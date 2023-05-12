@@ -8,7 +8,7 @@
 PRODUCT_NAME = frozen_food
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.frozenFood
+PRODUCT_BUNDLE_IDENTIFIER = com.romanmatla.frozenFood
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 com.romanmatla. All rights reserved.

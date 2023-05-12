@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>801790064493-8d18ttvesphq0dkl6qsgalila80tl3pm.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.801790064493-8d18ttvesphq0dkl6qsgalila80tl3pm</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBd1QngmEEy2k21mR8NLK41NSiuAjd4hdo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>801790064493</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.romanmatla.frozenFood</string>
+	<key>PROJECT_ID</key>
+	<string>frozenf</string>
+	<key>STORAGE_BUCKET</key>
+	<string>frozenf.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:801790064493:ios:152eb8aad6acb5cfd70c64</string>
+</dict>
+</plist>

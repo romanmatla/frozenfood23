@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "801790064493",
+    "project_id": "frozenf",
+    "storage_bucket": "frozenf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:801790064493:android:3dd78cf46a3bcbfad70c64",
+        "android_client_info": {
+          "package_name": "com.romanmatla.frozen_food"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "801790064493-n3kpcmk00mdp538uiionn44in0e9dcpc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAp7Zxzv9PWRRMYgaoethm1j8xt0bFVZYY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "801790064493-n3kpcmk00mdp538uiionn44in0e9dcpc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
