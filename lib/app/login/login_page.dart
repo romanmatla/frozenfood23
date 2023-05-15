@@ -2,13 +2,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({
     super.key,
   });
 
   final emailController = TextEditingController();
   final paswordController = TextEditingController();
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  var errorMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +57,7 @@ class LoginPage extends StatelessWidget {
                               child: Column(
                                 children: [
                                   TextField(
-                                    controller: emailController,
+                                    controller: widget.emailController,
                                     decoration: const InputDecoration(
                                       labelText: 'EMAIL',
                                       labelStyle: TextStyle(color: Colors.blue),
@@ -78,7 +85,7 @@ class LoginPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 10),
                                   TextField(
-                                    controller: paswordController,
+                                    controller: widget.paswordController,
                                     obscureText: true,
                                     decoration: const InputDecoration(
                                       labelText: 'HASŁO',
@@ -110,7 +117,9 @@ class LoginPage extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 60),
+                            const SizedBox(height: 30),
+                            Text(errorMessage),
+                            const SizedBox(height: 30),
                             Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Row(
@@ -129,11 +138,14 @@ class LoginPage extends StatelessWidget {
                                         try {
                                           await FirebaseAuth.instance
                                               .signInWithEmailAndPassword(
-                                                  email: emailController.text,
-                                                  password:
-                                                      paswordController.text);
+                                                  email: widget
+                                                      .emailController.text,
+                                                  password: widget
+                                                      .paswordController.text);
                                         } catch (error) {
-                                          print(error);
+                                          setState(() {
+                                            errorMessage = error.toString();
+                                          });
                                         }
                                       },
                                       child: const Icon(
