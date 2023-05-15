@@ -16,6 +16,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   var errorMessage = '';
+  var isCreatingAccount = false;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,9 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Logowanie',
+                              isCreatingAccount == true
+                                  ? 'Rejestracja'
+                                  : 'Logowanie',
                               style: GoogleFonts.poppins(
                                 fontSize: 30,
                                 fontWeight: FontWeight.w500,
@@ -126,26 +129,76 @@ class _LoginPageState extends State<LoginPage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    'Rejestracja',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
+                                  if (isCreatingAccount == false) ...[
+                                    TextButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          isCreatingAccount = true;
+                                        });
+                                      },
+                                      child: Text(
+                                        'Rejestracja',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          color: const Color.fromARGB(
+                                              255, 143, 142, 140),
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                  ],
+                                  if (isCreatingAccount == true) ...[
+                                    TextButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          isCreatingAccount = false;
+                                        });
+                                      },
+                                      child: Text(
+                                        'Logowanie',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          color: const Color.fromARGB(
+                                              255, 143, 142, 140),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                   ElevatedButton(
                                       onPressed: () async {
-                                        try {
-                                          await FirebaseAuth.instance
-                                              .signInWithEmailAndPassword(
-                                                  email: widget
-                                                      .emailController.text,
-                                                  password: widget
-                                                      .paswordController.text);
-                                        } catch (error) {
-                                          setState(() {
-                                            errorMessage = error.toString();
-                                          });
+                                        if (isCreatingAccount == true) {
+                                          //rejestracja
+
+                                          try {
+                                            await FirebaseAuth.instance
+                                                .createUserWithEmailAndPassword(
+                                                    email: widget
+                                                        .emailController.text,
+                                                    password: widget
+                                                        .paswordController
+                                                        .text);
+                                          } catch (error) {
+                                            setState(() {
+                                              errorMessage = error.toString();
+                                            });
+                                          }
+                                        } else {
+                                          // logowanie
+
+                                          try {
+                                            await FirebaseAuth.instance
+                                                .signInWithEmailAndPassword(
+                                                    email: widget
+                                                        .emailController.text,
+                                                    password: widget
+                                                        .paswordController
+                                                        .text);
+                                          } catch (error) {
+                                            setState(() {
+                                              errorMessage = error.toString();
+                                            });
+                                          }
                                         }
                                       },
                                       child: const Icon(
