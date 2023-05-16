@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                                   : 'Logowanie',
                               style: GoogleFonts.poppins(
                                 fontSize: 30,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                             const SizedBox(height: 60),
