@@ -166,50 +166,48 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                   ],
                                   ElevatedButton(
-                                      onPressed: () async {
-                                        if (isCreatingAccount == true) {
-                                          //rejestracja
+                                    onPressed: () async {
+                                      if (isCreatingAccount == true) {
+                                        //rejestracja
 
-                                          try {
-                                            await FirebaseAuth.instance
-                                                .createUserWithEmailAndPassword(
-                                                    email: widget
-                                                        .emailController.text,
-                                                    password: widget
-                                                        .paswordController
-                                                        .text);
-                                          } catch (error) {
-                                            setState(() {
-                                              errorMessage = error.toString();
-                                            });
-                                          }
-                                        } else {
-                                          // logowanie
-
-                                          try {
-                                            await FirebaseAuth.instance
-                                                .signInWithEmailAndPassword(
-                                                    email: widget
-                                                        .emailController.text,
-                                                    password: widget
-                                                        .paswordController
-                                                        .text);
-                                          } catch (error) {
-                                            setState(() {
-                                              errorMessage = error.toString();
-                                            });
-                                          }
+                                        try {
+                                          await FirebaseAuth.instance
+                                              .createUserWithEmailAndPassword(
+                                                  email: widget
+                                                      .emailController.text,
+                                                  password: widget
+                                                      .paswordController.text);
+                                        } catch (error) {
+                                          setState(() {
+                                            errorMessage = error.toString();
+                                          });
                                         }
-                                      },
-                                      child: const Icon(
-                                          Icons.arrow_forward_sharp,
-                                          size: 36),
-                                      style: ElevatedButton.styleFrom(
-                                        shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(12))),
-                                        fixedSize: const Size(60, 60),
-                                      )),
+                                      } else {
+                                        // logowanie
+
+                                        try {
+                                          await FirebaseAuth.instance
+                                              .signInWithEmailAndPassword(
+                                                  email: widget
+                                                      .emailController.text,
+                                                  password: widget
+                                                      .paswordController.text);
+                                        } catch (error) {
+                                          setState(() {
+                                            errorMessage = error.toString();
+                                          });
+                                        }
+                                      }
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12))),
+                                      fixedSize: const Size(60, 60),
+                                    ),
+                                    child: const Icon(Icons.arrow_forward_sharp,
+                                        size: 36),
+                                  ),
                                 ],
                               ),
                             ),

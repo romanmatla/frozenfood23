@@ -23,18 +23,25 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Builder(builder: (context) {
-        if (index == 0) {
-          return const MyRefrigeratorPageContent();
-        }
-        if (index == 1) {
-          return const AddProductPageContent();
-        }
-        if (index == 2) {
-          return const AdvicePageContent();
-        }
-        return MyAccountPageContent(email: widget.user.email);
-      }),
+      backgroundColor: const Color.fromARGB(255, 245, 177, 199),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('images/Vec.png'), fit: BoxFit.cover),
+        ),
+        child: Builder(builder: (context) {
+          if (index == 0) {
+            return const MyRefrigeratorPageContent();
+          }
+          if (index == 1) {
+            return const AddProductPageContent();
+          }
+          if (index == 2) {
+            return const AdvicePageContent();
+          }
+          return MyAccountPageContent(email: widget.user.email);
+        }),
+      ),
       bottomNavigationBar: NavigationBar(
         height: 70,
         backgroundColor: Colors.white,

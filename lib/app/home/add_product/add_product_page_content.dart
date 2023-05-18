@@ -8,7 +8,7 @@ class AddProductPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text('dwa'),
+      child: Text('Dodawanie produktów'),
     );
   }
 }
