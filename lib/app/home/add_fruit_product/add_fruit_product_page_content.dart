@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddFruitProductPageContent extends StatefulWidget {
-  AddFruitProductPageContent({
+  const AddFruitProductPageContent({
     super.key,
   });
 
@@ -25,19 +25,24 @@ class _AddFruitProductPageContentState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        icon: const Icon(Icons.arrow_back_sharp, size: 30),
-        label: const Text('Cofnij'),
+      appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 47, 151, 236),
+          elevation: 4,
+          title: const Text('Dodaj produkt')),
+      // fullscreenDialog: true,
+      // floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
+      // floatingActionButton: FloatingActionButton.extended(
+      //   icon: const Icon(Icons.arrow_back_sharp, size: 15),
+      //   label: const Text('Cofnij'),
 
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        // child: const Icon(Icons.arrow_back_sharp, size: 30),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-      ),
+      //   onPressed: () {
+      //     Navigator.of(context).pop();
+      //   },
+      //   // child: const Icon(Icons.arrow_back_sharp, size: 30),
+      //   shape: RoundedRectangleBorder(
+      //     borderRadius: BorderRadius.circular(12),
+      //   ),
+      // ),
       backgroundColor: const Color.fromARGB(255, 245, 177, 199),
       body: Container(
         decoration: const BoxDecoration(
@@ -84,7 +89,7 @@ class _AddFruitProductPageContentState
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(15.0),
+                        padding: const EdgeInsets.all(15.0),
                         child: Column(
                           children: [
                             Padding(
@@ -220,19 +225,24 @@ class _AddFruitProductPageContentState
                               ),
                             ),
                             ElevatedButton(
-                              onPressed: () {
-                                FirebaseFirestore.instance
-                                    .collection('product')
-                                    .add(
-                                  {
-                                    'name': name,
-                                    'categories': 'Owoce',
-                                    'date added': dateAdded,
-                                    'expiration date': expirationDate,
-                                    'quantity': quantity,
-                                  },
-                                );
-                              },
+                              onPressed: name.isEmpty ||
+                                      dateAdded.isEmpty ||
+                                      expirationDate.isEmpty ||
+                                      quantity.isEmpty
+                                  ? null
+                                  : () {
+                                      FirebaseFirestore.instance
+                                          .collection('product')
+                                          .add(
+                                        {
+                                          'name': name,
+                                          'categories': 'Owoce',
+                                          'date added': dateAdded,
+                                          'expiration date': expirationDate,
+                                          'quantity': quantity,
+                                        },
+                                      );
+                                    },
                               style: ElevatedButton.styleFrom(
                                 shape: const RoundedRectangleBorder(
                                     borderRadius:
@@ -245,54 +255,11 @@ class _AddFruitProductPageContentState
                           ],
                         ),
                       ),
-                      // ElevatedButton(
-                      //   onPressed: () {
-                      //     FirebaseFirestore.instance.collection('product').add(
-                      //       {
-                      //         'name': name,
-                      //         'categories': 'Owoce',
-                      //         'date added': dateAdded,
-                      //         'expiration date': expirationDate,
-                      //       },
-                      //     );
-                      //   },
-                      //   style: ElevatedButton.styleFrom(
-                      //     shape: const RoundedRectangleBorder(
-                      //         borderRadius:
-                      //             BorderRadius.all(Radius.circular(12))),
-                      //     fixedSize: const Size(60, 60),
-                      //   ),
-                      //   child: const Icon(Icons.arrow_back_sharp, size: 30),
-                      // ),
                     ],
                   ),
                 ),
               ),
             ),
-            // Container(
-            //   decoration: const BoxDecoration(
-            //     color: Colors.white,
-            //   ),
-            //   child: Row(
-            //     children: [
-            //       Padding(
-            //         padding: const EdgeInsets.all(20.0),
-            //         child: ElevatedButton(
-            //           onPressed: () {
-            //             Navigator.of(context).pop();
-            //           },
-            //           style: ElevatedButton.styleFrom(
-            //             shape: const RoundedRectangleBorder(
-            //                 borderRadius:
-            //                     BorderRadius.all(Radius.circular(12))),
-            //             fixedSize: const Size(60, 60),
-            //           ),
-            //           child: const Icon(Icons.arrow_back_sharp, size: 30),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // )
           ],
         ),
       ),

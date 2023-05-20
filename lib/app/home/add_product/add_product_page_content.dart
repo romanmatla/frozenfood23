@@ -66,7 +66,8 @@ class AddProductPageContent extends StatelessWidget {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      AddFruitProductPageContent(),
+                                      const AddFruitProductPageContent(),
+                                  fullscreenDialog: true,
                                 ),
                               );
                             },
