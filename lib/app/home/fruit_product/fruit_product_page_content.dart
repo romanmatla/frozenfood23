@@ -68,11 +68,33 @@ class FruitProductPageContent extends StatelessWidget {
                               return ListView(
                                 children: [
                                   for (final document in documents) ...[
-                                    ProductWidget(
+                                    Dismissible(
+                                      key: ValueKey(document.id),
+                                      background: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                            color: Colors.orange[200],
+                                          ),
+                                          child: const Align(
+                                              alignment: Alignment.centerRight,
+                                              child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                      right: 32.0),
+                                                  child: Icon(
+                                                    Icons.delete,
+                                                  )))),
+                                      onDismissed: (_) {
+                                        FirebaseFirestore.instance
+                                            .collection('product')
+                                            .doc(document.id)
+                                            .delete();
+                                      },
+                                      child: ProductWidget(
                                         document['name'],
                                         document['date added'],
                                         document['expiration date'],
-                                        document['quantity']),
+                                        document['quantity'],
+                                      ),
+                                    ),
                                   ],
                                 ],
                               );
