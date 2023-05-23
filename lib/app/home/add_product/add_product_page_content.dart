@@ -215,7 +215,7 @@ class CategoryWidget extends StatelessWidget {
                     // color: Colors.red,
                   ),
                   child: const Icon(
-                    Icons.fastfood_outlined,
+                    Icons.add,
                     color: Colors.white,
                     size: 30,
                   ),

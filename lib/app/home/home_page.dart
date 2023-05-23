@@ -18,12 +18,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int index = 1;
+  int index = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 245, 177, 199),
+      // backgroundColor: const Color.fromARGB(255, 245, 177, 199),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(

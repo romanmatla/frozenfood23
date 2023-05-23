@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class FruitProductPageContent extends StatelessWidget {
   const FruitProductPageContent({
@@ -14,7 +15,9 @@ class FruitProductPageContent extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('images/Vec.png'), fit: BoxFit.cover),
+            image: AssetImage('images/Vec.png'),
+            fit: BoxFit.cover,
+          ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -40,65 +43,77 @@ class FruitProductPageContent extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text('Owoce',
-                            style: GoogleFonts.poppins(
-                                fontSize: 22, fontWeight: FontWeight.w400)),
+                        child: Text(
+                          'Owoce',
+                          style: GoogleFonts.poppins(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                       ),
                       Expanded(
-                        child: StreamBuilder<
-                                QuerySnapshot<Map<String, dynamic>>>(
-                            stream: FirebaseFirestore.instance
-                                .collection('product')
-                                .where('categories', isEqualTo: 'Owoce')
-                                .snapshots()
-                                .where((event) => true),
-                            builder: (context, snapshot) {
-                              if (snapshot.hasError) {
-                                return const Text(
-                                    'wystąpił nieoczekiwany problem');
-                              }
+                        child:
+                            StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                                stream: FirebaseFirestore.instance
+                                    .collection('product')
+                                    .where('categories', isEqualTo: 'Owoce')
+                                    .snapshots()
+                                    .where((event) => true),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasError) {
+                                    return const Text(
+                                        'wystąpił nieoczekiwany problem');
+                                  }
 
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const Text('Proszę czekać, ładuję dane');
-                              }
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return CircularProgressIndicator();
+                                    // Text('Proszę czekać, ładuję dane');
+                                  }
 
-                              final documents = snapshot.data!.docs;
+                                  final documents = snapshot.data!.docs;
 
-                              return ListView(
-                                children: [
-                                  for (final document in documents) ...[
-                                    Dismissible(
-                                      key: ValueKey(document.id),
-                                      background: DecoratedBox(
-                                          decoration: BoxDecoration(
-                                            color: Colors.orange[200],
-                                          ),
-                                          child: const Align(
+                                  return ListView(
+                                    children: [
+                                      for (final document in documents) ...[
+                                        Dismissible(
+                                          key: ValueKey(document.id),
+                                          background: DecoratedBox(
+                                            decoration: BoxDecoration(
+                                              color: Colors.orange[200],
+                                            ),
+                                            child: const Align(
                                               alignment: Alignment.centerRight,
                                               child: Padding(
-                                                  padding: EdgeInsets.only(
-                                                      right: 32.0),
-                                                  child: Icon(
-                                                    Icons.delete,
-                                                  )))),
-                                      onDismissed: (_) {
-                                        FirebaseFirestore.instance
-                                            .collection('product')
-                                            .doc(document.id)
-                                            .delete();
-                                      },
-                                      child: ProductWidget(
-                                        document['name'],
-                                        document['date added'],
-                                        document['expiration date'],
-                                        document['quantity'],
-                                      ),
-                                    ),
-                                  ],
-                                ],
-                              );
-                            }),
+                                                padding: EdgeInsets.only(
+                                                    right: 32.0),
+                                                child: Icon(
+                                                  Icons.delete,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          confirmDismiss: (direction) async {
+                                            return direction ==
+                                                DismissDirection.endToStart;
+                                          },
+                                          onDismissed: (_) {
+                                            FirebaseFirestore.instance
+                                                .collection('product')
+                                                .doc(document.id)
+                                                .delete();
+                                          },
+                                          child: ProductWidget(
+                                            document['name'],
+                                            document['date added'],
+                                            document['expiration date'],
+                                            document['quantity'],
+                                          ),
+                                        ),
+                                      ],
+                                    ],
+                                  );
+                                }),
                       ),
                     ],
                   ),
@@ -119,8 +134,10 @@ class FruitProductPageContent extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12))),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12),
+                          ),
+                        ),
                         fixedSize: const Size(60, 60),
                       ),
                       child: const Icon(Icons.arrow_back_sharp, size: 30),
@@ -146,12 +163,19 @@ class ProductWidget extends StatelessWidget {
   });
 
   final String title;
-  final String dataAdded;
+  final Timestamp dataAdded;
   final String expirationDate;
   final String quantity;
 
+  // final int timestamp = 1621702800000;
+
   @override
   Widget build(BuildContext context) {
+    // final dataAdded = DateTime.fromMillisecondsSinceEpoch(timestamp);
+    // final formattedDateTime = DateFormat.MMMEd().format(dataAdded);
+    // final expirationDate = DateTime.fromMillisecondsSinceEpoch(timestamp);
+    // final expirationDateTime = DateFormat.yMd().format(expirationDate);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -176,62 +200,68 @@ class ProductWidget extends StatelessWidget {
           ],
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              children: [
-                Row(
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
                   children: [
-                    Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        gradient: const LinearGradient(
-                          colors: [
-                            Color.fromARGB(255, 2, 84, 151),
-                            Color.fromARGB(255, 20, 146, 248),
-                          ],
-                          transform: GradientRotation(20),
+                    Row(
+                      children: [
+                        Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            gradient: const LinearGradient(
+                              colors: [
+                                Color.fromARGB(255, 2, 84, 151),
+                                Color.fromARGB(255, 20, 146, 248),
+                              ],
+                              transform: GradientRotation(20),
+                            ),
+                          ),
+                          child: const Icon(
+                            Icons.fastfood_outlined,
+                            color: Colors.white,
+                            size: 30,
+                          ),
                         ),
-                        // color: Colors.blue,
-                      ),
-                      child: const Icon(
-                        Icons.fastfood_outlined,
-                        color: Colors.white,
-                        size: 30,
-                      ),
+                        Center(
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(title,
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500)),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    Center(
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(title,
-                              style: GoogleFonts.poppins(
-                                  fontSize: 18, fontWeight: FontWeight.w500)),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Data dodania:',
+                          style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
+                        Text(
+                          'example',
+                          style: GoogleFonts.poppins(
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                Column(
-                  children: [
-                    Text(
-                      'Data dodania:',
-                      style: GoogleFonts.poppins(
-                        fontSize: 16,
-                      ),
-                    ),
-                    Text(
-                      dataAdded,
-                      style: GoogleFonts.poppins(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+              ),
             ),
             Expanded(
               child: Padding(
@@ -251,14 +281,14 @@ class ProductWidget extends StatelessWidget {
                             Text(
                               'Ilość:',
                               style: GoogleFonts.poppins(
-                                fontSize: 16,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                             Text(
                               quantity,
                               style: GoogleFonts.poppins(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
                               ),
                             ),
                           ],
@@ -270,14 +300,14 @@ class ProductWidget extends StatelessWidget {
                         Text(
                           'Termin ważności: ',
                           style: GoogleFonts.poppins(
-                            fontSize: 16,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                         Text(
-                          expirationDate,
+                          expirationDate.toString(),
                           style: GoogleFonts.poppins(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
                           ),
                         ),
                       ],
