@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frozen_food/app/home/fruit_product/cubit/fruit_product_cubit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -52,68 +54,68 @@ class FruitProductPageContent extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child:
-                            StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                                stream: FirebaseFirestore.instance
-                                    .collection('product')
-                                    .where('categories', isEqualTo: 'Owoce')
-                                    .snapshots()
-                                    .where((event) => true),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasError) {
-                                    return const Text(
-                                        'wystąpił nieoczekiwany problem');
-                                  }
+                        child: BlocProvider(
+                          create: (context) => FruitProductCubit()..start(),
+                          child:
+                              BlocBuilder<FruitProductCubit, FruitProductState>(
+                                  builder: (context, state) {
+                            if (state.errorMessage.isNotEmpty) {
+                              return const Center(
+                                child: Text(
+                                  'wystąpił nieoczekiwany problem',
+                                ),
+                              );
+                            }
 
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return CircularProgressIndicator();
-                                    // Text('Proszę czekać, ładuję dane');
-                                  }
+                            if (state.isLoading) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                              // Text('Proszę czekać, ładuję dane');
+                            }
 
-                                  final documents = snapshot.data!.docs;
+                            final documents = state.documents;
 
-                                  return ListView(
-                                    children: [
-                                      for (final document in documents) ...[
-                                        Dismissible(
-                                          key: ValueKey(document.id),
-                                          background: DecoratedBox(
-                                            decoration: BoxDecoration(
-                                              color: Colors.orange[200],
-                                            ),
-                                            child: const Align(
-                                              alignment: Alignment.centerRight,
-                                              child: Padding(
-                                                padding: EdgeInsets.only(
-                                                    right: 32.0),
-                                                child: Icon(
-                                                  Icons.delete,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          confirmDismiss: (direction) async {
-                                            return direction ==
-                                                DismissDirection.endToStart;
-                                          },
-                                          onDismissed: (_) {
-                                            FirebaseFirestore.instance
-                                                .collection('product')
-                                                .doc(document.id)
-                                                .delete();
-                                          },
-                                          child: ProductWidget(
-                                            document['name'],
-                                            document['date added'],
-                                            document['expiration date'],
-                                            document['quantity'],
+                            return ListView(
+                              children: [
+                                for (final document in documents) ...[
+                                  Dismissible(
+                                    key: ValueKey(document.id),
+                                    background: DecoratedBox(
+                                      decoration: BoxDecoration(
+                                        color: Colors.orange[200],
+                                      ),
+                                      child: const Align(
+                                        alignment: Alignment.centerRight,
+                                        child: Padding(
+                                          padding: EdgeInsets.only(right: 32.0),
+                                          child: Icon(
+                                            Icons.delete,
                                           ),
                                         ),
-                                      ],
-                                    ],
-                                  );
-                                }),
+                                      ),
+                                    ),
+                                    confirmDismiss: (direction) async {
+                                      return direction ==
+                                          DismissDirection.endToStart;
+                                    },
+                                    onDismissed: (_) {
+                                      FirebaseFirestore.instance
+                                          .collection('product')
+                                          .doc(document.id)
+                                          .delete();
+                                    },
+                                    child: ProductWidget(
+                                      document['name'],
+                                      document['date added'],
+                                      document['expiration date'],
+                                      document['quantity'],
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            );
+                          }),
+                        ),
                       ),
                     ],
                   ),
@@ -154,7 +156,7 @@ class FruitProductPageContent extends StatelessWidget {
 }
 
 class ProductWidget extends StatelessWidget {
-  const ProductWidget(
+  ProductWidget(
     this.title,
     this.dataAdded,
     this.expirationDate,
@@ -168,6 +170,7 @@ class ProductWidget extends StatelessWidget {
   final String quantity;
 
   // final int timestamp = 1621702800000;
+  final DateTime timestamp = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -252,7 +255,7 @@ class ProductWidget extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'example',
+                          timestamp.toString(),
                           style: GoogleFonts.poppins(
                             fontSize: 14,
                           ),
