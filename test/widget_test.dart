@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:frozen_food/app/app.dart';
 
 import 'package:frozen_food/main.dart';
 
