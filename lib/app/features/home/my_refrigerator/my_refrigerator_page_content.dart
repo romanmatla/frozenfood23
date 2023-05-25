@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frozen_food/app/features/home/categories/categories_page_content.dart';
+import 'package:frozen_food/app/features/home/vegetables/vegetables_page_content.dart';
 import 'package:frozen_food/app/features/home/fruit_product/fruit_product_page_content.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -61,7 +61,7 @@ class MyRefrigeratorPageContent extends StatelessWidget {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      const CategoriesPageContent(),
+                                      const VegetablesPageContent(),
                                 ),
                               );
                             },
@@ -85,7 +85,7 @@ class MyRefrigeratorPageContent extends StatelessWidget {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    const CategoriesPageContent(),
+                                    const VegetablesPageContent(),
                               ),
                             );
                           },
