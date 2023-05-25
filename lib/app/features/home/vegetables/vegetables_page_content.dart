@@ -1,5 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frozen_food/app/features/home/vegetables/cubit/vegetables_cubit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class VegetablesPageContent extends StatelessWidget {
@@ -45,26 +46,24 @@ class VegetablesPageContent extends StatelessWidget {
                                   fontSize: 22, fontWeight: FontWeight.w400)),
                         ),
                         Expanded(
-                          child: StreamBuilder<
-                                  QuerySnapshot<Map<String, dynamic>>>(
-                              stream: FirebaseFirestore.instance
-                                  .collection('product')
-                                  .where('categories', isEqualTo: 'Warzywa')
-                                  .snapshots()
-                                  .where((event) => true),
-                              builder: (context, snapshot) {
-                                if (snapshot.hasError) {
-                                  return const Text(
-                                      'wystąpił nieoczekiwany problem');
+                          child: BlocProvider(
+                            create: (context) => VegetablesCubit()..start(),
+                            child:
+                                BlocBuilder<VegetablesCubit, VegetablesState>(
+                              builder: (context, state) {
+                                if (state.errorMessage.isNotEmpty) {
+                                  return const Center(
+                                    child:
+                                        Text('wystąpił nieoczekiwany problem'),
+                                  );
                                 }
 
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return const Text(
-                                      'Proszę czekać, ładuję dane');
+                                if (state.isLoading) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
                                 }
 
-                                final documents = snapshot.data!.docs;
+                                final documents = state.documents;
 
                                 return ListView(
                                   children: [
@@ -77,7 +76,9 @@ class VegetablesPageContent extends StatelessWidget {
                                     ],
                                   ],
                                 );
-                              }),
+                              },
+                            ),
+                          ),
                         ),
                       ],
                     ),
