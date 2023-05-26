@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:frozen_food/app/features/home/add_product/add_product_page_content.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddFruitProductPageContent extends StatefulWidget {
@@ -19,7 +20,6 @@ class _AddFruitProductPageContentState
   var dateAdded = '';
   var expirationDate = '';
   var quantity = '';
-  
 
   final today = DateTime.now();
 
@@ -46,6 +46,10 @@ class _AddFruitProductPageContentState
                         'quantity': quantity,
                       },
                     );
+                    Navigator.pop(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AddProductPageContent()));
                   },
             icon: const Icon(Icons.check),
           ),

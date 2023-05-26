@@ -70,7 +70,6 @@ class FruitProductPageContent extends StatelessWidget {
                             if (state.isLoading) {
                               return const Center(
                                   child: CircularProgressIndicator());
-                              // Text('Proszę czekać, ładuję dane');
                             }
 
                             final documents = state.documents;
@@ -104,11 +103,6 @@ class FruitProductPageContent extends StatelessWidget {
                                       context
                                           .read<FruitProductCubit>()
                                           .remove(documentID: document.id);
-
-                                      // FirebaseFirestore.instance
-                                      //     .collection('product')
-                                      //     .doc(document.id)
-                                      //     .delete();
                                     },
                                     child: ProductWidget(
                                       document['name'],
