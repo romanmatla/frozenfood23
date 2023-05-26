@@ -44,7 +44,7 @@ class MyRefrigeratorPageContent extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Icon(
-                          Icons.arrow_circle_up,
+                          Icons.ac_unit,
                           size: 50,
                         ),
                         Text('Zawartość lodówki',
@@ -79,80 +79,8 @@ class MyRefrigeratorPageContent extends StatelessWidget {
                         const CategoryWidget('Mięso'),
                         const CategoryWidget('Lody'),
                         const CategoryWidget('Pieczywo'),
+                        const CategoryWidget('Dania gotowe'),
                         const CategoryWidget('Inne'),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const VegetablesPageContent(),
-                              ),
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              padding: const EdgeInsets.all(15.0),
-                              margin: const EdgeInsets.all(2),
-                              decoration: BoxDecoration(
-                                color: Colors.grey[50],
-                                borderRadius: BorderRadius.circular(15),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.shade200,
-                                    offset: const Offset(4.0, 4.0),
-                                    blurRadius: 15,
-                                    spreadRadius: 1,
-                                  ),
-                                  const BoxShadow(
-                                    color: Colors.white,
-                                    offset: Offset(-4.0, -4.0),
-                                    blurRadius: 15,
-                                    spreadRadius: 1,
-                                  )
-                                ],
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        height: 50,
-                                        width: 50,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          color: Colors.blue,
-                                        ),
-                                        child: const Icon(
-                                          Icons.fastfood_outlined,
-                                          color: Colors.white,
-                                          size: 30,
-                                        ),
-                                      ),
-                                      Center(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Text('z kodu -',
-                                              style: GoogleFonts.poppins(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500)),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const Icon(
-                                    Icons.keyboard_arrow_right_outlined,
-                                    color: Colors.black45,
-                                    size: 30,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -216,12 +144,61 @@ class CategoryWidget extends StatelessWidget {
                       ],
                       transform: GradientRotation(20),
                     ),
-                    // color: Colors.red,
                   ),
-                  child: const Icon(
-                    Icons.fastfood_outlined,
-                    color: Colors.white,
-                    size: 30,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        if (title == 'Mięso')
+                          const Icon(
+                            Icons.home_mini,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        if (title == 'Warzywa')
+                          const Icon(
+                            Icons.wb_twighlight,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        if (title == 'Owoce')
+                          const Icon(
+                            Icons.grass,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        if (title == 'Pieczywo')
+                          const Icon(
+                            Icons.bakery_dining,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        if (title == 'Inne')
+                          const Icon(
+                            Icons.dinner_dining,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        if (title == 'Dania gotowe')
+                          const Icon(
+                            Icons.fastfood_outlined,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        if (title == 'Lody')
+                          const Icon(
+                            Icons.icecream_outlined,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+
+                        // const Icon(
+                        //   Icons.fastfood_outlined,
+                        //   color: Colors.white,
+                        //   size: 30,
+                        // ),
+                      ],
+                    ),
                   ),
                 ),
                 Center(

@@ -33,24 +33,19 @@ class _AddFruitProductPageContentState
         title: const Text('Dodaj produkt'),
         actions: [
           IconButton(
-            onPressed:
-                //  name.isEmpty ||
-                //         dateAdded.isEmpty ||
-                //         expirationDate.isEmpty ||
-                //         quantity.isEmpty
-                // ? null
-                // :
-                () {
-              FirebaseFirestore.instance.collection('product').add(
-                {
-                  'name': name,
-                  'categories': 'Owoce',
-                  'date added': today,
-                  'expiration date': expirationDate,
-                  'quantity': quantity,
-                },
-              );
-            },
+            onPressed: name.isEmpty || quantity.isEmpty
+                ? null
+                : () {
+                    FirebaseFirestore.instance.collection('product').add(
+                      {
+                        'name': name,
+                        'categories': 'Owoce',
+                        'date added': today,
+                        'expiration date': expirationDate,
+                        'quantity': quantity,
+                      },
+                    );
+                  },
             icon: const Icon(Icons.check),
           ),
         ],
