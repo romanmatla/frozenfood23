@@ -19,6 +19,7 @@ class _AddFruitProductPageContentState
   var dateAdded = '';
   var expirationDate = '';
   var quantity = '';
+  
 
   final today = DateTime.now();
 

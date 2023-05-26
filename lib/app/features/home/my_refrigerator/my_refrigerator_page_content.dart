@@ -27,15 +27,21 @@ class MyRefrigeratorPageContent extends StatelessWidget {
         Expanded(
           child: Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20), color: Colors.white),
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.white,
+            ),
             child: Center(
               child: Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('Moja lodówka',
-                        style: GoogleFonts.poppins(
-                            fontSize: 22, fontWeight: FontWeight.w400)),
+                    child: Text(
+                      'Moja lodówka',
+                      style: GoogleFonts.poppins(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 15),
                   Padding(
@@ -47,9 +53,13 @@ class MyRefrigeratorPageContent extends StatelessWidget {
                           Icons.ac_unit,
                           size: 50,
                         ),
-                        Text('Zawartość lodówki',
-                            style: GoogleFonts.poppins(
-                                fontSize: 18, fontWeight: FontWeight.w300)),
+                        Text(
+                          'Zawartość lodówki',
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -57,25 +67,27 @@ class MyRefrigeratorPageContent extends StatelessWidget {
                     child: ListView(
                       children: [
                         InkWell(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const VegetablesPageContent(),
-                                ),
-                              );
-                            },
-                            child: const CategoryWidget('Warzywa')),
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const VegetablesPageContent(),
+                              ),
+                            );
+                          },
+                          child: const CategoryWidget('Warzywa'),
+                        ),
                         InkWell(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const FruitProductPageContent(),
-                                ),
-                              );
-                            },
-                            child: const CategoryWidget('Owoce')),
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const FruitProductPageContent(),
+                              ),
+                            );
+                          },
+                          child: const CategoryWidget('Owoce'),
+                        ),
                         const CategoryWidget('Mięso'),
                         const CategoryWidget('Lody'),
                         const CategoryWidget('Pieczywo'),
@@ -191,12 +203,6 @@ class CategoryWidget extends StatelessWidget {
                             color: Colors.white,
                             size: 30,
                           ),
-
-                        // const Icon(
-                        //   Icons.fastfood_outlined,
-                        //   color: Colors.white,
-                        //   size: 30,
-                        // ),
                       ],
                     ),
                   ),
@@ -204,9 +210,13 @@ class CategoryWidget extends StatelessWidget {
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Text(title,
-                        style: GoogleFonts.poppins(
-                            fontSize: 18, fontWeight: FontWeight.w500)),
+                    child: Text(
+                      title,
+                      style: GoogleFonts.poppins(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
                 ),
               ],

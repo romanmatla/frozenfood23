@@ -53,6 +53,17 @@ class FruitProductCubit extends Cubit<FruitProductState> {
       });
   }
 
+  Future<void> remove({required String documentID}) async {
+    try {
+      FirebaseFirestore.instance.collection('product').doc(documentID).delete();
+    } catch (error) {
+      emit(FruitProductState(
+          documents: const [],
+          isLoading: false,
+          errorMessage: error.toString()));
+    }
+  }
+
   @override
   Future<void> close() {
     _streamSubscription?.cancel();
