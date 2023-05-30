@@ -84,8 +84,8 @@ class MyRefrigeratorPageContent extends StatelessWidget {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    const ProductsPageContent(),
+                                builder: (context) => const ProductsPageContent(
+                                    categories: 'Warzywa'),
                               ),
                             );
                           },
@@ -106,8 +106,8 @@ class MyRefrigeratorPageContent extends StatelessWidget {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => VegetablesPageContent(
-                                  categories: '',
+                                builder: (context) => const ProductsPageContent(
+                                  categories: 'Lody',
                                 ),
                               ),
                             );

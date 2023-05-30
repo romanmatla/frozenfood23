@@ -1,11 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductsPageContent extends StatelessWidget {
   const ProductsPageContent({
     super.key,
+    required this.categories,
   });
+
+  final String categories;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +25,14 @@ class ProductsPageContent extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.all(50.0),
+            Padding(
+              padding: const EdgeInsets.all(50.0),
               child: Text(
                 'Frozen food',
+                style: GoogleFonts.poppins(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
             const SizedBox(height: 40),
@@ -39,7 +47,7 @@ class ProductsPageContent extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'nowe produkty1',
+                          categories,
                           style: GoogleFonts.poppins(
                             fontSize: 22,
                             fontWeight: FontWeight.w400,
@@ -51,7 +59,7 @@ class ProductsPageContent extends StatelessWidget {
                           child: StreamBuilder<QuerySnapshot>(
                               stream: FirebaseFirestore.instance
                                   .collection('product')
-                                  .where('categories', isEqualTo: 'Warzywa')
+                                  .where('categories', isEqualTo: categories)
                                   .snapshots()
                                   .where((event) => true),
                               builder: (context, snapshot) {
@@ -68,28 +76,57 @@ class ProductsPageContent extends StatelessWidget {
                                 return ListView(
                                   children: [
                                     for (final document in documents) ...[
-                                      ProductWidget(
-                                        document['name'],
-                                        document['date added'],
-                                        document['expiration date'],
-                                        document['quantity'],
+                                      Dismissible(
+                                        key: ValueKey(document.id),
+                                        background: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                            color: Colors.orange[200],
+                                          ),
+                                          child: const Align(
+                                            alignment: Alignment.centerRight,
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                right: 32.0,
+                                              ),
+                                              child: Icon(
+                                                Icons.delete,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        confirmDismiss: (direction) async {
+                                          return direction ==
+                                              DismissDirection.endToStart;
+                                        },
+                                        onDismissed: (_) {
+                                          FirebaseFirestore.instance
+                                              .collection('product')
+                                              .doc(document.id)
+                                              .delete();
+                                        },
+                                        child: ProductWidget(
+                                          document['name'],
+                                          document['date added'],
+                                          document['expiration date'],
+                                          document['quantity'],
+                                        ),
                                       ),
                                     ],
                                     Container(
                                       color: Colors.amber,
-                                      padding: EdgeInsets.all(15),
-                                      child: Text(
+                                      padding: const EdgeInsets.all(15),
+                                      child: const Text(
                                         'jakiś tekst',
                                       ),
                                     ),
                                     Container(
                                       color: Colors.amber,
-                                      padding: EdgeInsets.all(15),
-                                      child: Text(
+                                      padding: const EdgeInsets.all(15),
+                                      child: const Text(
                                         'jakiś tekst',
                                       ),
                                     ),
-                                    Text('coś'),
+                                    const Text('coś'),
                                   ],
                                 );
                               }),
@@ -97,7 +134,7 @@ class ProductsPageContent extends StatelessWidget {
                       ),
                       Container(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text('nowe produkty12'),
+                        child: const Text('nowe produkty12'),
                       ),
                     ],
                   ),
