@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class VegetablesPageContent extends StatelessWidget {
   const VegetablesPageContent({
-    super.key,
+    super.key, required String categories,
     // required String categories,
    
   });

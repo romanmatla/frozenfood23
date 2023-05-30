@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frozen_food/app/features/home/add/add_page_content.dart';
-import 'package:frozen_food/app/features/home/add_fruit_product/add_fruit_product_page_content.dart';
-import 'package:frozen_food/app/features/home/vegetables/vegetables_page_content.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddProductPageContent extends StatelessWidget {

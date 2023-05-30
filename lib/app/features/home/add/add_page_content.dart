@@ -56,7 +56,7 @@ class AddPageContent extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
-                'Frozen food',
+                'Frozen food1',
                 style: GoogleFonts.poppins(
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
@@ -148,7 +148,9 @@ class AddPageContent extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Padding(padding: EdgeInsets.all(8.0),),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                          ),
                           const Text('to'),
 
                           // Padding(

@@ -46,7 +46,7 @@ class FruitProductPageContent extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'Owoce1',
+                          'stare wyświetlanie',
                           style: GoogleFonts.poppins(
                             fontSize: 22,
                             fontWeight: FontWeight.w400,

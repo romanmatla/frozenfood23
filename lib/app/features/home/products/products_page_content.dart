@@ -21,14 +21,10 @@ class ProductsPageContent extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(50.0),
+            const Padding(
+              padding: EdgeInsets.all(50.0),
               child: Text(
                 'Frozen food',
-                style: GoogleFonts.poppins(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                ),
               ),
             ),
             const SizedBox(height: 40),
@@ -43,78 +39,72 @@ class ProductsPageContent extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'nowe produkty',
+                          'nowe produkty1',
                           style: GoogleFonts.poppins(
                             fontSize: 22,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
-                      StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                          stream: FirebaseFirestore.instance
-                              .collection('product')
-                              .where('categories', isEqualTo: 'Lody')
-                              .snapshots(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasError) {
-                              return const Text(
-                                  'Wystąpił nieoczeiwany problem');
-                            }
+                      Expanded(
+                        child: Center(
+                          child: StreamBuilder<QuerySnapshot>(
+                              stream: FirebaseFirestore.instance
+                                  .collection('product')
+                                  .where('categories', isEqualTo: 'Warzywa')
+                                  .snapshots()
+                                  .where((event) => true),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasError) {
+                                  return const Text('Wystąpił problem');
+                                }
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Text('Trwa ładowanie danych');
+                                }
 
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const Text('Trwa ładowanie danych');
-                            }
+                                final documents = snapshot.data!.docs;
 
-                            final documents = snapshot.data!.docs;
-
-                            return ListView(
-                              children: [
-                                for (final document in documents) ...[
-                                  Dismissible(
-                                    key: ValueKey(document.id),
-                                    background: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        color: Colors.orange[200],
+                                return ListView(
+                                  children: [
+                                    for (final document in documents) ...[
+                                      ProductWidget(
+                                        document['name'],
+                                        document['date added'],
+                                        document['expiration date'],
+                                        document['quantity'],
                                       ),
-                                      child: const Align(
-                                        alignment: Alignment.centerRight,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                            right: 32.0,
-                                          ),
-                                          child: Icon(
-                                            Icons.delete,
-                                          ),
-                                        ),
+                                    ],
+                                    Container(
+                                      color: Colors.amber,
+                                      padding: EdgeInsets.all(15),
+                                      child: Text(
+                                        'jakiś tekst',
                                       ),
                                     ),
-                                    confirmDismiss: (direction) async {
-                                      return direction ==
-                                          DismissDirection.endToStart;
-                                    },
-                                    onDismissed: (_) {
-                                      FirebaseFirestore.instance
-                                          .collection('product')
-                                          .doc(document.id)
-                                          .delete();
-                                    },
-                                    child: ProductWidget(
-                                      document['name'],
-                                      document['date added'],
-                                      document['expiration date'],
-                                      document['quantity'],
+                                    Container(
+                                      color: Colors.amber,
+                                      padding: EdgeInsets.all(15),
+                                      child: Text(
+                                        'jakiś tekst',
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ],
-                            );
-                          }),
+                                    Text('coś'),
+                                  ],
+                                );
+                              }),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text('nowe produkty12'),
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
+            //przycisk cofania
             Container(
               decoration: const BoxDecoration(
                 color: Colors.white,
