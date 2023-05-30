@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:frozen_food/app/features/home/products/products_page_content.dart';
 import 'package:frozen_food/app/features/home/vegetables/vegetables_page_content.dart';
 import 'package:frozen_food/app/features/home/fruit_product/fruit_product_page_content.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyRefrigeratorPageContent extends StatelessWidget {
-  const MyRefrigeratorPageContent({
+  MyRefrigeratorPageContent({
     super.key,
   });
+
+  var capacity = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -53,12 +56,23 @@ class MyRefrigeratorPageContent extends StatelessWidget {
                           Icons.ac_unit,
                           size: 50,
                         ),
-                        Text(
-                          'Zawartość lodówki',
-                          style: GoogleFonts.poppins(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w300,
-                          ),
+                        Column(
+                          children: [
+                            Text(
+                              'Zawartość lodówki',
+                              style: GoogleFonts.poppins(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                            Text(
+                              'Slider',
+                              style: GoogleFonts.poppins(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            )
+                          ],
                         ),
                       ],
                     ),
@@ -71,7 +85,7 @@ class MyRefrigeratorPageContent extends StatelessWidget {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    const VegetablesPageContent(),
+                                    const ProductsPageContent(),
                               ),
                             );
                           },

@@ -9,9 +9,12 @@ class HomePage extends StatefulWidget {
   const HomePage({
     super.key,
     required this.user,
+    required this.categories,
   });
 
   final User user;
+
+  final String categories;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -31,7 +34,9 @@ class _HomePageState extends State<HomePage> {
         ),
         child: Builder(builder: (context) {
           if (index == 0) {
-            return const MyRefrigeratorPageContent();
+            return MyRefrigeratorPageContent(
+              
+            );
           }
           if (index == 1) {
             return const AddProductPageContent();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frozen_food/app/features/home/add/add_page_content.dart';
 import 'package:frozen_food/app/features/home/add_fruit_product/add_fruit_product_page_content.dart';
 import 'package:frozen_food/app/features/home/vegetables/vegetables_page_content.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -46,12 +47,21 @@ class AddProductPageContent extends StatelessWidget {
                   const SizedBox(height: 15),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Text(
-                      'Wybierz kategorię',
-                      style: GoogleFonts.poppins(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w300,
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Icon(
+                          Icons.add_circle_outline,
+                          size: 60,
+                        ),
+                        Text(
+                          'Wybierz kategorię',
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Expanded(
@@ -62,7 +72,7 @@ class AddProductPageContent extends StatelessWidget {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    const VegetablesPageContent(),
+                                    AddPageContent(categories: 'Warzywa'),
                               ),
                             );
                           },
@@ -73,7 +83,7 @@ class AddProductPageContent extends StatelessWidget {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    const AddFruitProductPageContent(),
+                                    AddPageContent(categories: 'Owoce'),
                                 fullscreenDialog: true,
                               ),
                             );

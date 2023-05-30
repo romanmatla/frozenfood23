@@ -6,7 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 class VegetablesPageContent extends StatelessWidget {
   const VegetablesPageContent({
     super.key,
+    // required String categories,
+   
   });
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,7 @@ class VegetablesPageContent extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text('Warzywa',
+                          child: Text( 'co to',
                               style: GoogleFonts.poppins(
                                   fontSize: 22, fontWeight: FontWeight.w400)),
                         ),

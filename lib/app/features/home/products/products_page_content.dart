@@ -1,12 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frozen_food/app/features/home/fruit_product/cubit/fruit_product_cubit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
-class FruitProductPageContent extends StatelessWidget {
-  const FruitProductPageContent({
+class ProductsPageContent extends StatelessWidget {
+  const ProductsPageContent({
     super.key,
   });
 
@@ -46,33 +43,30 @@ class FruitProductPageContent extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'Owoce1',
+                          'nowe produkty',
                           style: GoogleFonts.poppins(
                             fontSize: 22,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: BlocProvider(
-                          create: (context) => FruitProductCubit()..start(),
-                          child:
-                              BlocBuilder<FruitProductCubit, FruitProductState>(
-                                  builder: (context, state) {
-                            if (state.errorMessage.isNotEmpty) {
-                              return const Center(
-                                child: Text(
-                                  'wystąpił nieoczekiwany problem',
-                                ),
-                              );
+                      StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                          stream: FirebaseFirestore.instance
+                              .collection('product')
+                              .where('categories', isEqualTo: 'Lody')
+                              .snapshots(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) {
+                              return const Text(
+                                  'Wystąpił nieoczeiwany problem');
                             }
 
-                            if (state.isLoading) {
-                              return const Center(
-                                  child: CircularProgressIndicator());
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Text('Trwa ładowanie danych');
                             }
 
-                            final documents = state.documents;
+                            final documents = snapshot.data!.docs;
 
                             return ListView(
                               children: [
@@ -100,9 +94,10 @@ class FruitProductPageContent extends StatelessWidget {
                                           DismissDirection.endToStart;
                                     },
                                     onDismissed: (_) {
-                                      context
-                                          .read<FruitProductCubit>()
-                                          .remove(documentID: document.id);
+                                      FirebaseFirestore.instance
+                                          .collection('product')
+                                          .doc(document.id)
+                                          .delete();
                                     },
                                     child: ProductWidget(
                                       document['name'],
@@ -115,8 +110,6 @@ class FruitProductPageContent extends StatelessWidget {
                               ],
                             );
                           }),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -159,7 +152,7 @@ class FruitProductPageContent extends StatelessWidget {
 }
 
 class ProductWidget extends StatelessWidget {
-  ProductWidget(
+  const ProductWidget(
     this.title,
     this.dataAdded,
     this.expirationDate,
@@ -168,12 +161,12 @@ class ProductWidget extends StatelessWidget {
   });
 
   final String title;
-  final Timestamp dataAdded;
+  final String dataAdded;
   final String expirationDate;
   final String quantity;
 
   // final int timestamp = 1621702800000;
-  final DateTime timestamp = DateTime.now();
+  // final DateTime timestamp = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -261,7 +254,7 @@ class ProductWidget extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          timestamp.toString(),
+                          dataAdded,
                           style: GoogleFonts.poppins(
                             fontSize: 14,
                           ),
