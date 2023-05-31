@@ -180,7 +180,7 @@ class ProductsPageContent extends StatelessWidget {
 }
 
 class ProductWidget extends StatelessWidget {
-  ProductWidget(
+  const ProductWidget(
     this.title,
     this.dataAdded,
     this.expirationDate,
@@ -260,7 +260,7 @@ class ProductWidget extends StatelessWidget {
                             size: 30,
                           ),
                         ),
-                        Center(
+                        Expanded(
                           child: Center(
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),

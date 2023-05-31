@@ -95,12 +95,48 @@ class MyRefrigeratorPageContent extends StatelessWidget {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    const FruitProductPageContent(),
+                                builder: (context) => const ProductsPageContent(
+                                    categories: 'Owoce'),
                               ),
                             );
                           },
                           child: const CategoryWidget('Owoce'),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const ProductsPageContent(
+                                  categories: 'Mięso',
+                                ),
+                              ),
+                            );
+                          },
+                          child: const CategoryWidget('Mięso'),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const ProductsPageContent(
+                                  categories: 'Dania gotowe',
+                                ),
+                              ),
+                            );
+                          },
+                          child: const CategoryWidget('Dania gotowe'),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const ProductsPageContent(
+                                  categories: 'Pieczywo',
+                                ),
+                              ),
+                            );
+                          },
+                          child: const CategoryWidget('Pieczywo'),
                         ),
                         InkWell(
                           onTap: () {
@@ -114,11 +150,18 @@ class MyRefrigeratorPageContent extends StatelessWidget {
                           },
                           child: const CategoryWidget('Lody'),
                         ),
-                        const CategoryWidget('Mięso'),
-                        const CategoryWidget('Lody'),
-                        const CategoryWidget('Pieczywo'),
-                        const CategoryWidget('Dania gotowe'),
-                        const CategoryWidget('Inne'),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const ProductsPageContent(
+                                  categories: 'Inne',
+                                ),
+                              ),
+                            );
+                          },
+                          child: const CategoryWidget('Inne'),
+                        ),
                       ],
                     ),
                   ),

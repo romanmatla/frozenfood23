@@ -82,16 +82,66 @@ class AddProductPageContent extends StatelessWidget {
                               MaterialPageRoute(
                                 builder: (context) =>
                                     AddPageContent(categories: 'Owoce'),
-                                fullscreenDialog: true,
                               ),
                             );
                           },
                           child: const CategoryWidget('Owoce'),
                         ),
-                        const CategoryWidget('Mięso'),
-                        const CategoryWidget('Lody'),
-                        const CategoryWidget('Pieczywo'),
-                        const CategoryWidget('Inne'),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AddPageContent(categories: 'Mięso'),
+                              ),
+                            );
+                          },
+                          child: const CategoryWidget('Mięso'),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AddPageContent(categories: 'Dania gotowe'),
+                              ),
+                            );
+                          },
+                          child: const CategoryWidget('Dania gotowe'),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AddPageContent(categories: 'Pieczywo'),
+                              ),
+                            );
+                          },
+                          child: const CategoryWidget('Pieczywo'),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AddPageContent(categories: 'Lody'),
+                              ),
+                            );
+                          },
+                          child: const CategoryWidget('Lody'),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AddPageContent(categories: 'Inne'),
+                              ),
+                            );
+                          },
+                          child: const CategoryWidget('Inne'),
+                        ),
                       ],
                     ),
                   ),
