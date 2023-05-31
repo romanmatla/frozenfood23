@@ -4,18 +4,42 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AddPageContent extends StatelessWidget {
+class AddPageContent extends StatefulWidget {
   AddPageContent({
     super.key,
     required this.categories,
   });
 
   final String categories;
+
+  @override
+  State<AddPageContent> createState() => _AddPageContentState();
+}
+
+class _AddPageContentState extends State<AddPageContent> {
   final controllerName = TextEditingController();
   final controllerQuantity = TextEditingController();
 
   var dateTime;
   var timeStamp;
+
+  DateTime _dateTime = DateTime.now();
+  DateTime today = DateTime.now();
+
+  void _showDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(
+        const Duration(days: 365 * 3),
+      ),
+    ).then((value) {
+      setState(() {
+        _dateTime = value!;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +56,9 @@ class AddPageContent extends StatelessWidget {
                     FirebaseFirestore.instance.collection('product').add(
                       {
                         'name': controllerName.text,
-                        'categories': categories,
-                        'date added': 'data dodania',
-                        'expiration date': 'data ważności',
+                        'categories': widget.categories,
+                        'date added': today,
+                        'expiration date': _dateTime,
                         'quantity': controllerQuantity.text,
                       },
                     );
@@ -75,7 +99,7 @@ class AddPageContent extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          categories,
+                          widget.categories,
                           style: GoogleFonts.poppins(
                               fontSize: 22, fontWeight: FontWeight.w400),
                         ),
@@ -151,49 +175,51 @@ class AddPageContent extends StatelessWidget {
                           const Padding(
                             padding: EdgeInsets.all(8.0),
                           ),
-                          const Text('to'),
-
-                          // Padding(
-                          //   padding: const EdgeInsets.all(8.0),
-                          //   child: ElevatedButton(
-                          //     onPressed: () async {
-                          //       final selectedDate = await showDatePicker(
-                          //         context: context,
-                          //         initialDate: DateTime.now(),
-                          //         firstDate: DateTime.now(),
-                          //         lastDate: DateTime.now().add(
-                          //           const Duration(days: 365 * 3),
-                          //         ),
-                          //       )
-                          //           // .then((value) {
-                          //           //   setState(
-                          //           //     () {
-                          //           //       dateTime = value!;
-                          //           //     },
-                          //           //   );
-                          //           // })
-                          //           ;
-                          //       // if (selectedDate == null) return;
-                          //       // setState(() {
-                          //       //   expirationDate = selectedDate.toString();
-                          //       // });
-                          //     },
-                          //     style: ElevatedButton.styleFrom(
-                          //       padding: const EdgeInsets.all(20),
-                          //       textStyle: const TextStyle(
-                          //         fontSize: 16,
-                          //         color: Colors.black,
-                          //       ),
-                          //       backgroundColor: Colors.white,
-                          //       side: const BorderSide(
-                          //           color: Color.fromARGB(255, 71, 167, 245),
-                          //           width: 1),
-                          //       foregroundColor:
-                          //           const Color.fromARGB(255, 72, 166, 243),
-                          //     ),
-                          //     child: const Text('Dodaj datę ważności'),
-                          //   ),
-                          // ),
+                          Text(
+                            _dateTime.toString(),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton(
+                              onPressed: _showDatePicker,
+                              // () async {
+                              //   final selectedDate = await showDatePicker(
+                              //     context: context,
+                              //     initialDate: DateTime.now(),
+                              //     firstDate: DateTime.now(),
+                              //     lastDate: DateTime.now().add(
+                              //       const Duration(days: 365 * 3),
+                              //     ),
+                              //   )
+                              //       // .then((value) {
+                              //       //   setState(
+                              //       //     () {
+                              //       //       dateTime = value!;
+                              //       //     },
+                              //       //   );
+                              //       // })
+                              //       ;
+                              //   // if (selectedDate == null) return;
+                              //   // setState(() {
+                              //   //   expirationDate = selectedDate.toString();
+                              //   // });
+                              // },
+                              style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.all(20),
+                                textStyle: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black,
+                                ),
+                                backgroundColor: Colors.white,
+                                side: const BorderSide(
+                                    color: Color.fromARGB(255, 71, 167, 245),
+                                    width: 1),
+                                foregroundColor:
+                                    const Color.fromARGB(255, 72, 166, 243),
+                              ),
+                              child: const Text('Dodaj datę ważności'),
+                            ),
+                          ),
                         ],
                       ),
                     ),

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class ProductsPageContent extends StatelessWidget {
   const ProductsPageContent({
@@ -179,7 +180,7 @@ class ProductsPageContent extends StatelessWidget {
 }
 
 class ProductWidget extends StatelessWidget {
-  const ProductWidget(
+  ProductWidget(
     this.title,
     this.dataAdded,
     this.expirationDate,
@@ -188,19 +189,25 @@ class ProductWidget extends StatelessWidget {
   });
 
   final String title;
-  final String dataAdded;
-  final String expirationDate;
+  final Timestamp dataAdded;
+  final Timestamp expirationDate;
   final String quantity;
-
-  // final int timestamp = 1621702800000;
-  // final DateTime timestamp = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
-    // final dataAdded = DateTime.fromMillisecondsSinceEpoch(timestamp);
-    // final formattedDateTime = DateFormat.MMMEd().format(dataAdded);
-    // final expirationDate = DateTime.fromMillisecondsSinceEpoch(timestamp);
-    // final expirationDateTime = DateFormat.yMd().format(expirationDate);
+    Timestamp timestamp = expirationDate;
+    DateTime dateTime = timestamp.toDate();
+
+    Timestamp timestampAdd = dataAdded;
+    DateTime dateAdd = timestampAdd.toDate();
+
+    String releaseDateFormatted() {
+      return DateFormat.yMd().format(dateTime);
+    }
+
+    String releaseAddDateFormatted() {
+      return DateFormat.yMd().format(dateAdd);
+    }
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -281,7 +288,7 @@ class ProductWidget extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          dataAdded,
+                          releaseAddDateFormatted(),
                           style: GoogleFonts.poppins(
                             fontSize: 14,
                           ),
@@ -334,7 +341,7 @@ class ProductWidget extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          expirationDate.toString(),
+                          releaseDateFormatted(),
                           style: GoogleFonts.poppins(
                             fontSize: 14,
                           ),
