@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frozen_food/app/features/home/products/cubit/products_cubit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -57,22 +59,20 @@ class ProductsPageContent extends StatelessWidget {
                       ),
                       Expanded(
                         child: Center(
-                          child: StreamBuilder<QuerySnapshot>(
-                              stream: FirebaseFirestore.instance
-                                  .collection('product')
-                                  .where('categories', isEqualTo: categories)
-                                  .snapshots()
-                                  .where((event) => true),
-                              builder: (context, snapshot) {
-                                if (snapshot.hasError) {
-                                  return const Text('Wystąpił problem');
+                          child: BlocProvider(
+                            create: (context) => ProductsCubit()..start(),
+                            child: BlocBuilder<ProductsCubit, ProductsState>(
+                              builder: (context, state) {
+                                if (state.errorMessage.isNotEmpty) {
+                                  return const Center(
+                                      child: Text('Wystąpił problem'));
                                 }
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return const CircularProgressIndicator();
+                                if (state.isLoading) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
                                 }
 
-                                final documents = snapshot.data!.docs;
+                                final documents = state.documents;
 
                                 return ListView(
                                   children: [
@@ -130,7 +130,9 @@ class ProductsPageContent extends StatelessWidget {
                                     const Text('coś'),
                                   ],
                                 );
-                              }),
+                              },
+                            ),
+                          ),
                         ),
                       ),
                       Container(
