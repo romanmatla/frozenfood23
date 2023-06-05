@@ -171,16 +171,10 @@ class ProductWidget extends StatelessWidget {
   final String expirationDate;
   final String quantity;
 
-  // final int timestamp = 1621702800000;
   final DateTime timestamp = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
-    // final dataAdded = DateTime.fromMillisecondsSinceEpoch(timestamp);
-    // final formattedDateTime = DateFormat.MMMEd().format(dataAdded);
-    // final expirationDate = DateTime.fromMillisecondsSinceEpoch(timestamp);
-    // final expirationDateTime = DateFormat.yMd().format(expirationDate);
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
