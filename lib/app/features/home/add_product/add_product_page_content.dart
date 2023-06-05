@@ -44,7 +44,7 @@ class AddProductPageContent extends StatelessWidget {
                   ),
                   const SizedBox(height: 15),
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -70,7 +70,7 @@ class AddProductPageContent extends StatelessWidget {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    AddPageContent(categories: 'Warzywa'),
+                                    const AddPageContent(categories: 'Warzywa'),
                               ),
                             );
                           },
@@ -81,7 +81,7 @@ class AddProductPageContent extends StatelessWidget {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    AddPageContent(categories: 'Owoce'),
+                                    const AddPageContent(categories: 'Owoce'),
                               ),
                             );
                           },
@@ -92,7 +92,7 @@ class AddProductPageContent extends StatelessWidget {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    AddPageContent(categories: 'Mięso'),
+                                    const AddPageContent(categories: 'Mięso'),
                               ),
                             );
                           },
@@ -102,8 +102,8 @@ class AddProductPageContent extends StatelessWidget {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    AddPageContent(categories: 'Dania gotowe'),
+                                builder: (context) => const AddPageContent(
+                                    categories: 'Dania gotowe'),
                               ),
                             );
                           },
@@ -113,8 +113,8 @@ class AddProductPageContent extends StatelessWidget {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    AddPageContent(categories: 'Pieczywo'),
+                                builder: (context) => const AddPageContent(
+                                    categories: 'Pieczywo'),
                               ),
                             );
                           },
@@ -125,7 +125,7 @@ class AddProductPageContent extends StatelessWidget {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    AddPageContent(categories: 'Lody'),
+                                    const AddPageContent(categories: 'Lody'),
                               ),
                             );
                           },
@@ -136,7 +136,7 @@ class AddProductPageContent extends StatelessWidget {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    AddPageContent(categories: 'Inne'),
+                                    const AddPageContent(categories: 'Inne'),
                               ),
                             );
                           },
@@ -168,7 +168,7 @@ class CategoryWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(12.0),
         margin: const EdgeInsets.all(2),
         decoration: BoxDecoration(
           color: Colors.grey[100],

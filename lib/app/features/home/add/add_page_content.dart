@@ -1,11 +1,10 @@
-import 'dart:js_interop';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class AddPageContent extends StatefulWidget {
-  AddPageContent({
+  const AddPageContent({
     super.key,
     required this.categories,
   });
@@ -50,7 +49,7 @@ class _AddPageContentState extends State<AddPageContent> {
         title: const Text('Dodaj produkt'),
         actions: [
           IconButton(
-            onPressed: controllerName == null || controllerQuantity == null
+            onPressed: controllerName == false || controllerQuantity == false
                 ? null
                 : () {
                     FirebaseFirestore.instance.collection('product').add(
@@ -176,34 +175,12 @@ class _AddPageContentState extends State<AddPageContent> {
                             padding: EdgeInsets.all(8.0),
                           ),
                           Text(
-                            _dateTime.toString(),
+                            DateFormat.yMd().format(_dateTime),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: ElevatedButton(
                               onPressed: _showDatePicker,
-                              // () async {
-                              //   final selectedDate = await showDatePicker(
-                              //     context: context,
-                              //     initialDate: DateTime.now(),
-                              //     firstDate: DateTime.now(),
-                              //     lastDate: DateTime.now().add(
-                              //       const Duration(days: 365 * 3),
-                              //     ),
-                              //   )
-                              //       // .then((value) {
-                              //       //   setState(
-                              //       //     () {
-                              //       //       dateTime = value!;
-                              //       //     },
-                              //       //   );
-                              //       // })
-                              //       ;
-                              //   // if (selectedDate == null) return;
-                              //   // setState(() {
-                              //   //   expirationDate = selectedDate.toString();
-                              //   // });
-                              // },
                               style: ElevatedButton.styleFrom(
                                 padding: const EdgeInsets.all(20),
                                 textStyle: const TextStyle(

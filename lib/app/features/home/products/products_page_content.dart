@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -69,7 +69,7 @@ class ProductsPageContent extends StatelessWidget {
                                 }
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
-                                  return const Text('Trwa ładowanie danych');
+                                  return const CircularProgressIndicator();
                                 }
 
                                 final documents = snapshot.data!.docs;
@@ -135,7 +135,7 @@ class ProductsPageContent extends StatelessWidget {
                       ),
                       Container(
                         padding: const EdgeInsets.all(8.0),
-                        child: const Text('nowe produkty12'),
+                        child: const Text('nowe produkty'),
                       ),
                     ],
                   ),

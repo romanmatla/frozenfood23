@@ -1,16 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:frozen_food/app/features/home/products/products_page_content.dart';
-import 'package:frozen_food/app/features/home/fruit_product/fruit_product_page_content.dart';
-import 'package:frozen_food/app/features/home/vegetables/vegetables_page_content.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MyRefrigeratorPageContent extends StatelessWidget {
-  MyRefrigeratorPageContent({
+class MyRefrigeratorPageContent extends StatefulWidget {
+  const MyRefrigeratorPageContent({
     super.key,
   });
 
-  var capacity = 5;
+  @override
+  State<MyRefrigeratorPageContent> createState() =>
+      _MyRefrigeratorPageContentState();
+}
 
+class _MyRefrigeratorPageContentState extends State<MyRefrigeratorPageContent> {
+  // var capacity = 5;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -46,35 +50,65 @@ class MyRefrigeratorPageContent extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 5),
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Icon(
-                          Icons.ac_unit,
-                          size: 50,
-                        ),
-                        Column(
-                          children: [
-                            Text(
-                              'Zawartość lodówki',
-                              style: GoogleFonts.poppins(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w300,
-                              ),
+                    padding: const EdgeInsets.all(10.0),
+                    child: Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // Expanded(
+                          //   child:
+                          //   StreamBuilder<
+                          //           QuerySnapshot<Map<String, dynamic>>>(
+                          //       stream: FirebaseFirestore.instance
+                          //           .collection('place')
+                          //           .snapshots(),
+                          //       builder: (context, snapshot) {
+                          //         final documents = snapshot.data!.docs;
+                          //         return Text('to');
+                          //       }),
+                          // ),
+                          const Icon(
+                            Icons.ac_unit,
+                            size: 50,
+                          ),
+
+                          // StreamBuilder<QuerySnapshot>(
+                          //     stream: FirebaseFirestore.instance
+                          //         .collection('place')
+                          //         .snapshots(),
+                          //     builder: (context, snapshot) {
+                          //       final documents = snapshot.data!.docs;
+                          //       return ListView(children: const [
+                          //         // Text(document['freePlace'].toString()),
+                          //         PlaceWidget(),
+                          //       ]);
+
+                          //       return PlaceWidget();
+                          //     }),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Zawartość lodówki',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                                Text(
+                                  'Slider',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                )
+                              ],
                             ),
-                            Text(
-                              'Slider',
-                              style: GoogleFonts.poppins(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w300,
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Expanded(
@@ -175,6 +209,30 @@ class MyRefrigeratorPageContent extends StatelessWidget {
   }
 }
 
+class PlaceWidget extends StatelessWidget {
+  const PlaceWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.amber,
+        shape: BoxShape.circle,
+      ),
+      padding: const EdgeInsets.all(40),
+      child: Text(
+        '1',
+        style: GoogleFonts.poppins(
+          fontSize: 24,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
+}
+
 class CategoryWidget extends StatelessWidget {
   const CategoryWidget(
     this.title, {
@@ -188,7 +246,7 @@ class CategoryWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(12.0),
         margin: const EdgeInsets.all(2),
         decoration: BoxDecoration(
           color: Colors.grey[100],
