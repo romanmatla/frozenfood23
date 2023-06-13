@@ -60,7 +60,8 @@ class ProductsPageContent extends StatelessWidget {
                       Expanded(
                         child: Center(
                           child: BlocProvider(
-                            create: (context) => ProductsCubit()..start(),
+                            create: (context) =>
+                                ProductsCubit()..start(categories: categories),
                             child: BlocBuilder<ProductsCubit, ProductsState>(
                               builder: (context, state) {
                                 if (state.errorMessage.isNotEmpty) {
@@ -73,6 +74,8 @@ class ProductsPageContent extends StatelessWidget {
                                 }
 
                                 final documents = state.documents;
+                                // categories:
+                                // categories;
 
                                 return ListView(
                                   children: [
@@ -100,10 +103,9 @@ class ProductsPageContent extends StatelessWidget {
                                               DismissDirection.endToStart;
                                         },
                                         onDismissed: (_) {
-                                          FirebaseFirestore.instance
-                                              .collection('product')
-                                              .doc(document.id)
-                                              .delete();
+                                          context
+                                              .read<ProductsCubit>()
+                                              .remove(documentID: document.id);
                                         },
                                         child: ProductWidget(
                                           document['name'],
@@ -113,21 +115,6 @@ class ProductsPageContent extends StatelessWidget {
                                         ),
                                       ),
                                     ],
-                                    Container(
-                                      color: Colors.amber,
-                                      padding: const EdgeInsets.all(15),
-                                      child: const Text(
-                                        'jakiś tekst',
-                                      ),
-                                    ),
-                                    Container(
-                                      color: Colors.amber,
-                                      padding: const EdgeInsets.all(15),
-                                      child: const Text(
-                                        'jakiś tekst',
-                                      ),
-                                    ),
-                                    const Text('coś'),
                                   ],
                                 );
                               },
@@ -186,7 +173,8 @@ class ProductWidget extends StatelessWidget {
     this.title,
     this.dataAdded,
     this.expirationDate,
-    this.quantity, {
+    this.quantity,
+     {
     super.key,
   });
 

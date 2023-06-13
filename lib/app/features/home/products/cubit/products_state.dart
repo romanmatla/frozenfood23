@@ -9,5 +9,5 @@ class ProductsState {
   const ProductsState(
       {required this.documents,
       required this.isLoading,
-      required this.errorMessage});
+      required this.errorMessage,});
 }

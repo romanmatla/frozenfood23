@@ -18,9 +18,7 @@ class ProductsCubit extends Cubit<ProductsState> {
 
   StreamSubscription? _streamSubscription;
 
-  get categories => null;
-
-  Future<void> start() async {
+  Future<void> start({required String categories}) async {
     emit(
       const ProductsState(
         documents: [],
@@ -58,10 +56,13 @@ class ProductsCubit extends Cubit<ProductsState> {
     try {
       FirebaseFirestore.instance.collection('product').doc(documentID).delete();
     } catch (error) {
-      emit(ProductsState(
+      emit(
+        ProductsState(
           documents: const [],
           isLoading: false,
-          errorMessage: error.toString()));
+          errorMessage: error.toString(),
+        ),
+      );
     }
   }
 

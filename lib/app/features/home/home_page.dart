@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         ),
         child: Builder(builder: (context) {
           if (index == 0) {
-            return MyRefrigeratorPageContent(
+            return const MyRefrigeratorPageContent(
               
             );
           }
