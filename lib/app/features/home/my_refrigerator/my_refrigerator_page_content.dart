@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:frozen_food/app/features/home/products/products_page_content.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -53,62 +53,60 @@ class _MyRefrigeratorPageContentState extends State<MyRefrigeratorPageContent> {
                   const SizedBox(height: 5),
                   Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          // Expanded(
-                          //   child:
-                          //   StreamBuilder<
-                          //           QuerySnapshot<Map<String, dynamic>>>(
-                          //       stream: FirebaseFirestore.instance
-                          //           .collection('place')
-                          //           .snapshots(),
-                          //       builder: (context, snapshot) {
-                          //         final documents = snapshot.data!.docs;
-                          //         return Text('to');
-                          //       }),
-                          // ),
-                          const Icon(
-                            Icons.ac_unit,
-                            size: 50,
-                          ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // Expanded(
+                        //   child:
+                        //   StreamBuilder<
+                        //           QuerySnapshot<Map<String, dynamic>>>(
+                        //       stream: FirebaseFirestore.instance
+                        //           .collection('place')
+                        //           .snapshots(),
+                        //       builder: (context, snapshot) {
+                        //         final documents = snapshot.data!.docs;
+                        //         return Text('to');
+                        //       }),
+                        // ),
+                        const Icon(
+                          Icons.ac_unit,
+                          size: 50,
+                        ),
 
-                          // StreamBuilder<QuerySnapshot>(
-                          //     stream: FirebaseFirestore.instance
-                          //         .collection('place')
-                          //         .snapshots(),
-                          //     builder: (context, snapshot) {
-                          //       final documents = snapshot.data!.docs;
-                          //       return ListView(children: const [
-                          //         // Text(document['freePlace'].toString()),
-                          //         PlaceWidget(),
-                          //       ]);
+                        // StreamBuilder<QuerySnapshot>(
+                        //     stream: FirebaseFirestore.instance
+                        //         .collection('place')
+                        //         .snapshots(),
+                        //     builder: (context, snapshot) {
+                        //       final documents = snapshot.data!.docs;
+                        //       return ListView(children: const [
+                        //         // Text(document['freePlace'].toString()),
+                        //         PlaceWidget(),
+                        //       ]);
 
-                          //       return PlaceWidget();
-                          //     }),
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Text(
-                                  'Zawartość lodówki',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w300,
-                                  ),
+                        //       return PlaceWidget();
+                        //     }),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Text(
+                                'Zawartość lodówki',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w300,
                                 ),
-                                Text(
-                                  'Slider',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w300,
-                                  ),
-                                )
-                              ],
-                            ),
+                              ),
+                              Text(
+                                'Slider',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w300,
+                                ),
+                              )
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   Expanded(
