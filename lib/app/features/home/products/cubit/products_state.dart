@@ -5,6 +5,7 @@ class ProductsState {
   final List<QueryDocumentSnapshot<Object?>> documents;
   final bool isLoading;
   final String errorMessage;
+  
 
   const ProductsState(
       {required this.documents,

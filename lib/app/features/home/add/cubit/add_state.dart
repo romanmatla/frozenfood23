@@ -1,6 +1,12 @@
 part of 'add_cubit.dart';
 
 @immutable
-abstract class AddState {}
+class AddState {
+  const AddState({
+    this.saved = false,
+    this.errorMessage = '',
+  });
 
-class AddInitial extends AddState {}
+  final bool saved;
+  final String errorMessage;
+}

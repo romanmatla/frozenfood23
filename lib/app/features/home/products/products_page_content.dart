@@ -74,8 +74,6 @@ class ProductsPageContent extends StatelessWidget {
                                 }
 
                                 final documents = state.documents;
-                                // categories:
-                                // categories;
 
                                 return ListView(
                                   children: [
@@ -173,8 +171,7 @@ class ProductWidget extends StatelessWidget {
     this.title,
     this.dataAdded,
     this.expirationDate,
-    this.quantity,
-     {
+    this.quantity, {
     super.key,
   });
 
