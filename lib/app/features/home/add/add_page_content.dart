@@ -1,5 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frozen_food/app/features/home/add/cubit/add_cubit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -40,8 +41,6 @@ class _AddPageContentState extends State<AddPageContent> {
     });
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,22 +49,28 @@ class _AddPageContentState extends State<AddPageContent> {
         elevation: 4,
         title: const Text('Dodaj produkt'),
         actions: [
-          IconButton(
-            onPressed: controllerName == false || controllerQuantity == false
-                ? null
-                : () {
-                    FirebaseFirestore.instance.collection('product').add(
-                      {
-                        'name': controllerName.text,
-                        'categories': widget.categories,
-                        'date added': today,
-                        'expiration date': _dateTime,
-                        'quantity': controllerQuantity.text,
-                      },
-                    );
-                    Navigator.of(context).pop();
-                  },
-            icon: const Icon(Icons.check),
+          BlocProvider(
+            create: (context) => AddCubit(),
+            child: BlocBuilder<AddCubit, AddState>(
+              builder: (context, state) {
+                return IconButton(
+                  onPressed:
+                      controllerName == false || controllerQuantity == false
+                          ? null
+                          : () {
+                              context.read<AddCubit>().add(
+                                  controllerName.text,
+                                  widget.categories,
+                                  today,
+                                  _dateTime,
+                                  controllerQuantity.text);
+
+                              Navigator.of(context).pop();
+                            },
+                  icon: const Icon(Icons.check),
+                );
+              },
+            ),
           ),
         ],
       ),
