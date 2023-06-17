@@ -121,7 +121,7 @@ class _MyRefrigeratorPageContentState extends State<MyRefrigeratorPageContent> {
                               ),
                             );
                           },
-                          child: const CategoryWidget('Warzywa'),
+                          child: CategoryWidget('Warzywa'),
                         ),
                         InkWell(
                           onTap: () {
@@ -132,7 +132,7 @@ class _MyRefrigeratorPageContentState extends State<MyRefrigeratorPageContent> {
                               ),
                             );
                           },
-                          child: const CategoryWidget('Owoce'),
+                          child: CategoryWidget('Owoce'),
                         ),
                         InkWell(
                           onTap: () {
@@ -144,7 +144,7 @@ class _MyRefrigeratorPageContentState extends State<MyRefrigeratorPageContent> {
                               ),
                             );
                           },
-                          child: const CategoryWidget('Mięso'),
+                          child: CategoryWidget('Mięso'),
                         ),
                         InkWell(
                           onTap: () {
@@ -156,7 +156,7 @@ class _MyRefrigeratorPageContentState extends State<MyRefrigeratorPageContent> {
                               ),
                             );
                           },
-                          child: const CategoryWidget('Dania gotowe'),
+                          child: CategoryWidget('Dania gotowe'),
                         ),
                         InkWell(
                           onTap: () {
@@ -168,7 +168,7 @@ class _MyRefrigeratorPageContentState extends State<MyRefrigeratorPageContent> {
                               ),
                             );
                           },
-                          child: const CategoryWidget('Pieczywo'),
+                          child: CategoryWidget('Pieczywo'),
                         ),
                         InkWell(
                           onTap: () {
@@ -180,7 +180,7 @@ class _MyRefrigeratorPageContentState extends State<MyRefrigeratorPageContent> {
                               ),
                             );
                           },
-                          child: const CategoryWidget('Lody'),
+                          child: CategoryWidget('Lody'),
                         ),
                         InkWell(
                           onTap: () {
@@ -192,7 +192,7 @@ class _MyRefrigeratorPageContentState extends State<MyRefrigeratorPageContent> {
                               ),
                             );
                           },
-                          child: const CategoryWidget('Inne'),
+                          child: CategoryWidget('Inne'),
                         ),
                       ],
                     ),
@@ -232,12 +232,25 @@ class PlaceWidget extends StatelessWidget {
 }
 
 class CategoryWidget extends StatelessWidget {
-  const CategoryWidget(
+  CategoryWidget(
     this.title, {
     super.key,
   });
 
   final String title;
+  final _iconData = {
+    'Mięso': Icons.home_mini,
+    'Warzywa': Icons.wb_twighlight,
+    'Owoce': Icons.grass,
+    'Pieczywo': Icons.bakery_dining,
+    'Inne': Icons.dinner_dining,
+    'Dania gotowe': Icons.fastfood_outlined,
+    'Lody': Icons.icecream_outlined,
+  };
+
+  IconData _getIconData(String title) {
+    return _iconData[title] ?? Icons.help_outline;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -286,48 +299,11 @@ class CategoryWidget extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
-                        if (title == 'Mięso')
-                          const Icon(
-                            Icons.home_mini,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        if (title == 'Warzywa')
-                          const Icon(
-                            Icons.wb_twighlight,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        if (title == 'Owoce')
-                          const Icon(
-                            Icons.grass,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        if (title == 'Pieczywo')
-                          const Icon(
-                            Icons.bakery_dining,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        if (title == 'Inne')
-                          const Icon(
-                            Icons.dinner_dining,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        if (title == 'Dania gotowe')
-                          const Icon(
-                            Icons.fastfood_outlined,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        if (title == 'Lody')
-                          const Icon(
-                            Icons.icecream_outlined,
-                            color: Colors.white,
-                            size: 30,
-                          ),
+                        Icon(
+                          _getIconData(title),
+                          color: Colors.white,
+                          size: 30,
+                        ),
                       ],
                     ),
                   ),
