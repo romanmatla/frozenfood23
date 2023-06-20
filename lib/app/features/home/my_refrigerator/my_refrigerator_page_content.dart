@@ -1,4 +1,3 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:frozen_food/app/features/home/products/products_page_content.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -56,36 +55,10 @@ class _MyRefrigeratorPageContentState extends State<MyRefrigeratorPageContent> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Expanded(
-                        //   child:
-                        //   StreamBuilder<
-                        //           QuerySnapshot<Map<String, dynamic>>>(
-                        //       stream: FirebaseFirestore.instance
-                        //           .collection('place')
-                        //           .snapshots(),
-                        //       builder: (context, snapshot) {
-                        //         final documents = snapshot.data!.docs;
-                        //         return Text('to');
-                        //       }),
-                        // ),
                         const Icon(
                           Icons.ac_unit,
                           size: 50,
                         ),
-
-                        // StreamBuilder<QuerySnapshot>(
-                        //     stream: FirebaseFirestore.instance
-                        //         .collection('place')
-                        //         .snapshots(),
-                        //     builder: (context, snapshot) {
-                        //       final documents = snapshot.data!.docs;
-                        //       return ListView(children: const [
-                        //         // Text(document['freePlace'].toString()),
-                        //         PlaceWidget(),
-                        //       ]);
-
-                        //       return PlaceWidget();
-                        //     }),
                         Expanded(
                           child: Column(
                             children: [
@@ -112,88 +85,13 @@ class _MyRefrigeratorPageContentState extends State<MyRefrigeratorPageContent> {
                   Expanded(
                     child: ListView(
                       children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const ProductsPageContent(
-                                    categories: 'Warzywa'),
-                              ),
-                            );
-                          },
-                          child: CategoryWidget('Warzywa'),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const ProductsPageContent(
-                                    categories: 'Owoce'),
-                              ),
-                            );
-                          },
-                          child: CategoryWidget('Owoce'),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const ProductsPageContent(
-                                  categories: 'Mięso',
-                                ),
-                              ),
-                            );
-                          },
-                          child: CategoryWidget('Mięso'),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const ProductsPageContent(
-                                  categories: 'Dania gotowe',
-                                ),
-                              ),
-                            );
-                          },
-                          child: CategoryWidget('Dania gotowe'),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const ProductsPageContent(
-                                  categories: 'Pieczywo',
-                                ),
-                              ),
-                            );
-                          },
-                          child: CategoryWidget('Pieczywo'),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const ProductsPageContent(
-                                  categories: 'Lody',
-                                ),
-                              ),
-                            );
-                          },
-                          child: CategoryWidget('Lody'),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const ProductsPageContent(
-                                  categories: 'Inne',
-                                ),
-                              ),
-                            );
-                          },
-                          child: CategoryWidget('Inne'),
-                        ),
+                        buildCategoryWidget('Warzywa'),
+                        buildCategoryWidget('Owoce'),
+                        buildCategoryWidget('Mięso'),
+                        buildCategoryWidget('Dania gotowe'),
+                        buildCategoryWidget('Pieczywo'),
+                        buildCategoryWidget('Lody'),
+                        buildCategoryWidget('Inne'),
                       ],
                     ),
                   ),
@@ -205,6 +103,21 @@ class _MyRefrigeratorPageContentState extends State<MyRefrigeratorPageContent> {
       ],
     );
   }
+}
+
+Widget buildCategoryWidget(String category) {
+  return Builder(builder: (context) {
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ProductsPageContent(categories: category),
+          ),
+        );
+      },
+      child: CategoryWidget(category),
+    );
+  });
 }
 
 class PlaceWidget extends StatelessWidget {
