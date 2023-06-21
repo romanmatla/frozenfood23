@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frozen_food/app/features/login/cubit/login_cubit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
@@ -165,48 +167,64 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                     ),
                                   ],
-                                  ElevatedButton(
-                                    onPressed: () async {
-                                      if (isCreatingAccount == true) {
-                                        //rejestracja
+                                  BlocProvider(
+                                    create: (context) => LoginCubit(),
+                                    child:
+                                        BlocBuilder<LoginCubit, LoginState>(
+                                      builder: (context, state) {
+                                        
+                                        return ElevatedButton(
+                                          onPressed: () async {
+                                            if (isCreatingAccount == true) {
+                                              //rejestracja
 
-                                        try {
-                                          await FirebaseAuth.instance
-                                              .createUserWithEmailAndPassword(
-                                                  email: widget
-                                                      .emailController.text,
-                                                  password: widget
-                                                      .paswordController.text);
-                                        } catch (error) {
-                                          setState(() {
-                                            errorMessage = error.toString();
-                                          });
-                                        }
-                                      } else {
-                                        // logowanie
+                                              try {
+                                                await FirebaseAuth.instance
+                                                    .createUserWithEmailAndPassword(
+                                                        email: widget
+                                                            .emailController
+                                                            .text,
+                                                        password: widget
+                                                            .paswordController
+                                                            .text);
+                                              } catch (error) {
+                                                setState(() {
+                                                  errorMessage =
+                                                      error.toString();
+                                                });
+                                              }
+                                            } else {
+                                              // logowanie
 
-                                        try {
-                                          await FirebaseAuth.instance
-                                              .signInWithEmailAndPassword(
-                                                  email: widget
-                                                      .emailController.text,
-                                                  password: widget
-                                                      .paswordController.text);
-                                        } catch (error) {
-                                          setState(() {
-                                            errorMessage = error.toString();
-                                          });
-                                        }
-                                      }
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(12))),
-                                      fixedSize: const Size(60, 60),
+                                              try {
+                                                await FirebaseAuth.instance
+                                                    .signInWithEmailAndPassword(
+                                                        email: widget
+                                                            .emailController
+                                                            .text,
+                                                        password: widget
+                                                            .paswordController
+                                                            .text);
+                                              } catch (error) {
+                                                setState(() {
+                                                  errorMessage =
+                                                      error.toString();
+                                                });
+                                              }
+                                            }
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            shape: const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(12))),
+                                            fixedSize: const Size(60, 60),
+                                          ),
+                                          child: const Icon(
+                                              Icons.arrow_forward_sharp,
+                                              size: 36),
+                                        );
+                                      },
                                     ),
-                                    child: const Icon(Icons.arrow_forward_sharp,
-                                        size: 36),
                                   ),
                                 ],
                               ),

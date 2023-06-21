@@ -51,25 +51,30 @@ class _AddPageContentState extends State<AddPageContent> {
         actions: [
           BlocProvider(
             create: (context) => AddCubit(),
-            child: BlocBuilder<AddCubit, AddState>(
-              builder: (context, state) {
-                return IconButton(
-                  onPressed:
-                      controllerName == false || controllerQuantity == false
-                          ? null
-                          : () {
-                              context.read<AddCubit>().add(
-                                  controllerName.text,
-                                  widget.categories,
-                                  today,
-                                  _dateTime,
-                                  controllerQuantity.text);
-
-                              Navigator.of(context).pop();
-                            },
-                  icon: const Icon(Icons.check),
-                );
+            child: BlocListener<AddCubit, AddState>(
+              listener: (context, state) {
+                                Navigator.of(context).pop();
               },
+              child: BlocBuilder<AddCubit, AddState>(
+                builder: (context, state) {
+                  return IconButton(
+                    onPressed:
+                        controllerName == false || controllerQuantity == false
+                            ? null
+                            : () {
+                                context.read<AddCubit>().add(
+                                    controllerName.text,
+                                    widget.categories,
+                                    today,
+                                    _dateTime,
+                                    controllerQuantity.text);
+
+                                // Navigator.of(context).pop();
+                              },
+                    icon: const Icon(Icons.check),
+                  );
+                },
+              ),
             ),
           ),
         ],
