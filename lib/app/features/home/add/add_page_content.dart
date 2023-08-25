@@ -20,8 +20,8 @@ class _AddPageContentState extends State<AddPageContent> {
   final controllerName = TextEditingController();
   final controllerQuantity = TextEditingController();
 
-  var dateTime;
-  var timeStamp;
+  // var dateTime;
+  // var timeStamp;
 
   DateTime _dateTime = DateTime.now();
   DateTime today = DateTime.now();
