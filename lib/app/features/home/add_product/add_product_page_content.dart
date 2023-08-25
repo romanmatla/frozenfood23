@@ -66,83 +66,13 @@ class AddProductPageContent extends StatelessWidget {
                   Expanded(
                     child: ListView(
                       children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const AddPageContent(categories: 'Warzywa'),
-                              ),
-                            );
-                          },
-                          child: const CategoryWidget('Warzywa'),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const AddPageContent(categories: 'Owoce'),
-                              ),
-                            );
-                          },
-                          child: const CategoryWidget('Owoce'),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const AddPageContent(categories: 'Mięso'),
-                              ),
-                            );
-                          },
-                          child: const CategoryWidget('Mięso'),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const AddPageContent(
-                                    categories: 'Dania gotowe'),
-                              ),
-                            );
-                          },
-                          child: const CategoryWidget('Dania gotowe'),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const AddPageContent(
-                                    categories: 'Pieczywo'),
-                              ),
-                            );
-                          },
-                          child: const CategoryWidget('Pieczywo'),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const AddPageContent(categories: 'Lody'),
-                              ),
-                            );
-                          },
-                          child: const CategoryWidget('Lody'),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const AddPageContent(categories: 'Inne'),
-                              ),
-                            );
-                          },
-                          child: const CategoryWidget('Inne'),
-                        ),
+                        buildCategoryWidget('Warzywa'),
+                        buildCategoryWidget('Owoce'),
+                        buildCategoryWidget('Mięso'),
+                        buildCategoryWidget('Dania gotowe'),
+                        buildCategoryWidget('Pieczywo'),
+                        buildCategoryWidget('Lody'),
+                        buildCategoryWidget('Inne'),
                       ],
                     ),
                   ),
@@ -154,4 +84,19 @@ class AddProductPageContent extends StatelessWidget {
       ],
     );
   }
+}
+
+Widget buildCategoryWidget(String category) {
+  return Builder(builder: (context) {
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => AddPageContent(categories: category),
+          ),
+        );
+      },
+      child: AddCategoryWidget(category),
+    );
+  });
 }

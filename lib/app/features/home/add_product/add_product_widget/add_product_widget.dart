@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CategoryWidget extends StatelessWidget {
-  const CategoryWidget(
+class AddCategoryWidget extends StatelessWidget {
+  const AddCategoryWidget(
     this.title, {
     super.key,
   });
