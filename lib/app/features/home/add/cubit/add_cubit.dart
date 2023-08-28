@@ -11,7 +11,7 @@ class AddCubit extends Cubit<AddState> {
     String controllerName,
     String categories,
     DateTime today,
-    DateTime _dateTime,
+    DateTime dateTime,
     String controllerQuantity,
   ) async {
     try {
@@ -20,7 +20,7 @@ class AddCubit extends Cubit<AddState> {
           'name': controllerName,
           'categories': categories,
           'date added': today,
-          'expiration date': _dateTime,
+          'expiration date': dateTime,
           'quantity': controllerQuantity
         },
       );

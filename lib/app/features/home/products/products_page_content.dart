@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frozen_food/app/features/home/products/cubit/products_cubit.dart';
+import 'package:frozen_food/app/features/home/widgets/back_button_widget.dart';
 import 'package:frozen_food/app/features/home/widgets/product_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -128,11 +129,10 @@ class ProductsPageContent extends StatelessWidget {
               ),
             ),
             //przycisk cofania
-            const BackButton()
+            const BackElevetedButton(),
           ],
         ),
       ),
     );
   }
 }
-
