@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:frozen_food/app/models/product_model.dart';
+import 'package:frozen_food/app/repositories/product_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'products_state.dart';
 
 class ProductsCubit extends Cubit<ProductsState> {
-  ProductsCubit()
+  ProductsCubit(this._productRepository)
       : super(
           const ProductsState(
             documents: [],
@@ -16,6 +16,8 @@ class ProductsCubit extends Cubit<ProductsState> {
             errorMessage: '',
           ),
         );
+
+  final ProductRepository _productRepository;
 
   StreamSubscription? _streamSubscription;
 
@@ -28,26 +30,13 @@ class ProductsCubit extends Cubit<ProductsState> {
       ),
     );
 
-    _streamSubscription = FirebaseFirestore.instance
-        .collection('product')
-        .where('categories', isEqualTo: categories)
-        .snapshots()
+    _streamSubscription = _productRepository
+        .getProductStream(categories: categories)
         .where((event) => true)
         .listen((data) {
-      final productModels = data.docs.map(
-        (doc) {
-          return ProductModel(
-            id: doc.id,
-            title: doc['name'],
-            dataAdded: (doc['date added'] as Timestamp).toDate(),
-            expirationDate: (doc['expiration date'] as Timestamp).toDate(),
-            quantity: doc['quantity'],
-          );
-        },
-      ).toList();
       emit(
         ProductsState(
-          documents: productModels,
+          documents: data,
           isLoading: false,
           errorMessage: '',
         ),
@@ -66,7 +55,7 @@ class ProductsCubit extends Cubit<ProductsState> {
 
   Future<void> remove({required String documentID}) async {
     try {
-      FirebaseFirestore.instance.collection('product').doc(documentID).delete();
+      await _productRepository.delete(id: documentID);
     } catch (error) {
       emit(
         ProductsState(

@@ -1,11 +1,13 @@
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:frozen_food/app/repositories/product_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'add_state.dart';
 
 class AddCubit extends Cubit<AddState> {
-  AddCubit() : super(const AddState());
+  AddCubit(this._productRepository) : super(const AddState());
+
+  final ProductRepository _productRepository;
 
   Future<void> add(
     String controllerName,
@@ -15,15 +17,8 @@ class AddCubit extends Cubit<AddState> {
     String controllerQuantity,
   ) async {
     try {
-      await FirebaseFirestore.instance.collection('product').add(
-        {
-          'name': controllerName,
-          'categories': categories,
-          'date added': today,
-          'expiration date': dateTime,
-          'quantity': controllerQuantity
-        },
-      );
+      await _productRepository.add(
+          controllerName, categories, today, dateTime, controllerQuantity);
       emit(const AddState(saved: true));
     } catch (error) {
       emit(AddState(errorMessage: error.toString()));

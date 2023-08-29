@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frozen_food/app/features/home/products/cubit/products_cubit.dart';
 import 'package:frozen_food/app/features/home/widgets/back_button_widget.dart';
 import 'package:frozen_food/app/features/home/widgets/product_widget.dart';
+import 'package:frozen_food/app/repositories/product_repository.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductsPageContent extends StatelessWidget {
@@ -60,7 +61,7 @@ class ProductsPageContent extends StatelessWidget {
                         child: Center(
                           child: BlocProvider(
                             create: (context) =>
-                                ProductsCubit()..start(categories: categories),
+                                ProductsCubit(ProductRepository())..start(categories: categories),
                             child: BlocBuilder<ProductsCubit, ProductsState>(
                               builder: (context, state) {
                                 if (state.errorMessage.isNotEmpty) {

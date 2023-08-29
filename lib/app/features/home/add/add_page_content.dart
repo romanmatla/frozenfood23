@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frozen_food/app/features/home/add/cubit/add_cubit.dart';
+import 'package:frozen_food/app/repositories/product_repository.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -50,7 +51,7 @@ class _AddPageContentState extends State<AddPageContent> {
         title: const Text('Dodaj produkt'),
         actions: [
           BlocProvider(
-            create: (context) => AddCubit(),
+            create: (context) => AddCubit(ProductRepository()),
             child: BlocListener<AddCubit, AddState>(
               listener: (context, state) {
                 if (state.saved) {
