@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:frozen_food/app/models/product_model.dart';
 import 'package:meta/meta.dart';
 
 part 'products_state.dart';
@@ -33,9 +34,20 @@ class ProductsCubit extends Cubit<ProductsState> {
         .snapshots()
         .where((event) => true)
         .listen((data) {
+      final productModels = data.docs.map(
+        (doc) {
+          return ProductModel(
+            id: doc.id,
+            title: doc['name'],
+            dataAdded: (doc['date added'] as Timestamp).toDate(),
+            expirationDate: (doc['expiration date'] as Timestamp).toDate(),
+            quantity: doc['quantity'],
+          );
+        },
+      ).toList();
       emit(
         ProductsState(
-          documents: data.docs,
+          documents: productModels,
           isLoading: false,
           errorMessage: '',
         ),

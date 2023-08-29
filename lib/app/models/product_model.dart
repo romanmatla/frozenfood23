@@ -1,5 +1,5 @@
-class ItemModel {
-  ItemModel({
+class ProductModel {
+  ProductModel({
     required this.id,
     required this.title,
     required this.dataAdded,

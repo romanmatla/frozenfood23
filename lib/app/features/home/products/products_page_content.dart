@@ -72,13 +72,14 @@ class ProductsPageContent extends StatelessWidget {
                                       child: CircularProgressIndicator());
                                 }
 
-                                final documents = state.documents;
+                                final productModels = state.documents;
 
                                 return ListView(
                                   children: [
-                                    for (final document in documents) ...[
+                                    for (final productModel
+                                        in productModels) ...[
                                       Dismissible(
-                                        key: ValueKey(document.id),
+                                        key: ValueKey(productModel.id),
                                         background: DecoratedBox(
                                           decoration: BoxDecoration(
                                             color: Colors.orange[200],
@@ -100,15 +101,15 @@ class ProductsPageContent extends StatelessWidget {
                                               DismissDirection.endToStart;
                                         },
                                         onDismissed: (_) {
-                                          context
-                                              .read<ProductsCubit>()
-                                              .remove(documentID: document.id);
+                                          context.read<ProductsCubit>().remove(
+                                              documentID: productModel.id);
                                         },
                                         child: ProductWidget(
-                                          document['name'],
-                                          document['date added'],
-                                          document['expiration date'],
-                                          document['quantity'],
+                                          productModel.title,
+                                          productModel.dataAdded,
+                                          productModel.expirationDate,
+                                          productModel.quantity,
+                                          productModel,
                                         ),
                                       ),
                                     ],

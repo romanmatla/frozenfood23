@@ -37,19 +37,26 @@ class AdvicePageContent extends StatelessWidget {
                 child: Center(
                   child: Column(
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Padding(
-                          padding: EdgeInsets.all(15.0),
-                          child: Text(
-                              'Mrożenie to jeden z najpopularniejszych sposobów na przechowywanie żywności'),
+                      const SizedBox(height: 8),
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(
+                          'Mrożenie to jeden z najpopularniejszych sposobów na przechowywanie żywności',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                      const SizedBox(height: 8),
-                      const Padding(
-                        padding: EdgeInsets.all(15.0),
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
                         child: Text(
-                            'Aby mrożenie było skuteczne i bezpieczne, należy przestrzegać kilku podstawowych zasad.'),
+                          'Aby mrożenie było skuteczne i bezpieczne, należy przestrzegać kilku podstawowych zasad.',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                       ),
                       Expanded(
                         child: ListView(
@@ -249,7 +256,7 @@ class AdvicePageContent extends StatelessWidget {
                                     children: [
                                       const Image(
                                         image: AssetImage('images/info.png'),
-                                        width: 50,
+                                        width: 60,
                                       ),
                                       Center(
                                         child: Padding(

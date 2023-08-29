@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:frozen_food/app/models/product_model.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -8,29 +8,25 @@ class ProductWidget extends StatelessWidget {
     this.title,
     this.dataAdded,
     this.expirationDate,
-    this.quantity, {
+    this.quantity,
+    this.productModel, {
     super.key,
   });
 
   final String title;
-  final Timestamp dataAdded;
-  final Timestamp expirationDate;
+  final DateTime dataAdded;
+  final DateTime expirationDate;
   final String quantity;
+  final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
-    Timestamp timestamp = expirationDate;
-    DateTime dateTime = timestamp.toDate();
-
-    Timestamp timestampAdd = dataAdded;
-    DateTime dateAdd = timestampAdd.toDate();
-
     String releaseDateFormatted() {
-      return DateFormat.yMd().format(dateTime);
+      return DateFormat.yMd().format(expirationDate);
     }
 
     String releaseAddDateFormatted() {
-      return DateFormat.yMd().format(dateAdd);
+      return DateFormat.yMd().format(dataAdded);
     }
 
     return Padding(
