@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:frozen_food/app/models/advice_mode.dart';
 import 'package:meta/meta.dart';
 
 part 'advice_state.dart';
@@ -31,9 +32,14 @@ class AdviceCubit extends Cubit<AdviceState> {
         .collection('topic')
         .snapshots()
         .listen((data) {
+      final adviceModels = data.docs.map((doc) {
+        return AdviceModel(
+          title: doc['title'],
+        );
+      }).toList();
       emit(
         AdviceState(
-          documents: data.docs,
+          documents: adviceModels,
           isLoading: false,
           errorMessage: '',
         ),

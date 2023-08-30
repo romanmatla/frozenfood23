@@ -76,12 +76,12 @@ class AdvicePageContent extends StatelessWidget {
                                     child: CircularProgressIndicator());
                               }
 
-                              final documents = state.documents;
+                              final adviceModels = state.documents;
 
                               return ListView(
                                 children: [
-                                  for (final document in documents) ...[
-                                    _AdviceItemWidget(document['title']),
+                                  for (final adviceModel in adviceModels) ...[
+                                    _AdviceItemWidget(adviceModel.title),
                                   ],
                                 ],
                               );
