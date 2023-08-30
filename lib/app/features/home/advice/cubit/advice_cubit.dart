@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:frozen_food/app/models/advice_mode.dart';
+import 'package:frozen_food/app/repositories/advice_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'advice_state.dart';
 
 class AdviceCubit extends Cubit<AdviceState> {
-  AdviceCubit()
+  AdviceCubit(this._adviceRepository)
       : super(
           const AdviceState(
             documents: [],
@@ -16,6 +16,8 @@ class AdviceCubit extends Cubit<AdviceState> {
             isLoading: false,
           ),
         );
+
+  final AdviceRepository _adviceRepository;
 
   StreamSubscription? _streamSubscription;
 
@@ -28,18 +30,10 @@ class AdviceCubit extends Cubit<AdviceState> {
       ),
     );
 
-    _streamSubscription = FirebaseFirestore.instance
-        .collection('topic')
-        .snapshots()
-        .listen((data) {
-      final adviceModels = data.docs.map((doc) {
-        return AdviceModel(
-          title: doc['title'],
-        );
-      }).toList();
+    _streamSubscription = _adviceRepository.getAdviceStream().listen((data) {
       emit(
         AdviceState(
-          documents: adviceModels,
+          documents: data,
           isLoading: false,
           errorMessage: '',
         ),

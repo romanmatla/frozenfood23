@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frozen_food/app/features/home/advice/cubit/advice_cubit.dart';
+import 'package:frozen_food/app/repositories/advice_repository.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AdvicePageContent extends StatelessWidget {
@@ -62,7 +63,7 @@ class AdvicePageContent extends StatelessWidget {
                       ),
                       Expanded(
                         child: BlocProvider(
-                          create: (context) => AdviceCubit()..start(),
+                          create: (context) => AdviceCubit(AdviceRepository())..start(),
                           child: BlocBuilder<AdviceCubit, AdviceState>(
                             builder: (context, state) {
                               if (state.errorMessage.isNotEmpty) {
