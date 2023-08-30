@@ -1,5 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frozen_food/app/features/home/advice/cubit/advice_cubit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AdvicePageContent extends StatelessWidget {
@@ -60,57 +61,61 @@ class AdvicePageContent extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: StreamBuilder<QuerySnapshot>(
-                            stream: FirebaseFirestore.instance
-                                .collection('topic')
-                                .snapshots(),
-                            builder: (context, snapshot) {
-                              if (snapshot.hasError) {
-                                return const Text('Wystąpił problem');
+                        child: BlocProvider(
+                          create: (context) => AdviceCubit()..start(),
+                          child: BlocBuilder<AdviceCubit, AdviceState>(
+                            builder: (context, state) {
+                              if (state.errorMessage.isNotEmpty) {
+                                return Center(
+                                  child: Text(
+                                      'Wystąpił problem: ${state.errorMessage}'),
+                                );
                               }
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const Text('trwa ładowanie');
+                              if (state.isLoading) {
+                                return const Center(
+                                    child: CircularProgressIndicator());
                               }
 
-                              final documents = snapshot.data!.docs;
+                              final documents = state.documents;
 
                               return ListView(
                                 children: [
                                   for (final document in documents) ...[
                                     _AdviceItemWidget(document['title']),
                                   ],
-                                  // jak mrozić
-                                  //       Row(
-                                  //         children: [
-                                  //           const Image(
-                                  //             image: AssetImage('images/mroz.png'),
-                                  //             width: 50,
-                                  //           ),
-                                  //
-                                  // czas przechowywania
-                                  //       Row(
-                                  //         children: [
-                                  //           const Padding(
-                                  //             padding: EdgeInsets.all(8.0),
-                                  //             child: Image(
-                                  //               image: AssetImage('images/kleps.png'),
-                                  //               height: 60,
-                                  //             ),
-                                  //           ),
-                                  //
-                                  // O mrożeniu żywności
-                                  //
-                                  //       Row(
-                                  //         children: [
-                                  //           const Image(
-                                  //             image: AssetImage('images/info.png'),
-                                  //             width: 60,
-                                  //           ),
-                                  //
                                 ],
                               );
-                            }),
+                              // jak mrozić
+                              //       Row(
+                              //         children: [
+                              //           const Image(
+                              //             image: AssetImage('images/mroz.png'),
+                              //             width: 50,
+                              //           ),
+                              //
+                              // czas przechowywania
+                              //       Row(
+                              //         children: [
+                              //           const Padding(
+                              //             padding: EdgeInsets.all(8.0),
+                              //             child: Image(
+                              //               image: AssetImage('images/kleps.png'),
+                              //               height: 60,
+                              //             ),
+                              //           ),
+                              //
+                              // O mrożeniu żywności
+                              //
+                              //       Row(
+                              //         children: [
+                              //           const Image(
+                              //             image: AssetImage('images/info.png'),
+                              //             width: 60,
+                              //           ),
+                              //
+                            },
+                          ),
+                        ),
                       ),
                     ],
                   ),
