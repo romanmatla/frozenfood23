@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frozen_food/app/features/home/add/cubit/add_cubit.dart';
 import 'package:frozen_food/app/repositories/product_repository.dart';
+// import 'package:frozen_food/data/remote_data_sources/product_remote_data_souces.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -9,9 +10,14 @@ class AddPageContent extends StatefulWidget {
   const AddPageContent({
     super.key,
     required this.categories,
+    // required this.dataSource,
   });
 
   final String categories;
+
+  //  final ProductDataSource dataSource;
+
+  // ProductRepository({required this.dataSource});
 
   @override
   State<AddPageContent> createState() => _AddPageContentState();
