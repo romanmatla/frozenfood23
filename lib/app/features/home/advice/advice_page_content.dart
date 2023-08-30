@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frozen_food/app/core/enums.dart';
 import 'package:frozen_food/app/features/home/advice/cubit/advice_cubit.dart';
 import 'package:frozen_food/app/repositories/advice_repository.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -63,29 +64,47 @@ class AdvicePageContent extends StatelessWidget {
                       ),
                       Expanded(
                         child: BlocProvider(
-                          create: (context) => AdviceCubit(AdviceRepository())..start(),
+                          create: (context) =>
+                              AdviceCubit(AdviceRepository())..start(),
                           child: BlocBuilder<AdviceCubit, AdviceState>(
                             builder: (context, state) {
-                              if (state.errorMessage.isNotEmpty) {
-                                return Center(
-                                  child: Text(
-                                      'Wystąpił problem: ${state.errorMessage}'),
-                                );
-                              }
-                              if (state.isLoading) {
-                                return const Center(
-                                    child: CircularProgressIndicator());
-                              }
+                              switch (state.status) {
+                                case Status.initial:
+                                  return const Center(
+                                    child: Text('Initial state'),
+                                  );
+                                case Status.loading:
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                case Status.success:
+                                  final adviceModels = state.documents;
 
-                              final adviceModels = state.documents;
+                                  return ListView(
+                                    children: [
+                                      for (final adviceModel
+                                          in adviceModels) ...[
+                                        _AdviceItemWidget(adviceModel.title),
+                                      ],
+                                    ],
+                                  );
 
-                              return ListView(
-                                children: [
-                                  for (final adviceModel in adviceModels) ...[
-                                    _AdviceItemWidget(adviceModel.title),
-                                  ],
-                                ],
-                              );
+                                case Status.error:
+                                  return const Center(
+                                    child: Text('error'),
+                                  );
+                              }
+                              // if (state.errorMessage.isNotEmpty) {
+                              //   return Center(
+                              //     child: Text(
+                              //         'Wystąpił problem: ${state.errorMessage}'),
+                              //   );
+                              // }
+                              // if (state.isLoading) {
+                              //   return const Center(
+                              //       child: CircularProgressIndicator());
+                              // }
+
                               // jak mrozić
                               //       Row(
                               //         children: [
