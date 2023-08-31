@@ -58,7 +58,7 @@ class ArticlesPageContent extends StatelessWidget {
                         child: BlocProvider<ArticleCubit>(
                           create: (context) => ArticleCubit(
                             articleRepository: ArticlesRepository(
-                              remoteDataSource: ArticlesMockedDataSource(),
+                              remoteDataSource: ArticlesRemoteDioDataSource(),
                             ),
                           )..fetchData(authotId: author.id),
                           child: BlocBuilder<ArticleCubit, ArticleState>(
@@ -118,7 +118,10 @@ class _ArticleItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 10,
+      ),
       child: Container(
         padding: const EdgeInsets.all(16.0),
         margin: const EdgeInsets.all(2),

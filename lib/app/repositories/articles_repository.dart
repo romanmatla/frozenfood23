@@ -4,7 +4,7 @@ import 'package:frozen_food/data/remote_data_sources/articles_remote_data_source
 class ArticlesRepository {
   ArticlesRepository({required this.remoteDataSource});
 
-  final ArticlesMockedDataSource remoteDataSource;
+  final ArticlesRemoteDioDataSource remoteDataSource;
 
   Future<List<ArticleModel>> getArticlesForAuthorId(int authotId) async {
     final json = await remoteDataSource.getArticles();

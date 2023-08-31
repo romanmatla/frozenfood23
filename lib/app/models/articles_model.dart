@@ -11,6 +11,6 @@ class ArticleModel {
 
   ArticleModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-        authorId = json['author_id'],
+        authorId = json['categorys_id'],
         content = json['content'];
 }
