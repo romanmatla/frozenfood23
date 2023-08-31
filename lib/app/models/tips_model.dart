@@ -8,4 +8,3 @@ class TipsModel {
   TipsModel.fromJson(Map<String, dynamic> json) 
 : title = json['email'];
 }
-

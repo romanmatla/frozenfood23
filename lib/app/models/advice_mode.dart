@@ -1,7 +1,7 @@
-class AdviceModel {
-  AdviceModel({
-    required this.title,
-  });
+// class AdviceModel {
+//   AdviceModel({
+//     required this.title,
+//   });
 
-  final String title;
-}
+//   final String title;
+// }

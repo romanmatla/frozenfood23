@@ -5,7 +5,7 @@ import 'package:frozen_food/data/remote_data_sources/tips_remote_data_source.dar
 class TipsRepository {
 TipsRepository({required this.remoteDataSource});
 
-  final TipsMockDataSource remoteDataSource;
+  final TipsRemoteDioDataSource remoteDataSource;
 
   Future<List<TipsModel>> getTipsModels() async {
     final json = await remoteDataSource.getTips();

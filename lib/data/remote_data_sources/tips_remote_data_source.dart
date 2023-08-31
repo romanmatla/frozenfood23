@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+
 class TipsMockDataSource {
   Future<List<Map<String, dynamic>>?> getTips() async {
     return [
@@ -20,5 +22,17 @@ class TipsMockDataSource {
         'email': 'Krzyś',
       },
     ];
+  }
+}
+
+class TipsRemoteDioDataSource {
+  Future<List<Map<String, dynamic>>?> getTips() async {
+    final response = await Dio().get<List<dynamic>>(
+        'https://my-json-server.typicode.com/adamsmaka/json-demo/users');
+    final listDynamic = response.data;
+    if (listDynamic == null) {
+      return null;
+    }
+    return listDynamic.map((e) => e as Map<String, dynamic>).toList();
   }
 }

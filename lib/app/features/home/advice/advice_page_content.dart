@@ -66,7 +66,8 @@ class AdvicePageContent extends StatelessWidget {
                       ),
                       Expanded(
                         child: BlocProvider(
-                          create: (context) => AdviceCubit(TipsRepository(remoteDataSource: TipsMockDataSource()))
+                          create: (context) => AdviceCubit(TipsRepository(
+                              remoteDataSource: TipsRemoteDioDataSource()))
                             ..start(title: '???'),
                           child: BlocBuilder<AdviceCubit, AdviceState>(
                             builder: (context, state) {
@@ -84,8 +85,7 @@ class AdvicePageContent extends StatelessWidget {
 
                                   return ListView(
                                     children: [
-                                      for (final tipsModel
-                                          in tipsModel) ...[
+                                      for (final tipsModel in tipsModel) ...[
                                         _AdviceItemWidget(tipsModel.title),
                                       ],
                                     ],
