@@ -60,7 +60,7 @@ class ArticlesPageContent extends StatelessWidget {
                             articleRepository: ArticlesRepository(
                               remoteDataSource: ArticlesMockedDataSource(),
                             ),
-                          )..fetchData(authotId: author.id), 
+                          )..fetchData(authotId: author.id),
                           child: BlocBuilder<ArticleCubit, ArticleState>(
                             builder: (context, state) {
                               switch (state.status) {
@@ -108,8 +108,7 @@ class ArticlesPageContent extends StatelessWidget {
 }
 
 class _ArticleItemWidget extends StatelessWidget {
-  const _ArticleItemWidget(
-    {
+  const _ArticleItemWidget({
     super.key,
     required this.model,
   });
@@ -118,56 +117,48 @@ class _ArticleItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(12.0),
-      margin: const EdgeInsets.all(2),
-      decoration: BoxDecoration(
-        color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200,
-            offset: const Offset(4.0, 4.0),
-            blurRadius: 15,
-            spreadRadius: 1,
-          ),
-          const BoxShadow(
-            color: Colors.white,
-            offset: Offset(-4.0, -4.0),
-            blurRadius: 15,
-            spreadRadius: 1,
-          )
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            child: Row(
-              children: [
-                Center(
-                  child: Container(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        model.content,
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          // fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Container(
+        padding: const EdgeInsets.all(16.0),
+        margin: const EdgeInsets.all(2),
+        decoration: BoxDecoration(
+          color: Colors.grey[100],
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade200,
+              offset: const Offset(4.0, 4.0),
+              blurRadius: 15,
+              spreadRadius: 1,
             ),
-          ),
-          const Icon(
-            Icons.keyboard_arrow_right_outlined,
-            color: Colors.black45,
-            size: 30,
-          ),
-        ],
+            const BoxShadow(
+              color: Colors.white,
+              offset: Offset(-4.0, -4.0),
+              blurRadius: 15,
+              spreadRadius: 1,
+            )
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Text(
+                model.content,
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  // fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+            const Icon(
+              Icons.keyboard_arrow_right_outlined,
+              color: Colors.black45,
+              size: 30,
+            ),
+          ],
+        ),
       ),
     );
   }
