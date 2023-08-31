@@ -28,7 +28,7 @@ class TipsMockDataSource {
 class TipsRemoteDioDataSource {
   Future<List<Map<String, dynamic>>?> getTips() async {
     final response = await Dio().get<List<dynamic>>(
-        'https://my-json-server.typicode.com/adamsmaka/json-demo/users');
+        'https://my-json-server.typicode.com/romanmatla/json_forzen/categorys');
     final listDynamic = response.data;
     if (listDynamic == null) {
       return null;
