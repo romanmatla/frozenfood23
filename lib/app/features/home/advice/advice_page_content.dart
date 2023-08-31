@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frozen_food/app/core/enums.dart';
 import 'package:frozen_food/app/features/home/advice/cubit/advice_cubit.dart';
 import 'package:frozen_food/app/repositories/advice_repository.dart';
+import 'package:frozen_food/app/repositories/tips_repository.dart';
+import 'package:frozen_food/data/remote_data_sources/tips_remote_data_source.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AdvicePageContent extends StatelessWidget {
@@ -64,8 +66,8 @@ class AdvicePageContent extends StatelessWidget {
                       ),
                       Expanded(
                         child: BlocProvider(
-                          create: (context) =>
-                              AdviceCubit(AdviceRepository())..start(),
+                          create: (context) => AdviceCubit(TipsRepository(remoteDataSource: TipsMockDataSource()))
+                            ..start(title: '???'),
                           child: BlocBuilder<AdviceCubit, AdviceState>(
                             builder: (context, state) {
                               switch (state.status) {
@@ -78,13 +80,13 @@ class AdvicePageContent extends StatelessWidget {
                                     child: CircularProgressIndicator(),
                                   );
                                 case Status.success:
-                                  final adviceModels = state.documents;
+                                  final tipsModel = state.result;
 
                                   return ListView(
                                     children: [
-                                      for (final adviceModel
-                                          in adviceModels) ...[
-                                        _AdviceItemWidget(adviceModel.title),
+                                      for (final tipsModel
+                                          in tipsModel) ...[
+                                        _AdviceItemWidget(tipsModel.title),
                                       ],
                                     ],
                                   );

@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:frozen_food/app/models/advice_mode.dart';
-import 'package:frozen_food/app/repositories/advice_repository.dart';
+import 'package:frozen_food/app/models/tips_model.dart';
+import 'package:frozen_food/app/repositories/tips_repository.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/enums.dart';
@@ -10,55 +10,78 @@ import '../../../../core/enums.dart';
 part 'advice_state.dart';
 
 class AdviceCubit extends Cubit<AdviceState> {
-  AdviceCubit(this._adviceRepository)
-      : super(const AdviceState(
-          documents: [],
+  AdviceCubit(
+    // this._adviceRepository,
+    this.tipsRepository,
+  ) : super(const AdviceState(
+          result: [],
           //   errorMessage: '',
           //   isLoading: false,
           // ),
           status: Status.initial,
         ));
 
-  final AdviceRepository _adviceRepository;
+  final TipsRepository tipsRepository;
 
-  StreamSubscription? _streamSubscription;
-
-  Future<void> start() async {
-    emit(
-      const AdviceState(
-        status: Status.loading,
-
-        documents: [],
-        // errorMessage: '',
-        // isLoading: true,
-      ),
-    );
-
-    _streamSubscription = _adviceRepository.getAdviceStream().listen((data) {
+  Future<void> start({
+    required String title,
+  }) async {
+    emit(const AdviceState(status: Status.loading));
+    try {
+      final tipsModel = await tipsRepository.getTipsModels();
       emit(
         AdviceState(
+          result: tipsModel,
           status: Status.success,
-          documents: data,
-          // isLoading: false,
-          // errorMessage: '',
         ),
       );
-    })
-      ..onError((error) {
-        emit(
-          const AdviceState(
-            status: Status.error,
-            documents: [],
-            // isLoading: false,
-            // errorMessage: error.toString(),
-          ),
-        );
-      });
+    } catch (error) {
+      emit(const AdviceState(
+        status: Status.error,
+      ));
+    }
   }
 
-  @override
-  Future<void> close() {
-    _streamSubscription?.cancel();
-    return super.close();
-  }
+  // final AdviceRepository _adviceRepository;
+
+  // StreamSubscription? _streamSubscription;
+
+  // Future<void> start() async {
+  //   emit(
+  //     const AdviceState(
+  //       status: Status.loading,
+
+  //       documents: [],
+  //       // errorMessage: '',
+  //       // isLoading: true,
+  //     ),
+  //   );
+
+  //   _streamSubscription = _adviceRepository.getAdviceStream().listen((data) {
+  //     emit(
+  //       AdviceState(
+  //         status: Status.success,
+  //         documents: data,
+  //         // isLoading: false,
+  //         // errorMessage: '',
+  //       ),
+  //     );
+  //   })
+  //     ..onError((error) {
+  //       emit(
+  //         const AdviceState(
+  //           status: Status.error,
+  //           documents: [],
+  //           // isLoading: false,
+  //           // errorMessage: error.toString(),
+  //         ),
+  //       );
+  //     });
+  // }
+
+  // @override
+  // Future<void> close() {
+  //   _streamSubscription?.cancel();
+  //   return super.close();
+  // }
 }
