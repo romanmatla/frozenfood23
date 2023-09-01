@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frozen_food/app/features/home/products/cubit/products_cubit.dart';
+import 'package:frozen_food/app/features/home/widgets/back_button_widget.dart';
 import 'package:frozen_food/app/features/home/widgets/product_widget.dart';
+import 'package:frozen_food/app/repositories/product_repository.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductsPageContent extends StatelessWidget {
@@ -59,7 +61,7 @@ class ProductsPageContent extends StatelessWidget {
                         child: Center(
                           child: BlocProvider(
                             create: (context) =>
-                                ProductsCubit()..start(categories: categories),
+                                ProductsCubit(ProductRepository())..start(categories: categories),
                             child: BlocBuilder<ProductsCubit, ProductsState>(
                               builder: (context, state) {
                                 if (state.errorMessage.isNotEmpty) {
@@ -71,13 +73,14 @@ class ProductsPageContent extends StatelessWidget {
                                       child: CircularProgressIndicator());
                                 }
 
-                                final documents = state.documents;
+                                final productModels = state.documents;
 
                                 return ListView(
                                   children: [
-                                    for (final document in documents) ...[
+                                    for (final productModel
+                                        in productModels) ...[
                                       Dismissible(
-                                        key: ValueKey(document.id),
+                                        key: ValueKey(productModel.id),
                                         background: DecoratedBox(
                                           decoration: BoxDecoration(
                                             color: Colors.orange[200],
@@ -99,15 +102,15 @@ class ProductsPageContent extends StatelessWidget {
                                               DismissDirection.endToStart;
                                         },
                                         onDismissed: (_) {
-                                          context
-                                              .read<ProductsCubit>()
-                                              .remove(documentID: document.id);
+                                          context.read<ProductsCubit>().remove(
+                                              documentID: productModel.id);
                                         },
                                         child: ProductWidget(
-                                          document['name'],
-                                          document['date added'],
-                                          document['expiration date'],
-                                          document['quantity'],
+                                          productModel.title,
+                                          productModel.dataAdded,
+                                          productModel.expirationDate,
+                                          productModel.quantity,
+                                          productModel,
                                         ),
                                       ),
                                     ],
@@ -128,35 +131,7 @@ class ProductsPageContent extends StatelessWidget {
               ),
             ),
             //przycisk cofania
-            Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-              ),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        fixedSize: const Size(60, 60),
-                      ),
-                      child: const Icon(
-                        Icons.arrow_back_sharp,
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
+            const BackElevetedButton(),
           ],
         ),
       ),
