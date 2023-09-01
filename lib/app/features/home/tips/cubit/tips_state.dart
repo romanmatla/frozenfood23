@@ -1,8 +1,8 @@
-part of 'advice_cubit.dart';
+part of 'tips_cubit.dart';
 
 @immutable
-class AdviceState {
-  const AdviceState({
+class TipsState {
+  const TipsState({
     this.result = const [],
     // required this.isLoading,
     // required this.errorMessage,

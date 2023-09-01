@@ -32,7 +32,7 @@ class ArticlesPageContent extends StatelessWidget {
               padding: EdgeInsets.all(10.0),
               child: Image(
                 image: AssetImage('images/rozmr.png'),
-                width: 50,
+                width: 35,
               ),
             ),
             Padding(

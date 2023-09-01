@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frozen_food/app/core/enums.dart';
-import 'package:frozen_food/app/features/home/advice/cubit/advice_cubit.dart';
+import 'package:frozen_food/app/features/home/tips/cubit/tips_cubit.dart';
 import 'package:frozen_food/app/features/home/articles/articles_page.dart';
 import 'package:frozen_food/app/models/articles_model.dart';
 import 'package:frozen_food/app/repositories/tips_repository.dart';
 import 'package:frozen_food/data/remote_data_sources/tips_remote_data_source.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AdvicePageContent extends StatelessWidget {
-  const AdvicePageContent({
+class TipsPageContent extends StatelessWidget {
+  const TipsPageContent({
     super.key,
   });
 
@@ -67,10 +67,10 @@ class AdvicePageContent extends StatelessWidget {
                       ),
                       Expanded(
                         child: BlocProvider(
-                          create: (context) => AdviceCubit(TipsRepository(
+                          create: (context) => TipsCubit(TipsRepository(
                               remoteDataSource: TipsRemoteDioDataSource()))
                             ..start(title: '???'),
-                          child: BlocBuilder<AdviceCubit, AdviceState>(
+                          child: BlocBuilder<TipsCubit, TipsState>(
                             builder: (context, state) {
                               switch (state.status) {
                                 case Status.initial:
@@ -87,11 +87,12 @@ class AdvicePageContent extends StatelessWidget {
                                   return ListView(
                                     children: [
                                       for (final tipsModel in tipsModel) ...[
-                                        _AdviceItemWidget(tipsModel.title,
+                                        _TipsItemWidget(tipsModel.title,
                                             model: ArticleModel(
                                                 id: 1,
-                                                authorId: 1,
-                                                content: 'content')),
+                                                authorId: 3,
+                                                content: 'content')
+                                                ),
                                       ],
                                     ],
                                   );
@@ -117,8 +118,8 @@ class AdvicePageContent extends StatelessWidget {
   }
 }
 
-class _AdviceItemWidget extends StatelessWidget {
-  const _AdviceItemWidget(
+class _TipsItemWidget extends StatelessWidget {
+  const _TipsItemWidget(
     this.title, {
     super.key,
     required this.model,
@@ -162,7 +163,7 @@ class _AdviceItemWidget extends StatelessWidget {
               children: [
                 const Image(
                   image: AssetImage('images/rozmr.png'),
-                  width: 50,
+                  width: 30,
                 ),
                 Center(
                   child: Padding(
