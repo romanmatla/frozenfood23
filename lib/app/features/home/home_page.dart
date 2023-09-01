@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frozen_food/app/features/home/add_product/add_product_page_content.dart';
-import 'package:frozen_food/app/features/home/advice/advice_page_content.dart';
+import 'package:frozen_food/app/features/home/tips/tips_page_content.dart';
 import 'package:frozen_food/app/features/home/my_account/my_account_page_content.dart';
 import 'package:frozen_food/app/features/home/my_refrigerator/my_refrigerator_page_content.dart';
 
@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
             return const AddProductPageContent();
           }
           if (index == 2) {
-            return const AdvicePageContent();
+            return const TipsPageContent();
           }
           return MyAccountPageContent(email: widget.user.email);
         }),

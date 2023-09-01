@@ -4,6 +4,7 @@ import 'package:frozen_food/app/features/home/products/cubit/products_cubit.dart
 import 'package:frozen_food/app/features/home/widgets/back_button_widget.dart';
 import 'package:frozen_food/app/features/home/widgets/product_widget.dart';
 import 'package:frozen_food/app/repositories/product_repository.dart';
+// import 'package:frozen_food/data/remote_data_sources/product_remote_data_souces.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductsPageContent extends StatelessWidget {
@@ -58,6 +59,7 @@ class ProductsPageContent extends StatelessWidget {
                         ),
                       ),
                       Expanded(
+
                         child: Center(
                           child: BlocProvider(
                             create: (context) =>
