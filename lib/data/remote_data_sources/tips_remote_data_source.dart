@@ -1,15 +1,14 @@
 import 'package:dio/dio.dart';
+import 'package:frozen_food/app/models/tips_model.dart';
+import 'package:retrofit/retrofit.dart';
 
+part 'tips_remote_data_source.g.dart';
 
+@RestApi(baseUrl: "https://my-json-server.typicode.com/romanmatla/json_forzen")
+abstract class TipsRemoteRetrofitDataSource {
+  factory TipsRemoteRetrofitDataSource(Dio dio, {String baseUrl}) = _TipsRemoteRetrofitDataSource;
 
-class TipsRemoteDioDataSource {
-  Future<List<Map<String, dynamic>>?> getTips() async {
-    final response = await Dio().get<List<dynamic>>(
-        'https://my-json-server.typicode.com/romanmatla/json_forzen/categorys');
-    final listDynamic = response.data;
-    if (listDynamic == null) {
-      return null;
-    }
-    return listDynamic.map((e) => e as Map<String, dynamic>).toList();
-  }
+  @GET("/categorys")
+  Future<List<TipsModel>> getTips();
 }
+

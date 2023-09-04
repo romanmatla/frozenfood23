@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frozen_food/app/core/enums.dart';
@@ -59,7 +60,7 @@ class ArticlesPageContent extends StatelessWidget {
                         child: BlocProvider<ArticleCubit>(
                           create: (context) => ArticleCubit(
                             articleRepository: ArticlesRepository(
-                              remoteDataSource: ArticlesRemoteDioDataSource(),
+                              remoteDataSource: ArticlesRemoteRetrofitDataSource(Dio()),
                             ),
                           )..fetchData(categorysId: author.id),
                           child: BlocBuilder<ArticleCubit, ArticleState>(

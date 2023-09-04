@@ -4,15 +4,10 @@ import 'package:frozen_food/data/remote_data_sources/articles_remote_data_source
 class ArticlesRepository {
   ArticlesRepository({required this.remoteDataSource});
 
-  final ArticlesRemoteDioDataSource remoteDataSource;
+  final ArticlesRemoteRetrofitDataSource remoteDataSource;
 
   Future<List<ArticleModel>> getArticlesForAuthorId(int categorysId) async {
-    final json = await remoteDataSource.getArticles();
-    if (json == null) {
-      return [];
-    }
-    final allArticles =
-        json.map((item) => ArticleModel.fromJson(item)).toList();
+    final allArticles = await remoteDataSource.getArticles();
 
     return allArticles
         .where((article) => article.categorysId == categorysId)

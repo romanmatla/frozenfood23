@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frozen_food/app/core/enums.dart';
@@ -68,7 +69,8 @@ class TipsPageContent extends StatelessWidget {
                       Expanded(
                         child: BlocProvider(
                           create: (context) => TipsCubit(TipsRepository(
-                              remoteDataSource: TipsRemoteDioDataSource()))
+                              remoteDataSource:
+                                  TipsRemoteRetrofitDataSource(Dio())))
                             ..start(title: '???'),
                           child: BlocBuilder<TipsCubit, TipsState>(
                             builder: (context, state) {
