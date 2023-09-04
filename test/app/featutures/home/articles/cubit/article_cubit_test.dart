@@ -22,9 +22,9 @@ void main() {
       setUp(() {
         when(() => repository.getArticlesForAuthorId(555)).thenAnswer(
           (_) async => [
-            ArticleModel(id: 1, authorId: 555, content: 'content1'),
-            ArticleModel(id: 2, authorId: 555, content: 'content2'),
-            ArticleModel(id: 3, authorId: 555, content: 'content3'),
+            ArticleModel(1, 11, "content1"),
+            ArticleModel(2, 11, "content2"),
+            ArticleModel(3, 11, "content3"),
           ],
         );
       });
@@ -32,7 +32,7 @@ void main() {
       blocTest<ArticleCubit, ArticleState>(
         'emit Status.loading then Status.success with result',
         build: () => sut,
-        act: (cubit) => cubit.fetchData(authotId: 555),
+        act: (cubit) => cubit.fetchData(categorysId: 11),
         expect: () => [
           const ArticleState(
             status: Status.loading,
@@ -40,9 +40,9 @@ void main() {
           ArticleState(
             status: Status.success,
             results: [
-              ArticleModel(id: 1, authorId: 555, content: 'content1'),
-              ArticleModel(id: 2, authorId: 555, content: 'content2'),
-              ArticleModel(id: 3, authorId: 555, content: 'content3'),
+            ArticleModel(1, 11, "content1"),
+            ArticleModel(2, 11, "content2"),
+            ArticleModel(3, 11, "content3"),
             ],
           ),
         ],
@@ -60,7 +60,7 @@ void main() {
     blocTest<ArticleCubit, ArticleState>(
       'emit Status.loading then Status.error with errorMessage',
       build: () => sut,
-      act: (cubit) => cubit.fetchData(authotId: 555),
+      act: (cubit) => cubit.fetchData(categorysId: 11),
       expect: () => [
         const ArticleState(
           status: Status.loading,

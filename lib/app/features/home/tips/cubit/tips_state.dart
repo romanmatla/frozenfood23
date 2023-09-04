@@ -10,7 +10,7 @@ class TipsState {
     // this.model,
   });
 
-  final List<TipsModel> result;
+final List<TipsModel> result;
   // final bool isLoading;
   // final String errorMessage;
   final Status status;

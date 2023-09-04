@@ -1,14 +1,10 @@
 part of 'article_cubit.dart';
 
-@immutable
-class ArticleState {
-  const ArticleState({
-    this.results = const [],
-    this.status = Status.initial,
-    this.errorMessage,
-  });
-
-  final List<ArticleModel> results;
-  final Status status;
-  final String? errorMessage;
+@freezed
+class ArticleState with _$ArticleState {
+  const factory ArticleState({
+    @Default([]) List<ArticleModel> results,
+    @Default(Status.initial) Status status,
+    String? errorMessage,
+  }) = _ArticleState;
 }

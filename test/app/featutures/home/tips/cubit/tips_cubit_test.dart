@@ -23,9 +23,7 @@ void main() {
     setUp(() {
       when(() => repository.getTipsModels()).thenAnswer(
         (_) async => [
-          TipsModel(title: 'title1', picture: 'picture1'),
-          TipsModel(title: 'title2', picture: 'picture2'),
-          TipsModel(title: 'title3', picture: 'picture3'),
+          TipsModel(1, 'title', 'picture'),
         ],
       );
     });
@@ -40,9 +38,7 @@ void main() {
         ),
         TipsState(
           result: [
-            TipsModel(title: 'title1', picture: 'picture1'),
-            TipsModel(title: 'title2', picture: 'picture2'),
-            TipsModel(title: 'title3', picture: 'picture3'),
+          TipsModel(1, 'title', 'picture'),
           ],
           status: Status.success,
         ),
