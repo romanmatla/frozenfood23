@@ -60,7 +60,7 @@ class ArticlesPageContent extends StatelessWidget {
                             articleRepository: ArticlesRepository(
                               remoteDataSource: ArticlesRemoteDioDataSource(),
                             ),
-                          )..fetchData(authotId: author.id),
+                          )..fetchData(categorysId: author.id),
                           child: BlocBuilder<ArticleCubit, ArticleState>(
                             builder: (context, state) {
                               switch (state.status) {
@@ -80,8 +80,8 @@ class ArticlesPageContent extends StatelessWidget {
 
                                   return ListView(
                                     children: [
-                                      for (final author in state.results) ...[
-                                        _ArticleItemWidget(model: author),
+                                      for (final article in state.results) ...[
+                                        _ArticleItemWidget(model: article),
                                       ],
                                     ],
                                   );

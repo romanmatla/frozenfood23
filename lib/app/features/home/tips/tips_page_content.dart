@@ -90,9 +90,8 @@ class TipsPageContent extends StatelessWidget {
                                         _TipsItemWidget(tipsModel.title,
                                             model: ArticleModel(
                                                 id: 1,
-                                                authorId: 3,
-                                                content: 'content')
-                                                ),
+                                                categorysId: 3,
+                                                content: 'content')),
                                       ],
                                     ],
                                   );

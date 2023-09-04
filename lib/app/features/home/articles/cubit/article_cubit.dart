@@ -14,20 +14,27 @@ class ArticleCubit extends Cubit<ArticleState> {
 
   final ArticlesRepository articleRepository;
 
-  Future<void> fetchData({required int authotId}) async {
+  Future<void> fetchData({required int categorysId}) async {
     emit(
-      const ArticleState(status: Status.loading)
+      const ArticleState(
+        status: Status.loading,
+      ),
     );
     try {
-      final results = await articleRepository.getArticlesForAuthorId(authotId);
+      final results = await articleRepository.getArticlesForAuthorId(categorysId);
       emit(
-         ArticleState(
+        ArticleState(
           status: Status.success,
           results: results,
         ),
       );
     } catch (error) {
-      emit(ArticleState(status: Status.error, errorMessage: error.toString(),),);
+      emit(
+        ArticleState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
     }
   }
 }

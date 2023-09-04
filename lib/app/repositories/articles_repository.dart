@@ -6,7 +6,7 @@ class ArticlesRepository {
 
   final ArticlesRemoteDioDataSource remoteDataSource;
 
-  Future<List<ArticleModel>> getArticlesForAuthorId(int authotId) async {
+  Future<List<ArticleModel>> getArticlesForAuthorId(int categorysId) async {
     final json = await remoteDataSource.getArticles();
     if (json == null) {
       return [];
@@ -15,7 +15,7 @@ class ArticlesRepository {
         json.map((item) => ArticleModel.fromJson(item)).toList();
 
     return allArticles
-        .where((element) => element.authorId == authotId)
+        .where((element) => element.categorysId == categorysId)
         .toList();
   }
 }
