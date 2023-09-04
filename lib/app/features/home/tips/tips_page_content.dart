@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frozen_food/app/core/enums.dart';
 import 'package:frozen_food/app/features/home/tips/cubit/tips_cubit.dart';
 import 'package:frozen_food/app/features/home/articles/articles_page.dart';
-import 'package:frozen_food/app/models/articles_model.dart';
+import 'package:frozen_food/app/models/tips_model.dart';
 import 'package:frozen_food/app/repositories/tips_repository.dart';
 import 'package:frozen_food/data/remote_data_sources/tips_remote_data_source.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -82,16 +82,14 @@ class TipsPageContent extends StatelessWidget {
                                     child: CircularProgressIndicator(),
                                   );
                                 case Status.success:
-                                  final tipsModel = state.result;
+                                  // final tipsModel = state.result;
 
                                   return ListView(
                                     children: [
-                                      for (final tipsModel in tipsModel) ...[
-                                        _TipsItemWidget(tipsModel.title,
-                                            model: ArticleModel(
-                                                id: 1,
-                                                categorysId: 3,
-                                                content: 'content')),
+                                      for (final tipsModel in state.result) ...[
+                                        _TipsItemWidget(
+                                          model: tipsModel,
+                                        ),
                                       ],
                                     ],
                                   );
@@ -118,14 +116,12 @@ class TipsPageContent extends StatelessWidget {
 }
 
 class _TipsItemWidget extends StatelessWidget {
-  const _TipsItemWidget(
-    this.title, {
+  const _TipsItemWidget({
     super.key,
     required this.model,
   });
 
-  final String title;
-  final ArticleModel model;
+  final TipsModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -160,15 +156,15 @@ class _TipsItemWidget extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Image(
-                  image: AssetImage('images/rozmr.png'),
-                  width: 30,
+                CircleAvatar(
+                  backgroundImage: NetworkImage(model.picture),
+                  radius: 30,
                 ),
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Text(
-                      title,
+                      model.title,
                       style: GoogleFonts.poppins(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,

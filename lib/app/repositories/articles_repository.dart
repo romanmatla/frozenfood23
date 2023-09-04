@@ -15,7 +15,7 @@ class ArticlesRepository {
         json.map((item) => ArticleModel.fromJson(item)).toList();
 
     return allArticles
-        .where((element) => element.categorysId == categorysId)
+        .where((article) => article.categorysId == categorysId)
         .toList();
   }
 }
