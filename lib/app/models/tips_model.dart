@@ -1,21 +1,16 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'tips_model.g.dart';
+part 'tips_model.freezed.dart';
 
-@JsonSerializable()
-class TipsModel {
-  TipsModel({
-    required this.id,
-    required this.title,
-    required this.picture,
-  });
-
-  final int id;
-  final String title;
-  final String picture;
+@freezed
+class TipsModel with _$TipsModel {
+  factory TipsModel(
+    int id,
+    String title,
+    String picture,
+  ) = _TipsModel;
 
   factory TipsModel.fromJson(Map<String, dynamic> json) =>
       _$TipsModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$TipsModelToJson(this);
 }
