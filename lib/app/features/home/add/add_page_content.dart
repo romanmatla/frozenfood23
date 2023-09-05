@@ -146,57 +146,11 @@ class _AddPageContentState extends State<AddPageContent> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: TextField(
-                              controller: controllerName,
-                              decoration: const InputDecoration(
-                                labelText: 'Produkt',
-                                labelStyle: TextStyle(color: Colors.blue),
-                                border: OutlineInputBorder(),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 47, 151, 236),
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 248, 134, 3),
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            child: _AddProductWidget(controllerName: controllerName),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: TextField(
-                              controller: controllerQuantity,
-                              decoration: const InputDecoration(
-                                labelText: 'Ilość',
-                                labelStyle: TextStyle(color: Colors.blue),
-                                border: OutlineInputBorder(),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 47, 151, 236),
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 248, 134, 3),
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            child: _AddQuantityWidget(controllerQuantity: controllerQuantity),
                           ),
                           const Padding(
                             padding: EdgeInsets.all(8.0),
@@ -232,6 +186,80 @@ class _AddPageContentState extends State<AddPageContent> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _AddQuantityWidget extends StatelessWidget {
+  const _AddQuantityWidget({
+    super.key,
+    required this.controllerQuantity,
+  });
+
+  final TextEditingController controllerQuantity;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controllerQuantity,
+      decoration: const InputDecoration(
+        labelText: 'Ilość',
+        labelStyle: TextStyle(color: Colors.blue),
+        border: OutlineInputBorder(),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromARGB(255, 47, 151, 236),
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(15),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromARGB(255, 248, 134, 3),
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(15),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _AddProductWidget extends StatelessWidget {
+  const _AddProductWidget({
+    super.key,
+    required this.controllerName,
+  });
+
+  final TextEditingController controllerName;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controllerName,
+      decoration: const InputDecoration(
+        labelText: 'Produkt',
+        labelStyle: TextStyle(color: Colors.blue),
+        border: OutlineInputBorder(),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromARGB(255, 47, 151, 236),
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(15),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromARGB(255, 248, 134, 3),
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(15),
+          ),
         ),
       ),
     );
