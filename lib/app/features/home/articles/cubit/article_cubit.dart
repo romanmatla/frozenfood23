@@ -2,13 +2,14 @@ import 'package:bloc/bloc.dart';
 import 'package:frozen_food/app/core/enums.dart';
 import 'package:frozen_food/app/models/articles_model.dart';
 import 'package:frozen_food/app/repositories/articles_repository.dart';
-// import 'package:meta/meta.dart';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 part 'article_state.dart';
 part 'article_cubit.freezed.dart';
 
+
+@injectable 
 class ArticleCubit extends Cubit<ArticleState> {
   ArticleCubit({required this.articleRepository})
       : super(

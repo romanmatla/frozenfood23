@@ -12,9 +12,7 @@ class _TipsRemoteRetrofitDataSource implements TipsRemoteRetrofitDataSource {
   _TipsRemoteRetrofitDataSource(
     this._dio, {
     this.baseUrl,
-  }) {
-    baseUrl ??= 'https://my-json-server.typicode.com/romanmatla/json_forzen';
-  }
+  });
 
   final Dio _dio;
 

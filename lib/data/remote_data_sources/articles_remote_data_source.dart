@@ -1,13 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:frozen_food/app/models/articles_model.dart';
+import 'package:injectable/injectable.dart';
 
 import 'package:retrofit/retrofit.dart';
 
 part 'articles_remote_data_source.g.dart';
 
-@RestApi(baseUrl: "https://my-json-server.typicode.com/romanmatla/json_forzen")
+@injectable
+@RestApi()
 abstract class ArticlesRemoteRetrofitDataSource {
-  factory ArticlesRemoteRetrofitDataSource(Dio dio, {String baseUrl}) = _ArticlesRemoteRetrofitDataSource;
+  @factoryMethod
+  factory ArticlesRemoteRetrofitDataSource(Dio dio) =
+      _ArticlesRemoteRetrofitDataSource;
 
   @GET("/articles")
   Future<List<ArticleModel>> getArticles();
