@@ -12,7 +12,7 @@ part 'tips_cubit.freezed.dart';
 
 class TipsCubit extends Cubit<TipsState> {
   TipsCubit(
-    this.tipsRepository,
+    {required this.tipsRepository}
   ) : super(const TipsState(
           result: [],
           status: Status.initial,

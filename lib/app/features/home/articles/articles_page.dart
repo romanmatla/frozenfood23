@@ -1,13 +1,12 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frozen_food/app/core/enums.dart';
 import 'package:frozen_food/app/features/home/articles/cubit/article_cubit.dart';
 import 'package:frozen_food/app/models/articles_model.dart';
 import 'package:frozen_food/app/models/tips_model.dart';
-import 'package:frozen_food/app/repositories/articles_repository.dart';
-import 'package:frozen_food/data/remote_data_sources/articles_remote_data_source.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../injecton_container.dart';
 
 class ArticlesPageContent extends StatelessWidget {
   const ArticlesPageContent({
@@ -35,8 +34,7 @@ class ArticlesPageContent extends StatelessWidget {
                 child: CircleAvatar(
                   backgroundImage: NetworkImage(author.picture),
                   radius: 35,
-                )
-                ),
+                )),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
@@ -58,11 +56,8 @@ class ArticlesPageContent extends StatelessWidget {
                     children: [
                       Expanded(
                         child: BlocProvider<ArticleCubit>(
-                          create: (context) => ArticleCubit(
-                            articleRepository: ArticlesRepository(
-                              remoteDataSource: ArticlesRemoteRetrofitDataSource(Dio()),
-                            ),
-                          )..fetchData(categorysId: author.id),
+                          create: (context) =>
+                              getIt()..fetchData(categorysId: author.id),
                           child: BlocBuilder<ArticleCubit, ArticleState>(
                             builder: (context, state) {
                               switch (state.status) {

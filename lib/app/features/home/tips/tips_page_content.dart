@@ -1,13 +1,12 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frozen_food/app/core/enums.dart';
 import 'package:frozen_food/app/features/home/tips/cubit/tips_cubit.dart';
 import 'package:frozen_food/app/features/home/articles/articles_page.dart';
 import 'package:frozen_food/app/models/tips_model.dart';
-import 'package:frozen_food/app/repositories/tips_repository.dart';
-import 'package:frozen_food/data/remote_data_sources/tips_remote_data_source.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../injecton_container.dart';
 
 class TipsPageContent extends StatelessWidget {
   const TipsPageContent({
@@ -67,11 +66,11 @@ class TipsPageContent extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: BlocProvider(
-                          create: (context) => TipsCubit(TipsRepository(
-                              remoteDataSource:
-                                  TipsRemoteRetrofitDataSource(Dio())))
-                            ..start(title: '???'),
+                        child: BlocProvider<TipsCubit>(
+                          create: (context) {
+                            return getIt()
+                            ..start(title: '???');
+                          },
                           child: BlocBuilder<TipsCubit, TipsState>(
                             builder: (context, state) {
                               switch (state.status) {

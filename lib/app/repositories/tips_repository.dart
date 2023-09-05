@@ -10,17 +10,5 @@ class TipsRepository {
    return remoteDataSource.getTips();
   }
 
-  // Future<TipsModel?> getTipsModel() async {
-  //   final response = await Dio().get<Map<String, dynamic>>(
-  //       'https://my-json-server.typicode.com/adamsmaka/json-demo/users');
-  //   final responseData = response.data;
-
-  //   if (responseData == null) {
-  //     return null;
-  //   }
-
-  //   final name = responseData['email'] as String;
-
-  //   return TipsModel();
-  // }
+  
 }
