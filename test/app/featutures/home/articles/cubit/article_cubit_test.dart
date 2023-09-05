@@ -20,7 +20,7 @@ void main() {
   group('fetchData', () {
     group('success', () {
       setUp(() {
-        when(() => repository.getArticlesForAuthorId(555)).thenAnswer(
+        when(() => repository.getArticlesForAuthorId(11)).thenAnswer(
           (_) async => [
             ArticleModel(1, 11, "content1"),
             ArticleModel(2, 11, "content2"),
@@ -40,9 +40,9 @@ void main() {
           ArticleState(
             status: Status.success,
             results: [
-            ArticleModel(1, 11, "content1"),
-            ArticleModel(2, 11, "content2"),
-            ArticleModel(3, 11, "content3"),
+              ArticleModel(1, 11, "content1"),
+              ArticleModel(2, 11, "content2"),
+              ArticleModel(3, 11, "content3"),
             ],
           ),
         ],
@@ -52,7 +52,7 @@ void main() {
 
   group('failure', () {
     setUp(() {
-      when(() => repository.getArticlesForAuthorId(555)).thenThrow(
+      when(() => repository.getArticlesForAuthorId(11)).thenThrow(
         Exception('test-exception-error'),
       );
     });
@@ -67,7 +67,7 @@ void main() {
         ),
         const ArticleState(
           status: Status.error,
-          errorMessage: 'Exceptio: test-exception-error',
+          errorMessage: 'Exception: test-exception-error',
         ),
       ],
     );

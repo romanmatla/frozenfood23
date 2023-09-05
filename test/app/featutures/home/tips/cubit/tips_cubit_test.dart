@@ -17,32 +17,57 @@ void main() {
     sut = TipsCubit(tipsRepository: repository);
   });
 
-  
-
   group('start', () {
-    setUp(() {
-      when(() => repository.getTipsModels()).thenAnswer(
-        (_) async => [
-          TipsModel(1, 'title', 'picture'),
+    group('success', () {
+      setUp(() {
+        when(() => repository.getTipsModels()).thenAnswer(
+          (_) async => [
+            TipsModel(1, 'title1', 'picture1'),
+            TipsModel(2, 'title2', 'picture2'),
+            TipsModel(3, 'title3', 'picture3'),
+          ],
+        );
+      });
+
+      blocTest<TipsCubit, TipsState>(
+        'emit Status.loadind then Status.success with results',
+        build: () => sut,
+        act: (cubit) => cubit.start(title: 'test'),
+        expect: () => [
+          const TipsState(
+            status: Status.loading,
+          ),
+          TipsState(
+            result: [
+              TipsModel(1, 'title1', 'picture1'),
+              TipsModel(2, 'title2', 'picture2'),
+              TipsModel(3, 'title3', 'picture3'),
+            ],
+            status: Status.success,
+          ),
         ],
       );
     });
 
-    blocTest<TipsCubit, TipsState>(
-      'emit Status.loadind then Status.success with results',
-      build: () => sut,
-      act: (cubit) => cubit.start(title: 'test'),
-      expect: () => [
-        const TipsState(
-          status: Status.loading,
-        ),
-        TipsState(
-          result: [
-          TipsModel(1, 'title', 'picture'),
-          ],
-          status: Status.success,
-        ),
-      ],
-    );
+    group('failure', () {
+      setUp(() {
+        when(() => repository.getTipsModels()).thenThrow(Exception('test-exception-error'),
+        );
+      });
+
+      blocTest<TipsCubit, TipsState>(
+        'emit Status.loadind then Status.error',
+        build: () => sut,
+        act: (cubit) => cubit.start(title: 'test'),
+        expect: () => [
+          const TipsState(
+            status: Status.loading,
+          ),
+          const TipsState(
+            status: Status.error, 
+          ),
+        ],
+      );
+    });
   });
 }
