@@ -14,7 +14,7 @@ void main() {
 
   setUp(() {
     repository = MockTipsRepository();
-    sut = TipsCubit(repository);
+    sut = TipsCubit(tipsRepository: repository);
   });
 
   
