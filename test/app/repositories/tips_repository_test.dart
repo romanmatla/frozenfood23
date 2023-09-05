@@ -30,10 +30,10 @@ void main() {
     //1
     when(() => dataSource.getTips()).thenAnswer(
       (_) async => [
-        TipsModel(1, 'title1', 'picture1'),
-        TipsModel(2, 'title2', 'picture2'),
-        TipsModel(3, 'title3', 'picture3'),
-        TipsModel(4, 'title4', 'picture4'),
+        TipsModel(1, 'title1', 'picture1', 'errorMessage1'),
+        TipsModel(2, 'title2', 'picture2', 'errorMessage2'),
+        TipsModel(3, 'title3', 'picture3', 'errorMessage3'),
+        TipsModel(4, 'title4', 'picture4', 'errorMessage4'),
       ],
     );
     //2
@@ -42,10 +42,10 @@ void main() {
     expect(
       results,
       [
-        TipsModel(1, 'title1', 'picture1'),
-        TipsModel(2, 'title2', 'picture2'),
-        TipsModel(3, 'title3', 'picture3'),
-        TipsModel(4, 'title4', 'picture4'),
+        TipsModel(1, 'title1', 'picture1', 'errorMessage1'),
+        TipsModel(2, 'title2', 'picture2', 'errorMessage2'),
+        TipsModel(3, 'title3', 'picture3', 'errorMessage3'),
+        TipsModel(4, 'title4', 'picture4', 'errorMessage4'),
       ],
     );
   });

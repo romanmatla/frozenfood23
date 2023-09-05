@@ -35,10 +35,10 @@ void main() {
       //1
       when(() => dataSource.getArticles()).thenAnswer(
         (_) async => [
-          ArticleModel(1, 222, 'content1'),
-          ArticleModel(2, 333, 'content2'),
-          ArticleModel(3, 222, 'content3'),
-          ArticleModel(4, 222, 'content4'),
+          ArticleModel(1, 222, 'content1', 'errorMessage1'),
+          ArticleModel(2, 333, 'content2', 'errorMessage2'),
+          ArticleModel(3, 222, 'content3', 'errorMessage3'),
+          ArticleModel(4, 222, 'content4', 'errorMessage4'),
         ],
       );
 
@@ -49,9 +49,9 @@ void main() {
       expect(
         results,
         [
-          ArticleModel(1, 222, 'content1'),
-          ArticleModel(3, 222, 'content3'),
-          ArticleModel(4, 222, 'content4'),
+          ArticleModel(1, 222, 'content1', 'errorMessage1'),
+          ArticleModel(3, 222, 'content3', 'errorMessage3'),
+          ArticleModel(4, 222, 'content4', 'errorMessage4'),
         ],
       );
     });

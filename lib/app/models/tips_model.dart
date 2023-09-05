@@ -9,6 +9,7 @@ class TipsModel with _$TipsModel {
     int id,
     String title,
     String picture,
+    String? errorMessage,
   ) = _TipsModel;
 
   factory TipsModel.fromJson(Map<String, dynamic> json) =>

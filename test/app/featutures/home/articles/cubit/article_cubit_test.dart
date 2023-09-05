@@ -22,9 +22,9 @@ void main() {
       setUp(() {
         when(() => repository.getArticlesForAuthorId(11)).thenAnswer(
           (_) async => [
-            ArticleModel(1, 11, "content1"),
-            ArticleModel(2, 11, "content2"),
-            ArticleModel(3, 11, "content3"),
+            ArticleModel(1, 11, "content1", 'errorMessage1'),
+            ArticleModel(2, 11, "content2", 'errorMessage2'),
+            ArticleModel(3, 11, "content3", 'errorMessage3'),
           ],
         );
       });
@@ -40,9 +40,9 @@ void main() {
           ArticleState(
             status: Status.success,
             results: [
-              ArticleModel(1, 11, "content1"),
-              ArticleModel(2, 11, "content2"),
-              ArticleModel(3, 11, "content3"),
+            ArticleModel(1, 11, "content1", 'errorMessage1'),
+            ArticleModel(2, 11, "content2", 'errorMessage2'),
+            ArticleModel(3, 11, "content3", 'errorMessage3'),
             ],
           ),
         ],

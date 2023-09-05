@@ -23,6 +23,7 @@ mixin _$TipsModel {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get picture => throw _privateConstructorUsedError;
+  String? get errorMessage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $TipsModelCopyWith<$Res> {
   factory $TipsModelCopyWith(TipsModel value, $Res Function(TipsModel) then) =
       _$TipsModelCopyWithImpl<$Res, TipsModel>;
   @useResult
-  $Res call({int id, String title, String picture});
+  $Res call({int id, String title, String picture, String? errorMessage});
 }
 
 /// @nodoc
@@ -54,6 +55,7 @@ class _$TipsModelCopyWithImpl<$Res, $Val extends TipsModel>
     Object? id = null,
     Object? title = null,
     Object? picture = null,
+    Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -68,6 +70,10 @@ class _$TipsModelCopyWithImpl<$Res, $Val extends TipsModel>
           ? _value.picture
           : picture // ignore: cast_nullable_to_non_nullable
               as String,
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -79,7 +85,7 @@ abstract class _$$_TipsModelCopyWith<$Res> implements $TipsModelCopyWith<$Res> {
       __$$_TipsModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String title, String picture});
+  $Res call({int id, String title, String picture, String? errorMessage});
 }
 
 /// @nodoc
@@ -96,6 +102,7 @@ class __$$_TipsModelCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? picture = null,
+    Object? errorMessage = freezed,
   }) {
     return _then(_$_TipsModel(
       null == id
@@ -110,6 +117,10 @@ class __$$_TipsModelCopyWithImpl<$Res>
           ? _value.picture
           : picture // ignore: cast_nullable_to_non_nullable
               as String,
+      freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -117,7 +128,7 @@ class __$$_TipsModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_TipsModel implements _TipsModel {
-  _$_TipsModel(this.id, this.title, this.picture);
+  _$_TipsModel(this.id, this.title, this.picture, this.errorMessage);
 
   factory _$_TipsModel.fromJson(Map<String, dynamic> json) =>
       _$$_TipsModelFromJson(json);
@@ -128,10 +139,12 @@ class _$_TipsModel implements _TipsModel {
   final String title;
   @override
   final String picture;
+  @override
+  final String? errorMessage;
 
   @override
   String toString() {
-    return 'TipsModel(id: $id, title: $title, picture: $picture)';
+    return 'TipsModel(id: $id, title: $title, picture: $picture, errorMessage: $errorMessage)';
   }
 
   @override
@@ -141,12 +154,15 @@ class _$_TipsModel implements _TipsModel {
             other is _$_TipsModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.picture, picture) || other.picture == picture));
+            (identical(other.picture, picture) || other.picture == picture) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, picture);
+  int get hashCode =>
+      Object.hash(runtimeType, id, title, picture, errorMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -163,8 +179,8 @@ class _$_TipsModel implements _TipsModel {
 }
 
 abstract class _TipsModel implements TipsModel {
-  factory _TipsModel(final int id, final String title, final String picture) =
-      _$_TipsModel;
+  factory _TipsModel(final int id, final String title, final String picture,
+      final String? errorMessage) = _$_TipsModel;
 
   factory _TipsModel.fromJson(Map<String, dynamic> json) =
       _$_TipsModel.fromJson;
@@ -175,6 +191,8 @@ abstract class _TipsModel implements TipsModel {
   String get title;
   @override
   String get picture;
+  @override
+  String? get errorMessage;
   @override
   @JsonKey(ignore: true)
   _$$_TipsModelCopyWith<_$_TipsModel> get copyWith =>

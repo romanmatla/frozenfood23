@@ -9,12 +9,10 @@ import '../../../../core/enums.dart';
 part 'tips_state.dart';
 part 'tips_cubit.freezed.dart';
 
-
-@injectable 
+@injectable
 class TipsCubit extends Cubit<TipsState> {
-  TipsCubit(
-    {required this.tipsRepository}
-  ) : super(const TipsState(
+  TipsCubit({required this.tipsRepository})
+      : super(const TipsState(
           result: [],
           status: Status.initial,
         ));
@@ -34,10 +32,10 @@ class TipsCubit extends Cubit<TipsState> {
         ),
       );
     } catch (error) {
-      emit(const TipsState(
+      emit(TipsState(
         status: Status.error,
+        errorMessage: error.toString(),
       ));
     }
   }
-
 }

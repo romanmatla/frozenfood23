@@ -8,7 +8,7 @@ class ArticleModel with _$ArticleModel {
   factory ArticleModel(
     int id,
     @JsonKey(name: 'categorys_id') int categorysId,
-    String content,
+    String content, String? errorMessage,
 
   ) = _ArticleModel;
 

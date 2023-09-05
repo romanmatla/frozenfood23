@@ -24,6 +24,7 @@ mixin _$ArticleModel {
   @JsonKey(name: 'categorys_id')
   int get categorysId => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
+  String? get errorMessage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +39,10 @@ abstract class $ArticleModelCopyWith<$Res> {
       _$ArticleModelCopyWithImpl<$Res, ArticleModel>;
   @useResult
   $Res call(
-      {int id, @JsonKey(name: 'categorys_id') int categorysId, String content});
+      {int id,
+      @JsonKey(name: 'categorys_id') int categorysId,
+      String content,
+      String? errorMessage});
 }
 
 /// @nodoc
@@ -57,6 +61,7 @@ class _$ArticleModelCopyWithImpl<$Res, $Val extends ArticleModel>
     Object? id = null,
     Object? categorysId = null,
     Object? content = null,
+    Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -71,6 +76,10 @@ class _$ArticleModelCopyWithImpl<$Res, $Val extends ArticleModel>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -84,7 +93,10 @@ abstract class _$$_ArticleModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id, @JsonKey(name: 'categorys_id') int categorysId, String content});
+      {int id,
+      @JsonKey(name: 'categorys_id') int categorysId,
+      String content,
+      String? errorMessage});
 }
 
 /// @nodoc
@@ -101,6 +113,7 @@ class __$$_ArticleModelCopyWithImpl<$Res>
     Object? id = null,
     Object? categorysId = null,
     Object? content = null,
+    Object? errorMessage = freezed,
   }) {
     return _then(_$_ArticleModel(
       null == id
@@ -115,6 +128,10 @@ class __$$_ArticleModelCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
+      freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -122,8 +139,8 @@ class __$$_ArticleModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_ArticleModel implements _ArticleModel {
-  _$_ArticleModel(
-      this.id, @JsonKey(name: 'categorys_id') this.categorysId, this.content);
+  _$_ArticleModel(this.id, @JsonKey(name: 'categorys_id') this.categorysId,
+      this.content, this.errorMessage);
 
   factory _$_ArticleModel.fromJson(Map<String, dynamic> json) =>
       _$$_ArticleModelFromJson(json);
@@ -135,10 +152,12 @@ class _$_ArticleModel implements _ArticleModel {
   final int categorysId;
   @override
   final String content;
+  @override
+  final String? errorMessage;
 
   @override
   String toString() {
-    return 'ArticleModel(id: $id, categorysId: $categorysId, content: $content)';
+    return 'ArticleModel(id: $id, categorysId: $categorysId, content: $content, errorMessage: $errorMessage)';
   }
 
   @override
@@ -149,12 +168,15 @@ class _$_ArticleModel implements _ArticleModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.categorysId, categorysId) ||
                 other.categorysId == categorysId) &&
-            (identical(other.content, content) || other.content == content));
+            (identical(other.content, content) || other.content == content) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, categorysId, content);
+  int get hashCode =>
+      Object.hash(runtimeType, id, categorysId, content, errorMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -174,7 +196,8 @@ abstract class _ArticleModel implements ArticleModel {
   factory _ArticleModel(
       final int id,
       @JsonKey(name: 'categorys_id') final int categorysId,
-      final String content) = _$_ArticleModel;
+      final String content,
+      final String? errorMessage) = _$_ArticleModel;
 
   factory _ArticleModel.fromJson(Map<String, dynamic> json) =
       _$_ArticleModel.fromJson;
@@ -186,6 +209,8 @@ abstract class _ArticleModel implements ArticleModel {
   int get categorysId;
   @override
   String get content;
+  @override
+  String? get errorMessage;
   @override
   @JsonKey(ignore: true)
   _$$_ArticleModelCopyWith<_$_ArticleModel> get copyWith =>

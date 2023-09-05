@@ -11,6 +11,7 @@ _$_ArticleModel _$$_ArticleModelFromJson(Map<String, dynamic> json) =>
       json['id'] as int,
       json['categorys_id'] as int,
       json['content'] as String,
+      json['errorMessage'] as String?,
     );
 
 Map<String, dynamic> _$$_ArticleModelToJson(_$_ArticleModel instance) =>
@@ -18,4 +19,5 @@ Map<String, dynamic> _$$_ArticleModelToJson(_$_ArticleModel instance) =>
       'id': instance.id,
       'categorys_id': instance.categorysId,
       'content': instance.content,
+      'errorMessage': instance.errorMessage,
     };

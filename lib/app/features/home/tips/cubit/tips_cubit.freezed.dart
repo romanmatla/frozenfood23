@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TipsState {
   List<TipsModel> get result => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
+  String? get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TipsStateCopyWith<TipsState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $TipsStateCopyWith<$Res> {
   factory $TipsStateCopyWith(TipsState value, $Res Function(TipsState) then) =
       _$TipsStateCopyWithImpl<$Res, TipsState>;
   @useResult
-  $Res call({List<TipsModel> result, Status status});
+  $Res call({List<TipsModel> result, Status status, String? errorMessage});
 }
 
 /// @nodoc
@@ -47,6 +48,7 @@ class _$TipsStateCopyWithImpl<$Res, $Val extends TipsState>
   $Res call({
     Object? result = null,
     Object? status = null,
+    Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
       result: null == result
@@ -57,6 +59,10 @@ class _$TipsStateCopyWithImpl<$Res, $Val extends TipsState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -68,7 +74,7 @@ abstract class _$$_TipsStateCopyWith<$Res> implements $TipsStateCopyWith<$Res> {
       __$$_TipsStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<TipsModel> result, Status status});
+  $Res call({List<TipsModel> result, Status status, String? errorMessage});
 }
 
 /// @nodoc
@@ -84,6 +90,7 @@ class __$$_TipsStateCopyWithImpl<$Res>
   $Res call({
     Object? result = null,
     Object? status = null,
+    Object? errorMessage = freezed,
   }) {
     return _then(_$_TipsState(
       result: null == result
@@ -94,6 +101,10 @@ class __$$_TipsStateCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -102,7 +113,9 @@ class __$$_TipsStateCopyWithImpl<$Res>
 
 class _$_TipsState implements _TipsState {
   const _$_TipsState(
-      {final List<TipsModel> result = const [], this.status = Status.initial})
+      {final List<TipsModel> result = const [],
+      this.status = Status.initial,
+      this.errorMessage})
       : _result = result;
 
   final List<TipsModel> _result;
@@ -117,10 +130,12 @@ class _$_TipsState implements _TipsState {
   @override
   @JsonKey()
   final Status status;
+  @override
+  final String? errorMessage;
 
   @override
   String toString() {
-    return 'TipsState(result: $result, status: $status)';
+    return 'TipsState(result: $result, status: $status, errorMessage: $errorMessage)';
   }
 
   @override
@@ -129,12 +144,14 @@ class _$_TipsState implements _TipsState {
         (other.runtimeType == runtimeType &&
             other is _$_TipsState &&
             const DeepCollectionEquality().equals(other._result, _result) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_result), status);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_result), status, errorMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -145,12 +162,16 @@ class _$_TipsState implements _TipsState {
 
 abstract class _TipsState implements TipsState {
   const factory _TipsState(
-      {final List<TipsModel> result, final Status status}) = _$_TipsState;
+      {final List<TipsModel> result,
+      final Status status,
+      final String? errorMessage}) = _$_TipsState;
 
   @override
   List<TipsModel> get result;
   @override
   Status get status;
+  @override
+  String? get errorMessage;
   @override
   @JsonKey(ignore: true)
   _$$_TipsStateCopyWith<_$_TipsState> get copyWith =>

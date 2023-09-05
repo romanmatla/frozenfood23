@@ -22,9 +22,9 @@ void main() {
       setUp(() {
         when(() => repository.getTipsModels()).thenAnswer(
           (_) async => [
-            TipsModel(1, 'title1', 'picture1'),
-            TipsModel(2, 'title2', 'picture2'),
-            TipsModel(3, 'title3', 'picture3'),
+            TipsModel(1, 'title1', 'picture1', 'errorMessage1'),
+            TipsModel(2, 'title2', 'picture2', 'errorMessage2'),
+            TipsModel(3, 'title3', 'picture3', 'errorMessage3'),
           ],
         );
       });
@@ -39,9 +39,9 @@ void main() {
           ),
           TipsState(
             result: [
-              TipsModel(1, 'title1', 'picture1'),
-              TipsModel(2, 'title2', 'picture2'),
-              TipsModel(3, 'title3', 'picture3'),
+              TipsModel(1, 'title1', 'picture1', 'errorMessage1'),
+              TipsModel(2, 'title2', 'picture2', 'errorMessage2'),
+              TipsModel(3, 'title3', 'picture3', 'errorMessage3'),
             ],
             status: Status.success,
           ),
@@ -51,7 +51,8 @@ void main() {
 
     group('failure', () {
       setUp(() {
-        when(() => repository.getTipsModels()).thenThrow(Exception('test-exception-error'),
+        when(() => repository.getTipsModels()).thenThrow(
+          Exception('test-exception-error'),
         );
       });
 
@@ -64,8 +65,8 @@ void main() {
             status: Status.loading,
           ),
           const TipsState(
-            status: Status.error, 
-          ),
+              status: Status.error,
+              errorMessage: 'Exception: test-exception-error'),
         ],
       );
     });
