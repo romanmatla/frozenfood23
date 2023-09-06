@@ -95,6 +95,7 @@ class _AddPageContentState extends State<AddPageContent> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 40),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
