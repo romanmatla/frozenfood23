@@ -203,6 +203,8 @@ class _AddQuantityWidget extends StatelessWidget {
       decoration: const InputDecoration(
         labelText: 'Ilość',
         labelStyle: TextStyle(color: Colors.blue),
+        hintText: 'Podaj ile sztuk lub gram',
+        hintStyle: TextStyle(color: Color.fromARGB(255, 150, 191, 224)),
         border: OutlineInputBorder(),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
@@ -240,6 +242,8 @@ class _AddProductWidget extends StatelessWidget {
       decoration: const InputDecoration(
         labelText: 'Produkt',
         labelStyle: TextStyle(color: Colors.blue),
+        hintText: 'Podaj nazwę produktu',
+        hintStyle: TextStyle(color: Color.fromARGB(255, 150, 191, 224)),
         border: OutlineInputBorder(),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
