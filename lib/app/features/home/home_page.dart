@@ -42,7 +42,8 @@ class _HomePageState extends State<HomePage> {
             return const AddProductPageContent();
           }
           if (index == 2) {
-            return const TipsPageContent();
+
+            // return const TipsPageContent();
           }
           return MyAccountPageContent(email: widget.user.email);
         }),
