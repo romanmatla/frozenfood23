@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frozen_food/app/features/home/add/cubit/add_cubit.dart';
 import 'package:frozen_food/app/repositories/product_repository.dart';
-// import 'package:frozen_food/data/remote_data_sources/product_remote_data_souces.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -10,14 +9,9 @@ class AddPageContent extends StatefulWidget {
   const AddPageContent({
     super.key,
     required this.categories,
-    // required this.dataSource,
   });
 
   final String categories;
-
-  //  final ProductDataSource dataSource;
-
-  // ProductRepository({required this.dataSource});
 
   @override
   State<AddPageContent> createState() => _AddPageContentState();
@@ -27,13 +21,10 @@ class _AddPageContentState extends State<AddPageContent> {
   final controllerName = TextEditingController();
   final controllerQuantity = TextEditingController();
 
-  // var dateTime;
-  // var timeStamp;
-
-  DateTime _dateTime = DateTime.now();
+  DateTime? _dateTime = DateTime.now();
   DateTime today = DateTime.now();
 
-  void _showDatePicker() {
+  void _showDatePicker() async {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -43,7 +34,7 @@ class _AddPageContentState extends State<AddPageContent> {
       ),
     ).then((value) {
       setState(() {
-        _dateTime = value!;
+        _dateTime = value;
       });
     });
   }
@@ -83,8 +74,9 @@ class _AddPageContentState extends State<AddPageContent> {
                                     controllerName.text,
                                     widget.categories,
                                     today,
-                                    _dateTime,
+                                    _dateTime!,
                                     controllerQuantity.text);
+                                if (_dateTime == null) return;
                               },
                     icon: const Icon(Icons.check),
                   );
@@ -146,18 +138,22 @@ class _AddPageContentState extends State<AddPageContent> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: _AddProductWidget(controllerName: controllerName),
+                            child: _AddProductWidget(
+                                controllerName: controllerName),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: _AddQuantityWidget(controllerQuantity: controllerQuantity),
+                            child: _AddQuantityWidget(
+                                controllerQuantity: controllerQuantity),
                           ),
                           const Padding(
                             padding: EdgeInsets.all(8.0),
                           ),
-                          Text(
-                            DateFormat.yMd().format(_dateTime),
-                          ),
+                          if (_dateTime == null)
+                            const Text(
+                              'Nie wybrano daty',
+                              // DateFormat.yMd().format(_dateTime),
+                            ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: ElevatedButton(
