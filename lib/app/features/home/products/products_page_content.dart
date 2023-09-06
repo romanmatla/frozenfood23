@@ -26,6 +26,7 @@ class ProductsPageContent extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
+        
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

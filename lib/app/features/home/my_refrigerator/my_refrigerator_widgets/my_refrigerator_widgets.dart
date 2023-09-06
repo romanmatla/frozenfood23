@@ -21,6 +21,7 @@ class CategoryWidget extends StatelessWidget {
 
   IconData _getIconData(String title) {
     return _iconData[title] ?? Icons.help_outline;
+    
   }
 
   @override

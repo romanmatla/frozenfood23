@@ -8,6 +8,7 @@ class AddCategoryWidget extends StatelessWidget {
   });
 
   final String title;
+  
 
   @override
   Widget build(BuildContext context) {

@@ -12,6 +12,7 @@ void main() async {
   );
 
   configureDependencies();
+  
 
   runApp(const MyApp());
 }

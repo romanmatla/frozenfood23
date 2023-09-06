@@ -33,6 +33,7 @@ class ArticleCubit extends Cubit<ArticleState> {
           results: results,
         ),
       );
+      
     } catch (error) {
       emit(
         ArticleState(

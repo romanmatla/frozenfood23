@@ -11,6 +11,7 @@ class BackElevetedButton extends StatelessWidget {
       decoration: const BoxDecoration(
         color: Colors.white,
       ),
+      
       child: Row(
         children: [
           Padding(

@@ -11,6 +11,7 @@ class TipsModel with _$TipsModel {
     String picture,
     String? errorMessage,
   ) = _TipsModel;
+  
 
   factory TipsModel.fromJson(Map<String, dynamic> json) =>
       _$TipsModelFromJson(json);

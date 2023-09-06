@@ -8,6 +8,7 @@ class ProductRepository {
     if (userID == null) {
       throw Exception('User is not logged in');
     }
+    
     return FirebaseFirestore.instance
         .collection('users')
         .doc(userID)

@@ -9,4 +9,5 @@ class AddState {
 
   final bool saved;
   final String errorMessage;
+  
 }

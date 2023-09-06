@@ -11,6 +11,7 @@ class ArticleModel with _$ArticleModel {
     String content, String? errorMessage,
 
   ) = _ArticleModel;
+  
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) =>
       _$ArticleModelFromJson(json);

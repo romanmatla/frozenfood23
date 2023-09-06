@@ -9,6 +9,7 @@ class ArticlesRepository {
   ArticlesRepository({required this.remoteDataSource});
 
   final ArticlesRemoteRetrofitDataSource remoteDataSource;
+  
 
   Future<List<ArticleModel>> getArticlesForAuthorId(int categorysId) async {
     final allArticles = await remoteDataSource.getArticles();

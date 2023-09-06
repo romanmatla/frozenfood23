@@ -7,4 +7,5 @@ class ArticleState with _$ArticleState {
     @Default(Status.initial) Status status,
     String? errorMessage,
   }) = _ArticleState;
+  
 }

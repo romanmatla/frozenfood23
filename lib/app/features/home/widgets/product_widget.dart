@@ -12,6 +12,7 @@ class ProductWidget extends StatelessWidget {
     this.productModel, {
     super.key,
   });
+  
 
   final String title;
   final DateTime dataAdded;

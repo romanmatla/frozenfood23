@@ -8,6 +8,7 @@ class AddCubit extends Cubit<AddState> {
   AddCubit(this._productRepository) : super(const AddState());
 
   final ProductRepository _productRepository;
+  
 
   Future<void> add(
     String controllerName,

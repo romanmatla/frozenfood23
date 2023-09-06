@@ -9,6 +9,7 @@ class MyAccountPageContent extends StatelessWidget {
   });
 
   final String? email;
+  
 
   @override
   Widget build(BuildContext context) {

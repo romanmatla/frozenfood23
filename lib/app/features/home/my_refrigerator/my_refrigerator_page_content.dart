@@ -7,6 +7,7 @@ class MyRefrigeratorPageContent extends StatefulWidget {
   const MyRefrigeratorPageContent({
     super.key,
   });
+  
 
   @override
   State<MyRefrigeratorPageContent> createState() =>

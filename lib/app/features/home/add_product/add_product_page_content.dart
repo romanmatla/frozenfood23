@@ -20,6 +20,7 @@ class AddProductPageContent extends StatelessWidget {
             style: GoogleFonts.poppins(
               fontSize: 20,
               fontWeight: FontWeight.w400,
+              
             ),
           ),
         ),

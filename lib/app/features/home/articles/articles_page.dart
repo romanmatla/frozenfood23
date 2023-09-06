@@ -15,6 +15,7 @@ class ArticlesPageContent extends StatelessWidget {
   });
 
   final TipsModel author;
+  
 
   @override
   Widget build(BuildContext context) {

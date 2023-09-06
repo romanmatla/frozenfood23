@@ -170,6 +170,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                     ),
                                   ],
+                                  
                                   BlocProvider(
                                     create: (context) => LoginCubit(),
                                     child: BlocBuilder<LoginCubit, LoginState>(

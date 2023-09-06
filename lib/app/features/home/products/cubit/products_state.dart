@@ -7,6 +7,7 @@ class ProductsState {
     required this.isLoading,
     required this.errorMessage,
   });
+  
 
   final List<ProductModel> documents;
   final bool isLoading;

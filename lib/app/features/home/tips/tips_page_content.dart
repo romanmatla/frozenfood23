@@ -12,6 +12,7 @@ class TipsPageContent extends StatelessWidget {
   const TipsPageContent({
     super.key,
   });
+  
 
   @override
   Widget build(BuildContext context) {

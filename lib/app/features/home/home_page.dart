@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage> {
           return MyAccountPageContent(email: widget.user.email);
         }),
       ),
+      
       bottomNavigationBar: NavigationBar(
         height: 70,
         backgroundColor: Colors.white,

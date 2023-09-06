@@ -6,6 +6,7 @@ import 'package:retrofit/retrofit.dart';
 part 'tips_remote_data_source.g.dart';
 
 
+
 @injectable 
 @RestApi()
 abstract class TipsRemoteRetrofitDataSource {

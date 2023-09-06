@@ -6,6 +6,7 @@ class ProductModel {
     required this.expirationDate,
     required this.quantity,
   });
+  
 
   final String id;
   final String title;

@@ -3,6 +3,7 @@ import 'package:frozen_food/data/remote_data_sources/tips_remote_data_source.dar
 import 'package:injectable/injectable.dart';
 
 
+
 @injectable 
 class TipsRepository {
   TipsRepository({required this.remoteDataSource});
