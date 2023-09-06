@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frozen_food/app/features/home/add/cubit/add_cubit.dart';
 import 'package:frozen_food/app/repositories/product_repository.dart';
-// import 'package:frozen_food/data/remote_data_sources/product_remote_data_souces.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -10,14 +9,9 @@ class AddPageContent extends StatefulWidget {
   const AddPageContent({
     super.key,
     required this.categories,
-// required this.dataSource,
   });
 
   final String categories;
-
-  //  final ProductDataSource dataSource;
-
-  // ProductRepository({required this.dataSource});
 
   @override
   State<AddPageContent> createState() => _AddPageContentState();
@@ -27,13 +21,10 @@ class _AddPageContentState extends State<AddPageContent> {
   final controllerName = TextEditingController();
   final controllerQuantity = TextEditingController();
 
-  // var dateTime;
-  // var timeStamp;
-
-  DateTime _dateTime = DateTime.now();
+  DateTime? _dateTime = DateTime.now();
   DateTime today = DateTime.now();
 
-  void _showDatePicker() {
+  void _showDatePicker() async {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -43,7 +34,7 @@ class _AddPageContentState extends State<AddPageContent> {
       ),
     ).then((value) {
       setState(() {
-        _dateTime = value!;
+        _dateTime = value;
       });
     });
   }
@@ -83,9 +74,10 @@ class _AddPageContentState extends State<AddPageContent> {
                                     controllerName.text,
                                     widget.categories,
                                     today,
-                                    _dateTime,
+                                    _dateTime!,
                                     controllerQuantity.text);
-                                                              },
+                                if (_dateTime == null) return;
+                              },
                     icon: const Icon(Icons.check),
                   );
                 },
@@ -103,10 +95,11 @@ class _AddPageContentState extends State<AddPageContent> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 40),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
-                'Frozen food1',
+                'Frozen food',
                 style: GoogleFonts.poppins(
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
@@ -146,63 +139,21 @@ class _AddPageContentState extends State<AddPageContent> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: TextField(
-                              controller: controllerName,
-                              decoration: const InputDecoration(
-                                labelText: 'Produkt',
-                                labelStyle: TextStyle(color: Colors.blue),
-                                border: OutlineInputBorder(),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 47, 151, 236),
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 248, 134, 3),
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            child: _AddProductWidget(
+                                controllerName: controllerName),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: TextField(
-                              controller: controllerQuantity,
-                              decoration: const InputDecoration(
-                                labelText: 'Ilość',
-                                labelStyle: TextStyle(color: Colors.blue),
-                                border: OutlineInputBorder(),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 47, 151, 236),
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 248, 134, 3),
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            child: _AddQuantityWidget(
+                                controllerQuantity: controllerQuantity),
                           ),
                           const Padding(
                             padding: EdgeInsets.all(8.0),
                           ),
-                          Text(
-                              DateFormat.yMd().format(_dateTime),
+                          if (_dateTime == null)
+                            const Text(
+                              'Nie wybrano daty',
+                              // DateFormat.yMd().format(_dateTime),
                             ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -221,7 +172,7 @@ class _AddPageContentState extends State<AddPageContent> {
                                 foregroundColor:
                                     const Color.fromARGB(255, 72, 166, 243),
                               ),
-                              child: const Text('Dodaj datę'),
+                              child: const Text('Dodaj datę ważności'),
                             ),
                           ),
                         ],
@@ -232,6 +183,84 @@ class _AddPageContentState extends State<AddPageContent> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _AddQuantityWidget extends StatelessWidget {
+  const _AddQuantityWidget({
+    super.key,
+    required this.controllerQuantity,
+  });
+
+  final TextEditingController controllerQuantity;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controllerQuantity,
+      decoration: const InputDecoration(
+        labelText: 'Ilość',
+        labelStyle: TextStyle(color: Colors.blue),
+        hintText: 'Podaj ile sztuk lub gram',
+        hintStyle: TextStyle(color: Color.fromARGB(255, 150, 191, 224)),
+        border: OutlineInputBorder(),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromARGB(255, 47, 151, 236),
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(15),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromARGB(255, 248, 134, 3),
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(15),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _AddProductWidget extends StatelessWidget {
+  const _AddProductWidget({
+    super.key,
+    required this.controllerName,
+  });
+
+  final TextEditingController controllerName;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controllerName,
+      decoration: const InputDecoration(
+        labelText: 'Produkt',
+        labelStyle: TextStyle(color: Colors.blue),
+        hintText: 'Podaj nazwę produktu',
+        hintStyle: TextStyle(color: Color.fromARGB(255, 150, 191, 224)),
+        border: OutlineInputBorder(),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromARGB(255, 47, 151, 236),
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(15),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromARGB(255, 248, 134, 3),
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(15),
+          ),
         ),
       ),
     );
