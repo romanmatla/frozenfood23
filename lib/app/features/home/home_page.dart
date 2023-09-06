@@ -33,15 +33,13 @@ class _HomePageState extends State<HomePage> {
         ),
         child: Builder(builder: (context) {
           if (index == 0) {
-            return const MyRefrigeratorPageContent(
-              
-            );
+            return const MyRefrigeratorPageContent();
           }
           if (index == 1) {
             return const AddProductPageContent();
           }
           if (index == 2) {
-            // return const TipsPageContent();
+            return const TipsPageContent();
           }
           return MyAccountPageContent(email: widget.user.email);
         }),
