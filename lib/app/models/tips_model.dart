@@ -1,13 +1,17 @@
-class TipsModel {
-  TipsModel({
-    required this.title,
-    required this.picture,
-  });
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  final String title;
-  final String picture;
+part 'tips_model.g.dart';
+part 'tips_model.freezed.dart';
 
-  TipsModel.fromJson(Map<String, dynamic> json)
-      : title = json['title'],
-        picture = json['picture'];
+@freezed
+class TipsModel with _$TipsModel {
+  factory TipsModel(
+    int id,
+    String title,
+    String picture,
+    String? errorMessage,
+  ) = _TipsModel;
+
+  factory TipsModel.fromJson(Map<String, dynamic> json) =>
+      _$TipsModelFromJson(json);
 }

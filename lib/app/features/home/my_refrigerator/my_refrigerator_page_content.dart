@@ -52,26 +52,29 @@ class _MyRefrigeratorPageContentState extends State<MyRefrigeratorPageContent> {
                   ),
                   const SizedBox(height: 5),
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Icon(
-                          Icons.ac_unit,
-                          size: 50,
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Image(
+                            image: AssetImage('images/fridge.png'),
+                            width: 40,
+                          ),
                         ),
                         Expanded(
                           child: Column(
                             children: [
                               Text(
-                                'Zawartość lodówki',
+                                'Zawartość zamrażarki',
                                 style: GoogleFonts.poppins(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w300,
                                 ),
                               ),
                               Text(
-                                'Slider',
+                                'Pod ręką',
                                 style: GoogleFonts.poppins(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w300,

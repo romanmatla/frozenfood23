@@ -1,38 +1,18 @@
 import 'package:dio/dio.dart';
+import 'package:frozen_food/app/models/articles_model.dart';
+import 'package:injectable/injectable.dart';
 
-class ArticlesMockedDataSource {
-  Future<List<Map<String, dynamic>>?> getArticles() async {
-    return [
-      {
-        'id': 1,
-        'author_id': 1,
-        'content':
-            'Poprawić ten container!Poprawić ten container!Poprawić ten container!Poprawić ten containerPoprawić ten container!Poprawić ten container!Poprawić ten containerPoprawić ten container!Poprawić ten container!Poprawić ten containerPoprawić ten container!Poprawić ten container!Poprawić ten containerPoprawić ten container!Poprawić ten container!',
-      },
-      {
-        'id': 2,
-        'author_id': 2,
-        'content':
-            'Litwo! Ojczyzno moja!  Poprawić ten container!Poprawić ten container!Poprawić ten containerPoprawić ten container!Poprawić ten container!Poprawić ten containerPoprawić ten container!Poprawić ten container!Poprawić ten containerojskiego zagłuszył.'
-      },
-      {
-        'id': 3,
-        'author_id': 2,
-        'content':
-            'Litwo! Ojczyzno moja!  Poprawić ten container!Poprawić ten container!Poprawić ten containerPoprawić ten container!Poprawić ten container!Poprawić ten containerPoprawić ten container!Poprawić ten container!Poprawić ten containerojskiego zagłuszył.'
-      },
-    ];
-  }
-}
+import 'package:retrofit/retrofit.dart';
 
-class ArticlesRemoteDioDataSource {
-  Future<List<Map<String, dynamic>>?> getArticles() async {
-    final response = await Dio().get<List<dynamic>>(
-        'https://my-json-server.typicode.com/romanmatla/json_forzen/articles');
-    final listDynamic = response.data;
-    if (listDynamic == null) {
-      return null;
-    }
-    return listDynamic.map((e) => e as Map<String, dynamic>).toList();
-  }
+part 'articles_remote_data_source.g.dart';
+
+@injectable
+@RestApi()
+abstract class ArticlesRemoteRetrofitDataSource {
+  @factoryMethod
+  factory ArticlesRemoteRetrofitDataSource(Dio dio) =
+      _ArticlesRemoteRetrofitDataSource;
+
+  @GET("/articles")
+  Future<List<ArticleModel>> getArticles();
 }

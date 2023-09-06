@@ -1,18 +1,18 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:frozen_food/app/models/tips_model.dart';
 import 'package:frozen_food/app/repositories/tips_repository.dart';
-import 'package:meta/meta.dart';
-
+import 'package:injectable/injectable.dart';
 import '../../../../core/enums.dart';
 
 part 'tips_state.dart';
+part 'tips_cubit.freezed.dart';
 
+@injectable
 class TipsCubit extends Cubit<TipsState> {
-  TipsCubit(
-    this.tipsRepository,
-  ) : super(const TipsState(
+  TipsCubit({required this.tipsRepository})
+      : super(const TipsState(
           result: [],
           status: Status.initial,
         ));
@@ -32,10 +32,10 @@ class TipsCubit extends Cubit<TipsState> {
         ),
       );
     } catch (error) {
-      emit(const TipsState(
+      emit(TipsState(
         status: Status.error,
+        errorMessage: error.toString(),
       ));
     }
   }
-
 }

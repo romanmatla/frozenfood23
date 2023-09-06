@@ -25,9 +25,12 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
       decoration: const BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.topLeft,
+              begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Color.fromARGB(255, 248, 194, 245), Colors.white])),
+              colors: [
+            Color.fromARGB(255, 247, 218, 245),
+            Color.fromARGB(255, 252, 252, 252)
+          ])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
@@ -169,10 +172,8 @@ class _LoginPageState extends State<LoginPage> {
                                   ],
                                   BlocProvider(
                                     create: (context) => LoginCubit(),
-                                    child:
-                                        BlocBuilder<LoginCubit, LoginState>(
+                                    child: BlocBuilder<LoginCubit, LoginState>(
                                       builder: (context, state) {
-                                        
                                         return ElevatedButton(
                                           onPressed: () async {
                                             if (isCreatingAccount == true) {
