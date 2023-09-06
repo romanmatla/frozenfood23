@@ -26,7 +26,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: const Color.fromARGB(255, 245, 177, 199),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -42,7 +41,6 @@ class _HomePageState extends State<HomePage> {
             return const AddProductPageContent();
           }
           if (index == 2) {
-
             // return const TipsPageContent();
           }
           return MyAccountPageContent(email: widget.user.email);

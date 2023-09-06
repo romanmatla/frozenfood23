@@ -68,8 +68,8 @@
 //                       Expanded(
 //                         child: BlocProvider<TipsCubit>(
 //                           create: (context) {
-//                             // return getIt()
-//                             // ..start(title: '???');
+//                             return getIt()
+//                             ..start(title: '???');
 //                           },
 //                           child: BlocBuilder<TipsCubit, TipsState>(
 //                             builder: (context, state) {
@@ -126,11 +126,11 @@
 
 //   @override
 //   Widget build(BuildContext context) {
-//     // return InkWell(
-//     //   onTap: () {
-//     //     Navigator.of(context).push(MaterialPageRoute(
-//     //         builder: (_) => ArticlesPageContent(author:)));
-//     //   },
+//     return InkWell(
+//       onTap: () {
+//         Navigator.of(context).push(MaterialPageRoute(
+//             builder: (_) => ArticlesPageContent(author: model)));
+//       },
 //       child: Container(
 //         padding: const EdgeInsets.all(12.0),
 //         margin: const EdgeInsets.all(2),
