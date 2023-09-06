@@ -16,7 +16,7 @@ class MyAccountPageContent extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('jesteś zalogowany jako $email'),
+                    Text('jesteś zalogowany jako $email'),
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {

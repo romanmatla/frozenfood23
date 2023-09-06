@@ -172,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
                                     child:
                                         BlocBuilder<LoginCubit, LoginState>(
                                       builder: (context, state) {
-                                        
+
                                         return ElevatedButton(
                                           onPressed: () async {
                                             if (isCreatingAccount == true) {

@@ -29,11 +29,11 @@ class ArticlesPageContent extends StatelessWidget {
         child: Column(
           children: [
             const Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Image(
+                padding: EdgeInsets.all(10.0),
+                child: Image(
                 image: AssetImage('images/rozmr.png'),
-                width: 35,
-              ),
+                  width: 35,
+                ),
             ),
             Padding(
               padding: const EdgeInsets.all(10.0),
@@ -151,7 +151,7 @@ class _ArticleItemWidget extends StatelessWidget {
                 model.content,
                 style: GoogleFonts.poppins(
                   fontSize: 14,
-                  // fontWeight: FontWeight.w300,
+// fontWeight: FontWeight.w300,
                 ),
               ),
             ),

@@ -8,7 +8,7 @@ class ArticlesRepository {
 
   Future<List<ArticleModel>> getArticlesForAuthorId(int authotId) async {
     final json = await remoteDataSource.getArticles();
-    if (json == null) {
+if (json == null) {
       return [];
     }
     final allArticles =

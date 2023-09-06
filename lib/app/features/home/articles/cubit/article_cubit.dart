@@ -21,7 +21,7 @@ class ArticleCubit extends Cubit<ArticleState> {
     try {
       final results = await articleRepository.getArticlesForAuthorId(authotId);
       emit(
-         ArticleState(
+        ArticleState(
           status: Status.success,
           results: results,
         ),

@@ -3,8 +3,8 @@ import 'package:frozen_food/app/models/product_model.dart';
 
 class ProductRepository {
   Stream<List<ProductModel>> getProductStream({required String categories}) {
-    return FirebaseFirestore.instance
-        .collection('product')
+        return FirebaseFirestore.instance
+                .collection('product')
         .where('categories', isEqualTo: categories)
         .snapshots()
         .map(
@@ -35,15 +35,15 @@ class ProductRepository {
     DateTime dateTime,
     String controllerQuantity,
   ) async {
-      await FirebaseFirestore.instance.collection('product').add(
-        {
-          'name': controllerName,
-          'categories': categories,
-          'date added': today,
-          'expiration date': dateTime,
-          'quantity': controllerQuantity
-        },
-      );
-    
+    await FirebaseFirestore.instance.collection('product').add(
+      {
+        'name': controllerName,
+        'categories': categories,
+        'date added': today,
+        'expiration date': dateTime,
+        'quantity': controllerQuantity
+      },
+    );
+
   }
 }

@@ -88,11 +88,11 @@ class TipsPageContent extends StatelessWidget {
                                     children: [
                                       for (final tipsModel in tipsModel) ...[
                                         _TipsItemWidget(tipsModel.title,
-                                            model: ArticleModel(
+                                          model: ArticleModel(
                                                 id: 1,
                                                 authorId: 3,
                                                 content: 'content')
-                                                ),
+                                        ),
                                       ],
                                     ],
                                   );

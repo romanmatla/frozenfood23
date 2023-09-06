@@ -4,7 +4,7 @@ class TipsModel {
     required this.picture,
   });
 
-  final String title;
+final String title;
   final String picture;
 
   TipsModel.fromJson(Map<String, dynamic> json)

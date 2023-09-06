@@ -10,7 +10,7 @@ class AddPageContent extends StatefulWidget {
   const AddPageContent({
     super.key,
     required this.categories,
-    // required this.dataSource,
+// required this.dataSource,
   });
 
   final String categories;
@@ -85,7 +85,7 @@ class _AddPageContentState extends State<AddPageContent> {
                                     today,
                                     _dateTime,
                                     controllerQuantity.text);
-                              },
+                                                              },
                     icon: const Icon(Icons.check),
                   );
                 },
@@ -202,8 +202,8 @@ class _AddPageContentState extends State<AddPageContent> {
                             padding: EdgeInsets.all(8.0),
                           ),
                           Text(
-                            DateFormat.yMd().format(_dateTime),
-                          ),
+                              DateFormat.yMd().format(_dateTime),
+                            ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: ElevatedButton(

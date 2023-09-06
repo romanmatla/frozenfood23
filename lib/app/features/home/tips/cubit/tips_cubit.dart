@@ -34,7 +34,7 @@ class TipsCubit extends Cubit<TipsState> {
     } catch (error) {
       emit(const TipsState(
         status: Status.error,
-      ));
+              ));
     }
   }
 

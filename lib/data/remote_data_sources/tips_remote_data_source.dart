@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-class TipsMockDataSource {
+  class TipsMockDataSource {
   Future<List<Map<String, dynamic>>?> getTips() async {
     return [
       {
