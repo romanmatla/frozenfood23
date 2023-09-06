@@ -221,7 +221,7 @@ class _AddPageContentState extends State<AddPageContent> {
                                 foregroundColor:
                                     const Color.fromARGB(255, 72, 166, 243),
                               ),
-                              child: const Text('Dodaj datę ważności'),
+                              child: const Text('Dodaj datę'),
                             ),
                           ),
                         ],
