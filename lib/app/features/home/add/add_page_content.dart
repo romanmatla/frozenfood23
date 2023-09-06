@@ -98,7 +98,7 @@ class _AddPageContentState extends State<AddPageContent> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
-                'Frozen food1',
+                'Frozen food',
                 style: GoogleFonts.poppins(
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
