@@ -64,14 +64,14 @@ class _MyRefrigeratorPageContentState extends State<MyRefrigeratorPageContent> {
                           child: Column(
                             children: [
                               Text(
-                                'Zawartość lodówki',
+                                'Zawartość zamrażarki',
                                 style: GoogleFonts.poppins(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w300,
                                 ),
                               ),
                               Text(
-                                'Slider',
+                                'Pod ręką',
                                 style: GoogleFonts.poppins(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w300,
