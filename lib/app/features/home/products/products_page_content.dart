@@ -59,11 +59,11 @@ class ProductsPageContent extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-
                         child: Center(
                           child: BlocProvider(
                             create: (context) =>
-                                ProductsCubit(ProductRepository())..start(categories: categories),
+                                ProductsCubit(ProductRepository())
+                                  ..start(categories: categories),
                             child: BlocBuilder<ProductsCubit, ProductsState>(
                               builder: (context, state) {
                                 if (state.errorMessage.isNotEmpty) {
@@ -108,10 +108,10 @@ class ProductsPageContent extends StatelessWidget {
                                               documentID: productModel.id);
                                         },
                                         child: ProductWidget(
-                                          productModel.title,
-                                          productModel.dataAdded,
-                                          productModel.expirationDate,
-                                          productModel.quantity,
+                                          // productModel.title,
+                                          // productModel.dataAdded,
+                                          // productModel.expirationDate,
+                                          // productModel.quantity,
                                           productModel,
                                         ),
                                       ),

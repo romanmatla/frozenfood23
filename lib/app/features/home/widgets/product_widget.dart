@@ -5,28 +5,28 @@ import 'package:intl/intl.dart';
 
 class ProductWidget extends StatelessWidget {
   const ProductWidget(
-    this.title,
-    this.dataAdded,
-    this.expirationDate,
-    this.quantity,
+    // this.title,
+    // this.dataAdded,
+    // this.expirationDate,
+    // this.quantity,
     this.productModel, {
     super.key,
   });
 
-  final String title;
-  final DateTime dataAdded;
-  final DateTime expirationDate;
-  final String quantity;
+  // final String title;
+  // final DateTime dataAdded;
+  // final DateTime expirationDate;
+  // final String quantity;
   final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
     String releaseDateFormatted() {
-      return DateFormat.yMd().format(expirationDate);
+      return DateFormat.yMd().format(productModel.expirationDate);
     }
 
     String releaseAddDateFormatted() {
-      return DateFormat.yMd().format(dataAdded);
+      return DateFormat.yMd().format(productModel.dataAdded);
     }
 
     return Padding(
@@ -84,8 +84,8 @@ class ProductWidget extends StatelessWidget {
                           child: Center(
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
-                              child: Text(
-                                title,
+                              child: Text(productModel.title,
+                                // title,
                                 style: GoogleFonts.poppins(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -141,8 +141,8 @@ class ProductWidget extends StatelessWidget {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            Text(
-                              quantity,
+                            Text(productModel.quantity,
+                              // quantity,
                               style: GoogleFonts.poppins(
                                 fontSize: 14,
                               ),
