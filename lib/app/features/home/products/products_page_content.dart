@@ -77,6 +77,18 @@ class ProductsPageContent extends StatelessWidget {
 
                                 final productModels = state.documents;
 
+                                if (productModels.isEmpty) {
+                                  return Text(
+                                    'Nie ma produktów',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w400,
+                                      color: const Color.fromARGB(
+                                          255, 204, 40, 109),
+                                    ),
+                                  );
+                                }
+
                                 return ListView(
                                   children: [
                                     for (final productModel
