@@ -16,8 +16,13 @@ class MyAccountPageContent extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-                    Text('jesteś zalogowany jako $email'),
-          const SizedBox(height: 20),
+          const CircleAvatar(
+            backgroundImage: AssetImage('images/user.png'),
+            radius: 45,
+          ),
+          const SizedBox(height: 35),
+          Text('jesteś zalogowany jako $email'),
+          const SizedBox(height: 35),
           ElevatedButton(
             onPressed: () {
               context.read<RootCubit>().singOut();
