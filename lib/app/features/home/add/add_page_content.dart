@@ -95,7 +95,7 @@ class _AddPageContentState extends State<AddPageContent> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
@@ -106,7 +106,7 @@ class _AddPageContentState extends State<AddPageContent> {
                 ),
               ),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 60),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
@@ -153,7 +153,6 @@ class _AddPageContentState extends State<AddPageContent> {
                           if (_dateTime == null)
                             const Text(
                               'Nie wybrano daty',
-                              // DateFormat.yMd().format(_dateTime),
                             ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
