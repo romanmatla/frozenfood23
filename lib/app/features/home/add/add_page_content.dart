@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frozen_food/app/features/home/add/cubit/add_cubit.dart';
 import 'package:frozen_food/app/repositories/product_repository.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 class AddPageContent extends StatefulWidget {
   const AddPageContent({
