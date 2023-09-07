@@ -1,34 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:frozen_food/app/models/product_model.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 class ProductWidget extends StatelessWidget {
   const ProductWidget(
-    // this.title,
-    // this.dataAdded,
-    // this.expirationDate,
-    // this.quantity,
     this.productModel, {
     super.key,
   });
 
-  // final String title;
-  // final DateTime dataAdded;
-  // final DateTime expirationDate;
-  // final String quantity;
   final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
-    String releaseDateFormatted() {
-      return DateFormat.yMd().format(productModel.expirationDate);
-    }
-
-    String releaseAddDateFormatted() {
-      return DateFormat.yMd().format(productModel.dataAdded);
-    }
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -84,8 +67,8 @@ class ProductWidget extends StatelessWidget {
                           child: Center(
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
-                              child: Text(productModel.title,
-                                // title,
+                              child: Text(
+                                productModel.title,
                                 style: GoogleFonts.poppins(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -108,7 +91,7 @@ class ProductWidget extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          releaseAddDateFormatted(),
+                          productModel.releaseAddDateFormatted(),
                           style: GoogleFonts.poppins(
                             fontSize: 14,
                           ),
@@ -141,8 +124,8 @@ class ProductWidget extends StatelessWidget {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            Text(productModel.quantity,
-                              // quantity,
+                            Text(
+                              productModel.quantity,
                               style: GoogleFonts.poppins(
                                 fontSize: 14,
                               ),
@@ -160,8 +143,7 @@ class ProductWidget extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        Text(
-                          releaseDateFormatted(),
+                        Text(productModel.releaseDateFormateted(),
                           style: GoogleFonts.poppins(
                             fontSize: 14,
                           ),

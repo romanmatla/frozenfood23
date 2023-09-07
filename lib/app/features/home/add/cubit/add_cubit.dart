@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:frozen_food/app/repositories/product_repository.dart';
 import 'package:meta/meta.dart';
-import '../../../../core/enums.dart';
 
 part 'add_state.dart';
 

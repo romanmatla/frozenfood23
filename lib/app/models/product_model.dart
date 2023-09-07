@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class ProductModel {
   ProductModel({
     required this.id,
@@ -12,4 +14,12 @@ class ProductModel {
   final DateTime dataAdded;
   final DateTime expirationDate;
   final String quantity;
+
+  String releaseDateFormateted() {
+    return DateFormat.yMMMEd().format(expirationDate);
+  }
+
+  String releaseAddDateFormatted() {
+    return DateFormat.yMMMEd().format(dataAdded);
+  }
 }
