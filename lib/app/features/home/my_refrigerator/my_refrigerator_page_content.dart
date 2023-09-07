@@ -52,14 +52,24 @@ class _MyRefrigeratorPageContentState extends State<MyRefrigeratorPageContent> {
                   ),
                   const SizedBox(height: 5),
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Icon(
-                          Icons.ac_unit,
-                          size: 50,
+                        const Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 5,
+                            horizontal: 30,
+                          ),
+                          child: Image(
+                            image: AssetImage('images/ref_icon.png'),
+                            width: 50,
+                          ),
                         ),
+                        // const Icon(
+                        //   Icons.ac_unit,
+                        //   size: 50,
+                        // ),
                         Expanded(
                           child: Column(
                             children: [
