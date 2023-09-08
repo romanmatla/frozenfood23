@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomCenter,
-              colors: [Color.fromARGB(255, 248, 194, 245), Colors.white])),
+              colors: [Color.fromARGB(255, 245, 219, 243), Colors.white])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
@@ -35,10 +35,10 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               Column(
                 children: [
-                  const SizedBox(height: 150),
+                  const SizedBox(height: 50),
                   Center(
                     child: Container(
-                      height: 500,
+                      height: 650,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.white,
@@ -47,18 +47,34 @@ class _LoginPageState extends State<LoginPage> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              isCreatingAccount == true
-                                  ? 'Rejestracja'
-                                  : 'Logowanie',
-                              style: GoogleFonts.poppins(
-                                fontSize: 30,
-                                fontWeight: FontWeight.w600,
-                              ),
+                            const SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.all(5.0),
+                                  child: Image(
+                                    image: AssetImage('images/refrig.png'),
+                                    width: 130,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Text(
+                                    isCreatingAccount == true
+                                        ? 'Rejestracja'
+                                        : 'Logowanie',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 60),
+                            const SizedBox(height: 30),
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(20.0),
                               child: Column(
                                 children: [
                                   TextField(
@@ -122,9 +138,8 @@ class _LoginPageState extends State<LoginPage> {
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 30),
+                            const SizedBox(height: 10),
                             Text(errorMessage),
-                            const SizedBox(height: 30),
                             Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Row(
@@ -141,10 +156,10 @@ class _LoginPageState extends State<LoginPage> {
                                       child: Text(
                                         'Rejestracja',
                                         style: GoogleFonts.poppins(
-                                          fontSize: 16,
+                                          fontSize: 18,
                                           fontWeight: FontWeight.w400,
                                           color: const Color.fromARGB(
-                                              255, 143, 142, 140),
+                                              255, 88, 88, 86),
                                         ),
                                       ),
                                     ),
@@ -169,59 +184,64 @@ class _LoginPageState extends State<LoginPage> {
                                   ],
                                   BlocProvider(
                                     create: (context) => LoginCubit(),
-                                    child:
-                                        BlocBuilder<LoginCubit, LoginState>(
+                                    child: BlocBuilder<LoginCubit, LoginState>(
                                       builder: (context, state) {
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 40),
+                                          child: ElevatedButton(
+                                            onPressed: () async {
+                                              if (isCreatingAccount == true) {
+                                                //rejestracja
 
-                                        return ElevatedButton(
-                                          onPressed: () async {
-                                            if (isCreatingAccount == true) {
-                                              //rejestracja
+                                                try {
+                                                  await FirebaseAuth.instance
+                                                      .createUserWithEmailAndPassword(
+                                                          email: widget
+                                                              .emailController
+                                                              .text,
+                                                          password: widget
+                                                              .paswordController
+                                                              .text);
+                                                } catch (error) {
+                                                  setState(() {
+                                                    errorMessage =
+                                                        error.toString();
+                                                  });
+                                                }
+                                              } else {
+                                                // logowanie
 
-                                              try {
-                                                await FirebaseAuth.instance
-                                                    .createUserWithEmailAndPassword(
-                                                        email: widget
-                                                            .emailController
-                                                            .text,
-                                                        password: widget
-                                                            .paswordController
-                                                            .text);
-                                              } catch (error) {
-                                                setState(() {
-                                                  errorMessage =
-                                                      error.toString();
-                                                });
+                                                try {
+                                                  await FirebaseAuth.instance
+                                                      .signInWithEmailAndPassword(
+                                                          email: widget
+                                                              .emailController
+                                                              .text,
+                                                          password: widget
+                                                              .paswordController
+                                                              .text);
+                                                } catch (error) {
+                                                  setState(() {
+                                                    errorMessage =
+                                                        error.toString();
+                                                  });
+                                                }
                                               }
-                                            } else {
-                                              // logowanie
-
-                                              try {
-                                                await FirebaseAuth.instance
-                                                    .signInWithEmailAndPassword(
-                                                        email: widget
-                                                            .emailController
-                                                            .text,
-                                                        password: widget
-                                                            .paswordController
-                                                            .text);
-                                              } catch (error) {
-                                                setState(() {
-                                                  errorMessage =
-                                                      error.toString();
-                                                });
-                                              }
-                                            }
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            shape: const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(12))),
-                                            fixedSize: const Size(60, 60),
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  12))),
+                                              fixedSize: const Size(60, 60),
+                                            ),
+                                            child: const Icon(
+                                                Icons.arrow_forward_sharp,
+                                                size: 36),
                                           ),
-                                          child: const Icon(
-                                              Icons.arrow_forward_sharp,
-                                              size: 36),
                                         );
                                       },
                                     ),

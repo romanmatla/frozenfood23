@@ -79,13 +79,14 @@ class _AddPageContentState extends State<AddPageContent> {
                               },
                     icon: const Icon(Icons.check),
                   );
+                  
                 },
               ),
             ),
           ),
         ],
       ),
-      backgroundColor: const Color.fromARGB(255, 245, 177, 199),
+      backgroundColor: Colors.white,
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
