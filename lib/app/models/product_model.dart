@@ -1,19 +1,18 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 
-class ProductModel {
-  ProductModel({
-    required this.id,
-    required this.title,
-    required this.dataAdded,
-    required this.expirationDate,
-    required this.quantity,
-  });
+part 'product_model.freezed.dart';
 
-  final String id;
-  final String title;
-  final DateTime dataAdded;
-  final DateTime expirationDate;
-  final String quantity;
+@freezed
+class ProductModel with _$ProductModel {
+  const ProductModel._();
+  factory ProductModel({
+    required String id,
+    required String title,
+    required DateTime dataAdded,
+    required DateTime expirationDate,
+    required String quantity,}
+  ) = _ProductModel;
 
   String releaseDateFormateted() {
     return DateFormat.yMMMEd().format(expirationDate);
@@ -22,4 +21,6 @@ class ProductModel {
   String releaseAddDateFormatted() {
     return DateFormat.yMMMEd().format(dataAdded);
   }
+
+
 }
