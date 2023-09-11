@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frozen_food/app/features/login/cubit/login_cubit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/enums.dart';
+
 class LoginPage extends StatefulWidget {
   LoginPage({
     super.key,
@@ -193,6 +195,15 @@ class _LoginPageState extends State<LoginPage> {
                                             onPressed: () async {
                                               if (isCreatingAccount == true) {
                                                 //rejestracja
+                                                // switch (state.status) {
+                                                //   case Status.initial:
+                                                //     return;
+                                                //   case Status.loading:
+                                                //     return;
+                                                //   case Status.error:
+                                                //   case Status.success:
+                                                //     return;
+                                                // }
 
                                                 try {
                                                   await FirebaseAuth.instance
