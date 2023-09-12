@@ -12,16 +12,16 @@ class AddProductPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-          child: const Text('Dodaj kategorię'),
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const AddCategory(newCategory: ''),
-                fullscreenDialog: true,
-              ),
-            );
-          }),
+      // floatingActionButton: FloatingActionButton(
+      //     child: const Text('Dodaj kategorię'),
+      //     onPressed: () {
+      //       Navigator.of(context).push(
+      //         MaterialPageRoute(
+      //           builder: (context) => const AddCategory(newCategory: ''),
+      //           fullscreenDialog: true,
+      //         ),
+      //       );
+      //     }),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -65,13 +65,25 @@ class AddProductPageContent extends StatelessWidget {
                             Icons.add_circle_outline,
                             size: 60,
                           ),
-                          Text(
-                            'Wybierz kategorię',
-                            style: GoogleFonts.poppins(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w300,
-                            ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AddCategory(newCategory: ''),
+                                  fullscreenDialog: true,
+                                ),
+                              );
+                            },
+                            child: Text('dodaj kategorię'),
                           ),
+                          // Text(
+                          //   'Wybierz kategorię',
+                          //   style: GoogleFonts.poppins(
+                          //     fontSize: 18,
+                          //     fontWeight: FontWeight.w300,
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
