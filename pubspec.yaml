@@ -50,6 +50,11 @@ dependencies:
   get_it: ^7.6.4
   injectable: ^2.3.0
   http: ^1.1.0
+  flutter_native_splash: ^2.3.2
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/splash1.png  
 
 dev_dependencies:
   flutter_test:
