@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frozen_food/app/features/home/add/add_page_content.dart';
-import 'package:frozen_food/app/features/home/add_category/add_category_page.dart';
 import 'package:frozen_food/app/features/home/add_product/add_product_widget/add_product_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -61,29 +60,43 @@ class AddProductPageContent extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Icon(
-                            Icons.add_circle_outline,
-                            size: 60,
+                          const Padding(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 5,
+                              horizontal: 30,
+                            ),
+                            child: Image(
+                              image: AssetImage('images/refrig.png'),
+                              width: 60,
+                            ),
                           ),
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const AddCategory(newCategory: ''),
-                                  fullscreenDialog: true,
-                                ),
-                              );
-                            },
-                            child: Text('dodaj kategorię'),
-                          ),
-                          // Text(
-                          //   'Wybierz kategorię',
-                          //   style: GoogleFonts.poppins(
-                          //     fontSize: 18,
-                          //     fontWeight: FontWeight.w300,
-                          //   ),
+
+                          // const Icon(
+                          //   Icons.accessible,
+                          //   size: 60,
                           // ),
+                          // ElevatedButton(
+                          //   onPressed: () {
+                          //     Navigator.of(context).push(
+                          //       MaterialPageRoute(
+                          //         builder: (context) =>
+                          //             const AddCategory(newCategory: ''),
+                          //         fullscreenDialog: true,
+                          //       ),
+                          //     );
+                          //   },
+                          //   child: Text('dodaj kategorię'),
+                          // ),
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Text(
+                              'Wybierz kategorię',
+                              style: GoogleFonts.poppins(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
