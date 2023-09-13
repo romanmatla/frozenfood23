@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:frozen_food/app/core/enums.dart';
 import 'package:frozen_food/app/models/product_model.dart';
 import 'package:frozen_food/app/repositories/product_repository.dart';
 import 'package:meta/meta.dart';
@@ -12,8 +13,9 @@ class ProductsCubit extends Cubit<ProductsState> {
       : super(
           const ProductsState(
             documents: [],
-            isLoading: false,
-            errorMessage: '',
+            status: Status.initial,
+            // isLoading: false,
+            // errorMessage: '',
           ),
         );
 
@@ -25,8 +27,7 @@ class ProductsCubit extends Cubit<ProductsState> {
     emit(
       const ProductsState(
         documents: [],
-        isLoading: true,
-        errorMessage: '',
+        status: Status.loading,
       ),
     );
 
@@ -37,8 +38,7 @@ class ProductsCubit extends Cubit<ProductsState> {
       emit(
         ProductsState(
           documents: data,
-          isLoading: false,
-          errorMessage: '',
+          status: Status.success,
         ),
       );
     })
@@ -46,7 +46,7 @@ class ProductsCubit extends Cubit<ProductsState> {
         emit(
           ProductsState(
             documents: const [],
-            isLoading: false,
+            status: Status.error,
             errorMessage: error.toString(),
           ),
         );
@@ -60,7 +60,7 @@ class ProductsCubit extends Cubit<ProductsState> {
       emit(
         ProductsState(
           documents: const [],
-          isLoading: false,
+          status: Status.error,
           errorMessage: error.toString(),
         ),
       );

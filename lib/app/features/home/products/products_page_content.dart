@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frozen_food/app/core/enums.dart';
 import 'package:frozen_food/app/features/home/products/cubit/products_cubit.dart';
 import 'package:frozen_food/app/features/home/widgets/back_button_widget.dart';
 import 'package:frozen_food/app/features/home/widgets/product_widget.dart';
@@ -66,70 +67,81 @@ class ProductsPageContent extends StatelessWidget {
                                   ..start(categories: categories),
                             child: BlocBuilder<ProductsCubit, ProductsState>(
                               builder: (context, state) {
-                                if (state.errorMessage.isNotEmpty) {
-                                  return const Center(
-                                      child: Text('Wystąpił problem'));
-                                }
-                                if (state.isLoading) {
-                                  return const Center(
-                                      child: CircularProgressIndicator());
-                                }
+                                switch (state.status) {
+                                  case Status.initial:
+                                    return const Center(
+                                      child: Text('Initial state'),
+                                    );
+                                  case Status.loading:
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  case Status.error:
+                                    return const Center(
+                                      child: Text('Error'),
+                                    );
 
-                                final productModels = state.documents;
+                                  case Status.success:
+                                    final productModels = state.documents;
 
-                                if (productModels.isEmpty) {
-                                  return Text(
-                                    'Nie ma produktów',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w400,
-                                      color: const Color.fromARGB(
-                                          255, 204, 40, 109),
-                                    ),
-                                  );
-                                }
+                                    if (productModels.isEmpty) {
+                                      return Text(
+                                        'Brak produktów',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400,
+                                          color: const Color.fromARGB(
+                                              255, 204, 40, 109),
+                                        ),
+                                      );
+                                    }
 
-                                return ListView(
-                                  children: [
-                                    for (final productModel
-                                        in productModels) ...[
-                                      Dismissible(
-                                        key: ValueKey(productModel.id),
-                                        background: DecoratedBox(
-                                          decoration: BoxDecoration(
-                                            color: Colors.orange[200],
-                                          ),
-                                          child: const Align(
-                                            alignment: Alignment.centerRight,
-                                            child: Padding(
-                                              padding: EdgeInsets.only(
-                                                right: 32.0,
+                                    return ListView(
+                                      children: [
+                                        for (final productModel
+                                            in productModels) ...[
+                                          Dismissible(
+                                            key: ValueKey(productModel.id),
+                                            background: DecoratedBox(
+                                              decoration: BoxDecoration(
+                                                color: Colors.orange[200],
                                               ),
-                                              child: Icon(
-                                                Icons.delete,
+                                              child: const Align(
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                    right: 32.0,
+                                                  ),
+                                                  child: Icon(
+                                                    Icons.delete,
+                                                  ),
+                                                ),
                                               ),
                                             ),
+                                            confirmDismiss: (direction) async {
+                                              return direction ==
+                                                  DismissDirection.endToStart;
+                                            },
+                                            onDismissed: (_) {
+                                              context
+                                                  .read<ProductsCubit>()
+                                                  .remove(
+                                                      documentID:
+                                                          productModel.id);
+                                            },
+                                            child: ProductWidget(
+                                              // productModel.title,
+                                              // productModel.dataAdded,
+                                              // productModel.expirationDate,
+                                              // productModel.quantity,
+                                              productModel,
+                                            ),
                                           ),
-                                        ),
-                                        confirmDismiss: (direction) async {
-                                          return direction ==
-                                              DismissDirection.endToStart;
-                                        },
-                                        onDismissed: (_) {
-                                          context.read<ProductsCubit>().remove(
-                                              documentID: productModel.id);
-                                        },
-                                        child: ProductWidget(
-                                          // productModel.title,
-                                          // productModel.dataAdded,
-                                          // productModel.expirationDate,
-                                          // productModel.quantity,
-                                          productModel,
-                                        ),
-                                      ),
-                                    ],
-                                  ],
-                                );
+                                        ],
+                                      ],
+                                    );
+                                }
                               },
                             ),
                           ),

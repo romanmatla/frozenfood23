@@ -4,11 +4,13 @@ part of 'products_cubit.dart';
 class ProductsState {
   const ProductsState({
     this.documents = const [],
-    required this.isLoading,
-    required this.errorMessage,
+    required this.status,
+    // required this.isLoading,
+     this.errorMessage,
   });
 
   final List<ProductModel> documents;
-  final bool isLoading;
-  final String errorMessage;
+  final Status status;
+  // final bool isLoading;
+  final String? errorMessage;
 }
