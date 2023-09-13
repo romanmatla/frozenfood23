@@ -1,21 +1,20 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:frozen_food/app/core/enums.dart';
 import 'package:frozen_food/app/models/product_model.dart';
 import 'package:frozen_food/app/repositories/product_repository.dart';
-import 'package:meta/meta.dart';
 
 part 'products_state.dart';
+part 'products_cubit.freezed.dart';
 
 class ProductsCubit extends Cubit<ProductsState> {
   ProductsCubit(this._productRepository)
       : super(
-          const ProductsState(
+          ProductsState(
             documents: [],
             status: Status.initial,
-            // isLoading: false,
-            // errorMessage: '',
           ),
         );
 
@@ -25,7 +24,7 @@ class ProductsCubit extends Cubit<ProductsState> {
 
   Future<void> start({required String categories}) async {
     emit(
-      const ProductsState(
+      ProductsState(
         documents: [],
         status: Status.loading,
       ),
