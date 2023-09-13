@@ -1,11 +1,12 @@
 import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:frozen_food/app/repositories/product_repository.dart';
-import 'package:meta/meta.dart';
 
 part 'add_state.dart';
+part 'add_cubit.freezed.dart';
 
 class AddCubit extends Cubit<AddState> {
-  AddCubit(this._productRepository) : super(const AddState());
+  AddCubit(this._productRepository) : super(AddState());
 
   final ProductRepository _productRepository;
 
@@ -19,7 +20,7 @@ class AddCubit extends Cubit<AddState> {
     try {
       await _productRepository.add(
           controllerName, categories, today, dateTime, controllerQuantity);
-      emit(const AddState(saved: true));
+      emit(AddState(saved: true));
     } catch (error) {
       emit(AddState(errorMessage: error.toString()));
     }

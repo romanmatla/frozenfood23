@@ -53,10 +53,10 @@ class _AddPageContentState extends State<AddPageContent> {
                 if (state.saved) {
                   Navigator.of(context).pop();
                 }
-                if (state.errorMessage.isNotEmpty) {
+                if (state.errorMessage == null) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(state.errorMessage),
+                      content: Text(state.errorMessage!),
                       backgroundColor: Colors.red,
                     ),
                   );
@@ -79,7 +79,6 @@ class _AddPageContentState extends State<AddPageContent> {
                               },
                     icon: const Icon(Icons.check),
                   );
-                  
                 },
               ),
             ),
