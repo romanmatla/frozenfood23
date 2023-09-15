@@ -11,6 +11,7 @@ class AddProductPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.indigo[50],
       // floatingActionButton: FloatingActionButton(
       //     child: const Text('Dodaj kategorię'),
       //     onPressed: () {

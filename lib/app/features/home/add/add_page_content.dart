@@ -54,29 +54,30 @@ class _AddPageContentState extends State<AddPageContent> {
                   Navigator.of(context).pop();
                 }
                 if (state.errorMessage == null) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(state.errorMessage!),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //   const SnackBar(
+                  //     content: Text('Wystąpił nieoczekiwany problem'),
+                  //     backgroundColor: Colors.red,
+                  //   ),
+                  // );
                 }
               },
               child: BlocBuilder<AddCubit, AddState>(
                 builder: (context, state) {
                   return IconButton(
                     onPressed:
-                        controllerName == false || controllerQuantity == false
-                            ? null
-                            : () {
-                                context.read<AddCubit>().add(
-                                    controllerName.text,
-                                    widget.categories,
-                                    today,
-                                    _dateTime!,
-                                    controllerQuantity.text);
-                                if (_dateTime == null) return;
-                              },
+                        // controllerName == false || controllerQuantity == false
+                        //     ? null
+                        //     :
+                        () {
+                      context.read<AddCubit>().add(
+                          controllerName.text,
+                          widget.categories,
+                          today,
+                          _dateTime!,
+                          controllerQuantity.text);
+                      if (_dateTime == null) return;
+                    },
                     icon: const Icon(Icons.check),
                   );
                 },
@@ -98,7 +99,7 @@ class _AddPageContentState extends State<AddPageContent> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
-                'Frozen food',
+                'Dodawanie produktu',
                 style: GoogleFonts.poppins(
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
@@ -189,7 +190,6 @@ class _AddPageContentState extends State<AddPageContent> {
 
 class _AddQuantityWidget extends StatelessWidget {
   const _AddQuantityWidget({
-    super.key,
     required this.controllerQuantity,
   });
 
@@ -228,7 +228,6 @@ class _AddQuantityWidget extends StatelessWidget {
 
 class _AddProductWidget extends StatelessWidget {
   const _AddProductWidget({
-    super.key,
     required this.controllerName,
   });
 
@@ -237,6 +236,7 @@ class _AddProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      maxLength: 25,
       controller: controllerName,
       decoration: const InputDecoration(
         labelText: 'Produkt',

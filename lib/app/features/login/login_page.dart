@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frozen_food/app/features/login/cubit/login_cubit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../core/enums.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({

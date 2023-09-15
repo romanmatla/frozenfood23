@@ -118,7 +118,6 @@ class TipsPageContent extends StatelessWidget {
 
 class _TipsItemWidget extends StatelessWidget {
   const _TipsItemWidget({
-    super.key,
     required this.model,
   });
 

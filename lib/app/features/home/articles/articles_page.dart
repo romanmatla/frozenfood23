@@ -106,7 +106,6 @@ class ArticlesPageContent extends StatelessWidget {
 
 class _ArticleItemWidget extends StatelessWidget {
   const _ArticleItemWidget({
-    super.key,
     required this.model,
   });
 
