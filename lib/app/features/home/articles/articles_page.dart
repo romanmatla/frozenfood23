@@ -150,11 +150,11 @@ class _ArticleItemWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const Icon(
-              Icons.keyboard_arrow_right_outlined,
-              color: Colors.black45,
-              size: 30,
-            ),
+            // const Icon(
+            //   Icons.keyboard_arrow_right_outlined,
+            //   color: Colors.black45,
+            //   size: 30,
+            // ),
           ],
         ),
       ),

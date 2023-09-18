@@ -5,7 +5,6 @@ import 'package:frozen_food/app/features/home/products/cubit/products_cubit.dart
 import 'package:frozen_food/app/features/home/widgets/back_button_widget.dart';
 import 'package:frozen_food/app/features/home/widgets/product_widget.dart';
 import 'package:frozen_food/app/repositories/product_repository.dart';
-// import 'package:frozen_food/data/remote_data_sources/product_remote_data_souces.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductsPageContent extends StatelessWidget {
@@ -30,17 +29,18 @@ class ProductsPageContent extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.all(50.0),
               child: Text(
-                'Frozen food',
+                'Zamrożone produkty z kategorii',
                 style: GoogleFonts.poppins(
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.w400,
                 ),
               ),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 30),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
@@ -131,10 +131,6 @@ class ProductsPageContent extends StatelessWidget {
                                                           productModel.id);
                                             },
                                             child: ProductWidget(
-                                              // productModel.title,
-                                              // productModel.dataAdded,
-                                              // productModel.expirationDate,
-                                              // productModel.quantity,
                                               productModel,
                                             ),
                                           ),
@@ -146,10 +142,6 @@ class ProductsPageContent extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(8.0),
-                        child: const Text('nowe produkty'),
                       ),
                     ],
                   ),

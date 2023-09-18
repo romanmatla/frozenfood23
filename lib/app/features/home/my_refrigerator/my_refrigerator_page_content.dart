@@ -20,13 +20,24 @@ class _MyRefrigeratorPageContentState extends State<MyRefrigeratorPageContent> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        const SizedBox(height: 50),
         Padding(
-          padding: const EdgeInsets.all(50.0),
+          padding: const EdgeInsets.all(5.0),
           child: Text(
             'Frozen food',
             style: GoogleFonts.poppins(
               fontSize: 20,
               fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Text(
+            'Mrożenie pod kontrolą',
+            style: GoogleFonts.poppins(
+              fontSize: 18,
+              fontWeight: FontWeight.w300,
             ),
           ),
         ),
@@ -74,19 +85,12 @@ class _MyRefrigeratorPageContentState extends State<MyRefrigeratorPageContent> {
                           child: Column(
                             children: [
                               Text(
-                                'Zawartość lodówki',
+                                'Sprawdź co masz zamrożone',
                                 style: GoogleFonts.poppins(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w300,
                                 ),
                               ),
-                              Text(
-                                'Slider',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w300,
-                                ),
-                              )
                             ],
                           ),
                         ),
